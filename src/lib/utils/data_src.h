@@ -10,8 +10,10 @@
 #define BOTAN_DATA_SRC_H_
 
 #include <botan/secmem.h>
+#ifndef SOUP_BUILD
 #include <string>
 #include <iosfwd>
+#endif
 
 namespace Botan {
 

@@ -9,6 +9,7 @@
 #define BOTAN_PARSING_UTILS_H_
 
 #include <botan/types.h>
+#ifndef SOUP_BUILD
 #include <string>
 #include <vector>
 #include <set>
@@ -16,6 +17,7 @@
 #include <istream>
 #include <functional>
 #include <map>
+#endif
 
 BOTAN_FUTURE_INTERNAL_HEADER(parsing.h)
 

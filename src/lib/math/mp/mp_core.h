@@ -15,7 +15,9 @@
 #include <botan/mem_ops.h>
 #include <botan/internal/mp_asmi.h>
 #include <botan/internal/ct_utils.h>
+#ifndef SOUP_BUILD
 #include <algorithm>
+#endif
 
 namespace Botan {
 

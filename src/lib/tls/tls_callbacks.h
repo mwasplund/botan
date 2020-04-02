@@ -13,7 +13,9 @@
 #include <botan/tls_session.h>
 #include <botan/tls_alert.h>
 #include <botan/pubkey.h>
+#ifndef SOUP_BUILD
 #include <functional>
+#endif
 
 namespace Botan {
 
@@ -358,6 +360,8 @@ class BOTAN_PUBLIC_API(2,0) Callbacks
           }
    };
 
+// MSVC compiler error
+#ifndef SOUP_BUILD
 /**
 * TLS::Callbacks using std::function for compatability with the old API signatures.
 * This type is only provided for backward compatibility.
@@ -404,7 +408,7 @@ class BOTAN_PUBLIC_API(2,0) Compat_Callbacks final : public Callbacks
             m_alert_cb(recv_alert_cb),
             m_hs_cb(hs_cb), m_hs_msg_cb(hs_msg_cb), m_next_proto(next_proto) {}
 
-       enum class SILENCE_DEPRECATION_WARNING { PLEASE = 0 };
+      enum class SILENCE_DEPRECATION_WARNING { PLEASE = 0 };
        Compat_Callbacks(SILENCE_DEPRECATION_WARNING,
                         output_fn data_output_fn, data_cb app_data_cb,
                         std::function<void (Alert)> recv_alert_cb,
@@ -476,6 +480,7 @@ class BOTAN_PUBLIC_API(2,0) Compat_Callbacks final : public Callbacks
          const handshake_msg_cb m_hs_msg_cb;
          const next_protocol_fn m_next_proto;
    };
+#endif
 
 }
 

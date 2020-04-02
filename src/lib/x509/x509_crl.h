@@ -11,7 +11,9 @@
 #include <botan/x509_obj.h>
 #include <botan/x509_dn.h>
 #include <botan/crl_ent.h>
+#ifndef SOUP_BUILD
 #include <vector>
+#endif
 
 namespace Botan {
 

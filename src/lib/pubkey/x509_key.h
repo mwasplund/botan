@@ -10,8 +10,10 @@
 
 #include <botan/pk_keys.h>
 #include <botan/types.h>
+#ifndef SOUP_BUILD
 #include <string>
 #include <vector>
+#endif
 
 namespace Botan {
 

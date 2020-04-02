@@ -12,7 +12,9 @@
 #include <botan/types.h>
 #include <botan/secmem.h>
 #include <botan/exceptn.h>
+#ifndef SOUP_BUILD
 #include <iosfwd>
+#endif
 
 namespace Botan {
 

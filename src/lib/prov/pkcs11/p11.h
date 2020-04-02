@@ -13,9 +13,11 @@
 #include <botan/exceptn.h>
 #include <botan/dyn_load.h>
 
+#ifndef SOUP_BUILD
 #include <vector>
 #include <string>
 #include <map>
+#endif
 
 #define CK_PTR *
 

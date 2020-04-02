@@ -17,7 +17,9 @@
 #include <botan/p11_ecc_key.h>
 #include <botan/ecdsa.h>
 
+#ifndef SOUP_BUILD
 #include <string>
+#endif
 
 namespace Botan {
 namespace PKCS11 {

@@ -9,9 +9,11 @@
 #define BOTAN_OS_UTILS_H_
 
 #include <botan/types.h>
+#ifndef SOUP_BUILD
 #include <functional>
 #include <string>
 #include <vector>
+#endif
 
 namespace Botan {
 

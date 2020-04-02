@@ -10,7 +10,9 @@
 
 #include <botan/bigint.h>
 #include <botan/symkey.h>
+#ifndef SOUP_BUILD
 #include <string>
+#endif
 
 namespace Botan {
 

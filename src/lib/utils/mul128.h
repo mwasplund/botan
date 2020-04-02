@@ -38,7 +38,9 @@ namespace Botan {
 
 #elif defined(BOTAN_BUILD_COMPILER_IS_MSVC) && defined(BOTAN_TARGET_CPU_HAS_NATIVE_64BIT)
 
+#ifndef SOUP_BUILD
 #include <intrin.h>
+#endif
 #pragma intrinsic(_umul128)
 
 #define BOTAN_FAST_64X64_MUL(a,b,lo,hi) \

@@ -11,8 +11,10 @@
 #include <botan/secmem.h>
 #include <botan/sym_algo.h>
 #include <botan/exceptn.h>
+#ifndef SOUP_BUILD
 #include <string>
 #include <vector>
+#endif
 
 namespace Botan {
 

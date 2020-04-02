@@ -30,9 +30,11 @@
 #include <boost/asio.hpp>
 #include <boost/beast/core/flat_buffer.hpp>
 
+#ifndef SOUP_BUILD
 #include <algorithm>
 #include <memory>
 #include <type_traits>
+#endif
 
 namespace Botan {
 namespace TLS {

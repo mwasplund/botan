@@ -13,7 +13,9 @@
 #include <botan/asn1_time.h>
 #include <botan/key_constraint.h>
 #include <botan/name_constraint.h>
+#ifndef SOUP_BUILD
 #include <memory>
+#endif
 
 namespace Botan {
 

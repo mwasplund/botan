@@ -14,8 +14,10 @@
 
 #include <botan/secmem.h>
 #include <botan/gf2m_small_m.h>
+#ifndef SOUP_BUILD
 #include <utility>
 #include <string>
+#endif
 
 //BOTAN_FUTURE_INTERNAL_HEADER(polyn_gf2m.h)
 

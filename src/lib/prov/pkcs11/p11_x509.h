@@ -14,7 +14,9 @@
 #if defined(BOTAN_HAS_X509_CERTIFICATES)
 
 #include <botan/x509cert.h>
+#ifndef SOUP_BUILD
 #include <vector>
+#endif
 
 namespace Botan {
 namespace PKCS11 {

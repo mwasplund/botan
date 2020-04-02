@@ -9,8 +9,10 @@
 #define BOTAN_HASH_FUNCTION_BASE_CLASS_H_
 
 #include <botan/buf_comp.h>
+#ifndef SOUP_BUILD
 #include <string>
 #include <memory>
+#endif
 
 namespace Botan {
 

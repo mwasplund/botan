@@ -9,7 +9,9 @@
 #define BOTAN_CHARSET_H_
 
 #include <botan/types.h>
+#ifndef SOUP_BUILD
 #include <string>
+#endif
 
 BOTAN_FUTURE_INTERNAL_HEADER(charset.h)
 

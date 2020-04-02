@@ -10,7 +10,9 @@
 #define BOTAN_ENUMS_H_
 
 #include <botan/types.h>
+#ifndef SOUP_BUILD
 #include <string>
+#endif
 
 namespace Botan {
 

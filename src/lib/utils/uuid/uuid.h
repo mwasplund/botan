@@ -9,8 +9,10 @@
 #define BOTAN_UUID_H_
 
 #include <botan/types.h>
+#ifndef SOUP_BUILD
 #include <vector>
 #include <string>
+#endif
 
 BOTAN_FUTURE_INTERNAL_HEADER(uuid.h)
 

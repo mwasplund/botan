@@ -10,8 +10,10 @@
 
 #include <botan/hash.h>
 #include <botan/threefish_512.h>
+#ifndef SOUP_BUILD
 #include <string>
 #include <memory>
+#endif
 
 BOTAN_FUTURE_INTERNAL_HEADER(skin_512.h)
 

@@ -9,9 +9,11 @@
 #ifndef BOTAN_P11_SLOT_H_
 #define BOTAN_P11_SLOT_H_
 
+#ifndef SOUP_BUILD
 #include <string>
 #include <vector>
 #include <functional>
+#endif
 
 #include <botan/p11_module.h>
 

@@ -8,8 +8,10 @@
 #define BOTAN_TLS_ALGO_IDS_H_
 
 #include <botan/types.h>
+#ifndef SOUP_BUILD
 #include <string>
 #include <vector>
+#endif
 
 //BOTAN_FUTURE_INTERNAL_HEADER(tls_algos.h)
 

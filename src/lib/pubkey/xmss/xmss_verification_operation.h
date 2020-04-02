@@ -8,10 +8,12 @@
 #ifndef BOTAN_XMSS_VERIFICATION_OPERATION_H_
 #define BOTAN_XMSS_VERIFICATION_OPERATION_H_
 
+#ifndef SOUP_BUILD
 #include <array>
 #include <cstddef>
 #include <iterator>
 #include <string>
+#endif
 #include <botan/types.h>
 #include <botan/xmss_publickey.h>
 #include <botan/xmss_common_ops.h>

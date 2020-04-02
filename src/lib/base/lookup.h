@@ -10,9 +10,11 @@
 
 #include <botan/build.h>
 #include <botan/exceptn.h>
+#ifndef SOUP_BUILD
 #include <string>
 #include <vector>
 #include <memory>
+#endif
 
 #if defined(BOTAN_HAS_BLOCK_CIPHER)
    #include <botan/block_cipher.h>

@@ -11,8 +11,10 @@
 #include <botan/secmem.h>
 #include <botan/exceptn.h>
 #include <botan/mutex.h>
+#ifndef SOUP_BUILD
 #include <chrono>
 #include <string>
+#endif
 
 namespace Botan {
 

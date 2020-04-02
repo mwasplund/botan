@@ -10,7 +10,9 @@
 
 #include <botan/bigint.h>
 #include <botan/reducer.h>
+#ifndef SOUP_BUILD
 #include <functional>
+#endif
 
 BOTAN_FUTURE_INTERNAL_HEADER(blinding.h)
 

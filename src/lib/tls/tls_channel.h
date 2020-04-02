@@ -14,10 +14,12 @@
 #include <botan/tls_session_manager.h>
 #include <botan/tls_callbacks.h>
 #include <botan/x509cert.h>
+#ifndef SOUP_BUILD
 #include <functional>
 #include <vector>
 #include <string>
 #include <map>
+#endif
 
 namespace Botan {
 

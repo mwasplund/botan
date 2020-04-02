@@ -12,9 +12,11 @@
 #include <botan/asn1_obj.h>
 #include <botan/asn1_oid.h>
 #include <botan/asn1_str.h>
+#ifndef SOUP_BUILD
 #include <vector>
 #include <map>
 #include <iosfwd>
+#endif
 
 namespace Botan {
 

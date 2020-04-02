@@ -10,8 +10,10 @@
 
 #include <botan/buf_comp.h>
 #include <botan/sym_algo.h>
+#ifndef SOUP_BUILD
 #include <string>
 #include <memory>
+#endif
 
 namespace Botan {
 

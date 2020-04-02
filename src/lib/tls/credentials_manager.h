@@ -12,7 +12,9 @@
 #include <botan/x509cert.h>
 #include <botan/certstor.h>
 #include <botan/symkey.h>
+#ifndef SOUP_BUILD
 #include <string>
+#endif
 
 namespace Botan {
 

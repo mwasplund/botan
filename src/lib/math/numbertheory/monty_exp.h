@@ -7,7 +7,9 @@
 #ifndef BOTAN_MONTY_EXP_H_
 #define BOTAN_MONTY_EXP_H_
 
+#ifndef SOUP_BUILD
 #include <memory>
+#endif
 
 namespace Botan {
 

@@ -11,7 +11,9 @@
 #include <botan/asn1_obj.h>
 #include <botan/alg_id.h>
 #include <botan/cert_status.h>
+#ifndef SOUP_BUILD
 #include <vector>
+#endif
 
 namespace Botan {
 

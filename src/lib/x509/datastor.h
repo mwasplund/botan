@@ -10,10 +10,12 @@
 
 #include <botan/x509_dn.h>
 #include <botan/asn1_alt_name.h>
+#ifndef SOUP_BUILD
 #include <functional>
 #include <string>
 #include <vector>
 #include <map>
+#endif
 
 BOTAN_FUTURE_INTERNAL_HEADER(datastor.h)
 

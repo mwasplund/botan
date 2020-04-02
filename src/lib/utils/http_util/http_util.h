@@ -10,11 +10,13 @@
 
 #include <botan/types.h>
 #include <botan/exceptn.h>
+#ifndef SOUP_BUILD
 #include <vector>
 #include <map>
 #include <string>
 #include <functional>
 #include <chrono>
+#endif
 
 BOTAN_FUTURE_INTERNAL_HEADER(http_util.h)
 

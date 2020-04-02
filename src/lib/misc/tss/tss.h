@@ -9,8 +9,10 @@
 #define BOTAN_RTSS_H_
 
 #include <botan/secmem.h>
+#ifndef SOUP_BUILD
 #include <string>
 #include <vector>
+#endif
 
 namespace Botan {
 

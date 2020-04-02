@@ -11,7 +11,9 @@
 
 #include <botan/types.h>
 #include <botan/pipe.h>
+#ifndef SOUP_BUILD
 #include <deque>
+#endif
 
 namespace Botan {
 

@@ -10,9 +10,11 @@
 
 #include <botan/types.h>
 #include <botan/exceptn.h>
+#ifndef SOUP_BUILD
 #include <string>
 #include <chrono>
 #include <vector>
+#endif
 
 namespace Botan {
 

@@ -14,7 +14,9 @@
 #include <botan/bigint.h>
 #include <botan/rng.h>
 #include <botan/uuid.h>
+#ifndef SOUP_BUILD
 #include <functional>
+#endif
 
 //TODO remove this
 #include <tss/tspi.h>

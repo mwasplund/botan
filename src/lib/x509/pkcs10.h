@@ -14,7 +14,9 @@
 #include <botan/key_constraint.h>
 #include <botan/asn1_attribute.h>
 #include <botan/asn1_alt_name.h>
+#ifndef SOUP_BUILD
 #include <vector>
+#endif
 
 namespace Botan {
 

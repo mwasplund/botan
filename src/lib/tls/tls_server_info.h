@@ -9,7 +9,9 @@
 #define BOTAN_TLS_SERVER_INFO_H_
 
 #include <botan/types.h>
+#ifndef SOUP_BUILD
 #include <string>
+#endif
 
 namespace Botan {
 

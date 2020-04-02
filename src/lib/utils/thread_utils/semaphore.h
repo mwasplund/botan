@@ -8,8 +8,10 @@
 #ifndef BOTAN_SEMAPHORE_H_
 #define BOTAN_SEMAPHORE_H_
 
+#ifndef SOUP_BUILD
 #include <condition_variable>
 #include <mutex>
+#endif
 
 namespace Botan {
 

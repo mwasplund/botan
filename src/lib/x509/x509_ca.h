@@ -10,7 +10,9 @@
 
 #include <botan/x509cert.h>
 #include <botan/x509_crl.h>
+#ifndef SOUP_BUILD
 #include <chrono>
+#endif
 
 #if defined(BOTAN_HAS_SYSTEM_RNG)
   #include <botan/system_rng.h>

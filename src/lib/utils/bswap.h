@@ -11,7 +11,7 @@
 
 #include <botan/types.h>
 
-#if defined(BOTAN_BUILD_COMPILER_IS_MSVC)
+#if defined(BOTAN_BUILD_COMPILER_IS_MSVC) && !defined(SOUP_BUILD)
   #include <stdlib.h>
 #endif
 

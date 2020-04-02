@@ -8,9 +8,11 @@
 #define BOTAN_PSK_DB_H_
 
 #include <botan/secmem.h>
+#ifndef SOUP_BUILD
 #include <memory>
 #include <string>
 #include <set>
+#endif
 
 namespace Botan {
 

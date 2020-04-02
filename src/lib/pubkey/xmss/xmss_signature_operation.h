@@ -8,8 +8,10 @@
 #ifndef BOTAN_XMSS_SIGNATURE_OPERATION_H_
 #define BOTAN_XMSS_SIGNATURE_OPERATION_H_
 
+#ifndef SOUP_BUILD
 #include <cstddef>
 #include <string>
+#endif
 #include <botan/secmem.h>
 #include <botan/types.h>
 #include <botan/xmss_parameters.h>

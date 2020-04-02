@@ -10,8 +10,10 @@
 
 #include <botan/asn1_obj.h>
 #include <botan/asn1_oid.h>
+#ifndef SOUP_BUILD
 #include <string>
 #include <vector>
+#endif
 
 namespace Botan {
 

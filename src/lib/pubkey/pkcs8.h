@@ -11,9 +11,11 @@
 #include <botan/pk_keys.h>
 #include <botan/exceptn.h>
 #include <botan/secmem.h>
+#ifndef SOUP_BUILD
 #include <functional>
 #include <chrono>
 #include <memory>
+#endif
 
 namespace Botan {
 

@@ -9,8 +9,10 @@
 #define BOTAN_COMPRESSION_UTILS_H_
 
 #include <botan/compression.h>
+#ifndef SOUP_BUILD
 #include <memory>
 #include <unordered_map>
+#endif
 
 namespace Botan {
 

@@ -11,7 +11,9 @@
 #define BOTAN_GFP_CURVE_H_
 
 #include <botan/bigint.h>
+#ifndef SOUP_BUILD
 #include <memory>
+#endif
 
 // Currently exposed in PointGFp
 //BOTAN_FUTURE_INTERNAL_HEADER(curve_gfp.h)

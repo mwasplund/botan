@@ -8,8 +8,10 @@
 #define BOTAN_PADDING_H_
 
 #include <botan/build.h>
+#ifndef SOUP_BUILD
 #include <string>
 #include <vector>
+#endif
 
 namespace Botan {
 

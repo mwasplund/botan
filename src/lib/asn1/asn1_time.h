@@ -9,7 +9,9 @@
 #define BOTAN_ASN1_TIME_H_
 
 #include <botan/asn1_obj.h>
+#ifndef SOUP_BUILD
 #include <chrono>
+#endif
 
 namespace Botan {
 

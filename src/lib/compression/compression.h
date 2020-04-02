@@ -10,7 +10,9 @@
 
 #include <botan/secmem.h>
 #include <botan/exceptn.h>
+#ifndef SOUP_BUILD
 #include <string>
+#endif
 
 namespace Botan {
 

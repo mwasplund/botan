@@ -8,10 +8,12 @@
 #define BOTAN_PWDHASH_H_
 
 #include <botan/types.h>
+#ifndef SOUP_BUILD
 #include <string>
 #include <memory>
 #include <vector>
 #include <chrono>
+#endif
 
 namespace Botan {
 

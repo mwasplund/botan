@@ -10,8 +10,10 @@
 #define BOTAN_TLS_HANDSHAKE_MSG_H_
 
 #include <botan/tls_magic.h>
+#ifndef SOUP_BUILD
 #include <vector>
 #include <string>
+#endif
 
 namespace Botan {
 

@@ -49,8 +49,10 @@ API follows a few simple rules:
 */
 
 #include <botan/build.h>
+#ifndef SOUP_BUILD
 #include <stdint.h>
 #include <stddef.h>
+#endif
 
 /**
 * Error codes

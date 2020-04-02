@@ -7,8 +7,10 @@
 #ifndef BOTAN_URI_H_
 #define BOTAN_URI_H_
 
+#ifndef SOUP_BUILD
 #include <cstdint>
 #include <string>
+#endif
 
 #include <botan/build.h>
 

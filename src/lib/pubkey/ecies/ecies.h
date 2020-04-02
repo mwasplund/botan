@@ -16,9 +16,11 @@
 #include <botan/secmem.h>
 #include <botan/symkey.h>
 #include <botan/mac.h>
+#ifndef SOUP_BUILD
 #include <memory>
 #include <string>
 #include <vector>
+#endif
 
 namespace Botan {
 

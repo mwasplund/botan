@@ -9,7 +9,9 @@
 #define BOTAN_XMSS_PARAMETERS_H_
 
 #include <botan/xmss_wots_parameters.h>
+#ifndef SOUP_BUILD
 #include <string>
+#endif
 
 namespace Botan {
 

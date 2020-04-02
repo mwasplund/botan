@@ -13,11 +13,13 @@
 #include <botan/p11_session.h>
 #include <botan/secmem.h>
 
+#ifndef SOUP_BUILD
 #include <vector>
 #include <string>
 #include <type_traits>
 #include <list>
 #include <functional>
+#endif
 
 namespace Botan {
 namespace PKCS11 {

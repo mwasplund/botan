@@ -11,7 +11,9 @@
 
 #if defined(BOTAN_TARGET_OS_HAS_THREADS)
 
+#ifndef SOUP_BUILD
 #include <mutex>
+#endif
 
 namespace Botan {
 

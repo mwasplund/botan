@@ -12,7 +12,9 @@
 #include <botan/tls_channel.h>
 #include <botan/tls_policy.h>
 #include <botan/credentials_manager.h>
+#ifndef SOUP_BUILD
 #include <vector>
+#endif
 
 namespace Botan {
 

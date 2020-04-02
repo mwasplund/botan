@@ -9,7 +9,9 @@
 #define BOTAN_MAC_POLY1305_H_
 
 #include <botan/mac.h>
+#ifndef SOUP_BUILD
 #include <memory>
+#endif
 
 BOTAN_FUTURE_INTERNAL_HEADER(poly1305.h)
 

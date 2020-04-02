@@ -11,7 +11,9 @@
 #include <botan/asn1_obj.h>
 #include <botan/asn1_str.h>
 #include <botan/asn1_oid.h>
+#ifndef SOUP_BUILD
 #include <map>
+#endif
 
 namespace Botan {
 

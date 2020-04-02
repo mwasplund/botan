@@ -9,7 +9,9 @@
 #define BOTAN_PBE_PKCS_v20_H_
 
 #include <botan/alg_id.h>
+#ifndef SOUP_BUILD
 #include <chrono>
+#endif
 
 BOTAN_FUTURE_INTERNAL_HEADER(pbes2.h)
 

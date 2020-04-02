@@ -11,8 +11,10 @@
 #include <botan/pk_ops_fwd.h>
 #include <botan/secmem.h>
 #include <botan/exceptn.h>
+#ifndef SOUP_BUILD
 #include <memory>
 #include <string>
+#endif
 
 namespace Botan {
 

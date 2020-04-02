@@ -8,8 +8,10 @@
 #define BOTAN_RWLOCK_H_
 
 #include <botan/types.h>
+#ifndef SOUP_BUILD
 #include <mutex>
 #include <condition_variable>
+#endif
 
 namespace Botan {
 

@@ -9,10 +9,12 @@
 #ifndef BOTAN_XMSS_PUBLICKEY_H_
 #define BOTAN_XMSS_PUBLICKEY_H_
 
+#ifndef SOUP_BUILD
 #include <cstddef>
 #include <iterator>
 #include <memory>
 #include <string>
+#endif
 #include <botan/alg_id.h>
 #include <botan/asn1_oid.h>
 #include <botan/der_enc.h>

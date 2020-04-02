@@ -11,7 +11,9 @@
 #include <botan/pk_keys.h>
 #include <botan/pk_ops_fwd.h>
 #include <botan/symkey.h>
+#ifndef SOUP_BUILD
 #include <string>
+#endif
 
 #if defined(BOTAN_HAS_SYSTEM_RNG)
   #include <botan/system_rng.h>

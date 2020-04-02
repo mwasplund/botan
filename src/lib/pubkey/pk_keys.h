@@ -12,7 +12,9 @@
 #include <botan/asn1_oid.h>
 #include <botan/alg_id.h>
 #include <botan/pk_ops_fwd.h>
+#ifndef SOUP_BUILD
 #include <string>
+#endif
 
 namespace Botan {
 

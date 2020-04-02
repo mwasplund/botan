@@ -9,8 +9,10 @@
 #define BOTAN_ATOMIC_H_
 
 #include <botan/types.h>
+#ifndef SOUP_BUILD
 #include <atomic>
 #include <memory>
+#endif
 
 //BOTAN_FUTURE_INTERNAL_HEADER(atomic.h)
 

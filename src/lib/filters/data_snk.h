@@ -10,8 +10,10 @@
 #define BOTAN_DATA_SINK_H_
 
 #include <botan/filter.h>
+#ifndef SOUP_BUILD
 #include <memory>
 #include <iosfwd>
+#endif
 
 namespace Botan {
 

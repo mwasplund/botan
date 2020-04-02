@@ -9,7 +9,9 @@
 #define BOTAN_PUBKEY_EME_ENCRYPTION_PAD_H_
 
 #include <botan/secmem.h>
+#ifndef SOUP_BUILD
 #include <string>
+#endif
 
 BOTAN_FUTURE_INTERNAL_HEADER(eme.h)
 

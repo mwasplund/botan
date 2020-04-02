@@ -10,10 +10,12 @@
 
 #include <botan/types.h> // IWYU pragma: export
 #include <botan/mem_ops.h> // IWYU pragma: export
+#ifndef SOUP_BUILD
 #include <vector> // IWYU pragma: export
 #include <algorithm>
 #include <deque>
 #include <type_traits>
+#endif
 
 namespace Botan {
 

@@ -8,9 +8,11 @@
 #ifndef BOTAN_XMSS_WOTS_PUBLICKEY_H_
 #define BOTAN_XMSS_WOTS_PUBLICKEY_H_
 
+#ifndef SOUP_BUILD
 #include <cstddef>
 #include <string>
 #include <vector>
+#endif
 #include <botan/alg_id.h>
 #include <botan/rng.h>
 #include <botan/asn1_oid.h>

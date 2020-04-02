@@ -8,7 +8,9 @@
 #ifndef BOTAN_CRYPTOBOX_H_
 #define BOTAN_CRYPTOBOX_H_
 
+#ifndef SOUP_BUILD
 #include <string>
+#endif
 #include <botan/symkey.h>
 
 namespace Botan {

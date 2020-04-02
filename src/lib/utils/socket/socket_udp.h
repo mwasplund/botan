@@ -9,8 +9,10 @@
 #define BOTAN_SOCKET_UDP_H_
 
 #include <botan/types.h>
+#ifndef SOUP_BUILD
 #include <string>
 #include <chrono>
+#endif
 
 namespace Botan {
 

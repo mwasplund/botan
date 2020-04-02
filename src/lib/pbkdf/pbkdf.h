@@ -9,7 +9,9 @@
 #define BOTAN_PBKDF_H_
 
 #include <botan/symkey.h>
+#ifndef SOUP_BUILD
 #include <chrono>
+#endif
 
 namespace Botan {
 

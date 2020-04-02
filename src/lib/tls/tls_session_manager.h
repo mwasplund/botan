@@ -10,8 +10,10 @@
 
 #include <botan/tls_session.h>
 #include <botan/mutex.h>
+#ifndef SOUP_BUILD
 #include <chrono>
 #include <map>
+#endif
 
 namespace Botan {
 

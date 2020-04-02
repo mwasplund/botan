@@ -8,6 +8,7 @@
 #define BOTAN_THREAD_POOL_H_
 
 #include <botan/types.h>
+#ifndef SOUP_BUILD
 #include <functional>
 #include <deque>
 #include <vector>
@@ -18,6 +19,7 @@
 #include <thread>
 #include <future>
 #include <condition_variable>
+#endif
 
 namespace Botan {
 

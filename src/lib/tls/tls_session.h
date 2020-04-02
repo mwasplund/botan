@@ -15,7 +15,9 @@
 #include <botan/tls_server_info.h>
 #include <botan/secmem.h>
 #include <botan/symkey.h>
+#ifndef SOUP_BUILD
 #include <chrono>
+#endif
 
 namespace Botan {
 

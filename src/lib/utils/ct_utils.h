@@ -16,8 +16,10 @@
 
 #include <botan/secmem.h>
 #include <botan/internal/bit_ops.h>
+#ifndef SOUP_BUILD
 #include <type_traits>
 #include <vector>
+#endif
 
 #if defined(BOTAN_HAS_VALGRIND)
   #include <valgrind/memcheck.h>

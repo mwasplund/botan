@@ -13,9 +13,11 @@
 #include <botan/tls_magic.h>
 #include <botan/tls_version.h>
 #include <botan/aead.h>
+#ifndef SOUP_BUILD
 #include <vector>
 #include <chrono>
 #include <functional>
+#endif
 
 namespace Botan {
 

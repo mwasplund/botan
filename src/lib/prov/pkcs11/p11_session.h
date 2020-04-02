@@ -11,7 +11,9 @@
 
 #include <botan/p11_slot.h>
 
+#ifndef SOUP_BUILD
 #include <utility>
+#endif
 
 namespace Botan {
 namespace PKCS11 {

@@ -12,8 +12,10 @@
 
 #include <botan/point_gfp.h>
 #include <botan/asn1_oid.h>
+#ifndef SOUP_BUILD
 #include <memory>
 #include <set>
+#endif
 
 namespace Botan {
 

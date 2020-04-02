@@ -8,7 +8,9 @@
 #define BOTAN_TOTP_H_
 
 #include <botan/hotp.h>
+#ifndef SOUP_BUILD
 #include <chrono>
+#endif
 
 namespace Botan {
 

@@ -9,9 +9,11 @@
 #define BOTAN_BLOCK_CIPHER_H_
 
 #include <botan/sym_algo.h>
+#ifndef SOUP_BUILD
 #include <string>
 #include <memory>
 #include <vector>
+#endif
 
 namespace Botan {
 

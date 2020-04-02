@@ -9,10 +9,12 @@
 #ifndef BOTAN_STL_UTIL_H_
 #define BOTAN_STL_UTIL_H_
 
+#ifndef SOUP_BUILD
 #include <vector>
 #include <string>
 #include <map>
 #include <set>
+#endif
 #include <botan/secmem.h>
 
 namespace Botan {

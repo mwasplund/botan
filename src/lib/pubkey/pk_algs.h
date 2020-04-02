@@ -10,7 +10,9 @@
 
 #include <botan/pk_keys.h>
 #include <botan/alg_id.h>
+#ifndef SOUP_BUILD
 #include <memory>
+#endif
 
 namespace Botan {
 

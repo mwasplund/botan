@@ -9,8 +9,10 @@
 #define BOTAN_NAME_CONSTRAINT_H_
 
 #include <botan/asn1_obj.h>
+#ifndef SOUP_BUILD
 #include <ostream>
 #include <limits>
+#endif
 
 namespace Botan {
 

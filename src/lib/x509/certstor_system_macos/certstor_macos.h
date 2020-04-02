@@ -9,7 +9,9 @@
 #ifndef BOTAN_CERT_STORE_SYSTEM_MACOS_H_
 #define BOTAN_CERT_STORE_SYSTEM_MACOS_H_
 
+#ifndef SOUP_BUILD
 #include <memory>
+#endif
 
 #include <botan/certstor.h>
 

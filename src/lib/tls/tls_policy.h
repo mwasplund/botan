@@ -12,8 +12,10 @@
 #include <botan/tls_version.h>
 #include <botan/tls_algos.h>
 #include <botan/tls_ciphersuite.h>
+#ifndef SOUP_BUILD
 #include <vector>
 #include <map>
+#endif
 
 namespace Botan {
 

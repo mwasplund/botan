@@ -9,9 +9,11 @@
 #define BOTAN_CPUID_H_
 
 #include <botan/types.h>
+#ifndef SOUP_BUILD
 #include <vector>
 #include <string>
 #include <iosfwd>
+#endif
 
 BOTAN_FUTURE_INTERNAL_HEADER(cpuid.h)
 

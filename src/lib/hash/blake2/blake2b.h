@@ -9,8 +9,10 @@
 #define BOTAN_BLAKE2B_H_
 
 #include <botan/hash.h>
+#ifndef SOUP_BUILD
 #include <string>
 #include <memory>
+#endif
 
 BOTAN_FUTURE_INTERNAL_HEADER(blake2b.h)
 

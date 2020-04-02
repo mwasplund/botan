@@ -10,8 +10,10 @@
 #define BOTAN_CALENDAR_H_
 
 #include <botan/types.h>
+#ifndef SOUP_BUILD
 #include <chrono>
 #include <string>
+#endif
 
 namespace Botan {
 

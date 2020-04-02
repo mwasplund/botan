@@ -9,8 +9,10 @@
 #define BOTAN_MLOCK_ALLOCATOR_H_
 
 #include <botan/types.h>
+#ifndef SOUP_BUILD
 #include <vector>
 #include <memory>
+#endif
 
 BOTAN_FUTURE_INTERNAL_HEADER(locking_allocator.h)
 

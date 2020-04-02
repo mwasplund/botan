@@ -9,8 +9,10 @@
 #define BOTAN_EXCEPTION_H_
 
 #include <botan/types.h>
+#ifndef SOUP_BUILD
 #include <exception>
 #include <string>
+#endif
 
 namespace Botan {
 

@@ -9,9 +9,11 @@
 
 #include <botan/types.h>
 #include <botan/mutex.h>
+#ifndef SOUP_BUILD
 #include <vector>
 #include <deque>
 #include <map>
+#endif
 
 namespace Botan {
 

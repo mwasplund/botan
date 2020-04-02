@@ -9,8 +9,10 @@
 #define BOTAN_DER_ENCODER_H_
 
 #include <botan/asn1_obj.h>
+#ifndef SOUP_BUILD
 #include <vector>
 #include <functional>
+#endif
 
 namespace Botan {
 

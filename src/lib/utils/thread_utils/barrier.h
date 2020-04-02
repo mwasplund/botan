@@ -8,7 +8,9 @@
 #ifndef BOTAN_UTIL_BARRIER_H_
 #define BOTAN_UTIL_BARRIER_H_
 
+#ifndef SOUP_BUILD
 #include <mutex>
+#endif
 #include <condition_variable>
 
 namespace Botan {

@@ -16,8 +16,10 @@
 #include <botan/p11_ecc_key.h>
 #include <botan/ecdh.h>
 
+#ifndef SOUP_BUILD
 #include <string>
 #include <vector>
+#endif
 
 namespace Botan {
 namespace PKCS11 {

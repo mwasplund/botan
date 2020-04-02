@@ -8,7 +8,9 @@
 #ifndef BOTAN_XMSS_SIGNATURE_H_
 #define BOTAN_XMSS_SIGNATURE_H_
 
+#ifndef SOUP_BUILD
 #include <cstddef>
+#endif
 #include <botan/exceptn.h>
 #include <botan/types.h>
 #include <botan/secmem.h>

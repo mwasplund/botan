@@ -1,5 +1,8 @@
 Name = "Botan"
 Version = "1.0.0"
 Public = "Module.cpp"
+IncludePaths = [
+    "../../build/include/"
+]
 Source = [
 ]

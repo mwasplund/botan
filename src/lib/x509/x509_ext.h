@@ -15,7 +15,9 @@
 #include <botan/name_constraint.h>
 #include <botan/key_constraint.h>
 #include <botan/crl_ent.h>
+#ifndef SOUP_BUILD
 #include <set>
+#endif
 
 namespace Botan {
 

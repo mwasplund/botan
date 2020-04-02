@@ -10,12 +10,14 @@
 
 #include <botan/tls_magic.h>
 #include <botan/tls_version.h>
+#ifndef SOUP_BUILD
 #include <functional>
 #include <vector>
 #include <deque>
 #include <map>
 #include <set>
 #include <utility>
+#endif
 
 namespace Botan {
 

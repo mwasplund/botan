@@ -9,7 +9,9 @@
 #define BOTAN_PARALLEL_HASH_H_
 
 #include <botan/hash.h>
+#ifndef SOUP_BUILD
 #include <vector>
+#endif
 
 BOTAN_FUTURE_INTERNAL_HEADER(par_hash.h)
 

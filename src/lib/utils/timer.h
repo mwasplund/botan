@@ -8,8 +8,10 @@
 #define BOTAN_TIMER_H_
 
 #include <botan/types.h>
+#ifndef SOUP_BUILD
 #include <string>
 #include <chrono>
+#endif
 
 namespace Botan {
 

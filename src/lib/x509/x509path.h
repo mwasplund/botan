@@ -12,9 +12,11 @@
 #include <botan/x509cert.h>
 #include <botan/certstor.h>
 #include <botan/ocsp.h>
+#ifndef SOUP_BUILD
 #include <functional>
 #include <set>
 #include <chrono>
+#endif
 
 #if defined(BOTAN_TARGET_OS_HAS_THREADS) && defined(BOTAN_HAS_HTTP_UTIL)
   #define BOTAN_HAS_ONLINE_REVOCATION_CHECKS

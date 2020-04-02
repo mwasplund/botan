@@ -7,10 +7,12 @@
 #ifndef BOTAN_FFI_UTILS_H_
 #define BOTAN_FFI_UTILS_H_
 
+#ifndef SOUP_BUILD
 #include <cstdint>
 #include <memory>
 #include <stdexcept>
 #include <functional>
+#endif
 #include <botan/exceptn.h>
 #include <botan/mem_ops.h>
 

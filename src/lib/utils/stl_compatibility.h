@@ -9,12 +9,14 @@
 #define BOTAN_STL_COMPATIBILITY_H_
 
 #include <botan/types.h>
+#ifndef SOUP_BUILD
 #include <memory>
 
 #if __cplusplus < 201402L
 #include <cstddef>
 #include <type_traits>
 #include <utility>
+#endif
 #endif
 
 BOTAN_FUTURE_INTERNAL_HEADER(stl_compatability.h)

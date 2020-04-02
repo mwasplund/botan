@@ -11,9 +11,11 @@
 
 #include <botan/certstor.h>
 
+#ifndef SOUP_BUILD
 #include <vector>
 #include <memory>
 #include <map>
+#endif
 
 namespace Botan {
 /**

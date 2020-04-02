@@ -12,7 +12,9 @@
 
 #include <botan/curve_gfp.h>
 #include <botan/exceptn.h>
+#ifndef SOUP_BUILD
 #include <vector>
+#endif
 
 namespace Botan {
 

@@ -8,9 +8,11 @@
 #define BOTAN_ASN1_PRINT_H_
 
 #include <botan/asn1_obj.h>
+#ifndef SOUP_BUILD
 #include <string>
 #include <vector>
 #include <iosfwd>
+#endif
 
 namespace Botan {
 

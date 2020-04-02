@@ -9,7 +9,9 @@
 #define BOTAN_BUFFERED_COMPUTATION_H_
 
 #include <botan/secmem.h>
+#ifndef SOUP_BUILD
 #include <string>
+#endif
 
 namespace Botan {
 

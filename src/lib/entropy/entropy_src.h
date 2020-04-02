@@ -10,10 +10,12 @@
 
 #include <botan/secmem.h>
 #include <botan/rng.h>
+#ifndef SOUP_BUILD
 #include <string>
 #include <chrono>
 #include <memory>
 #include <vector>
+#endif
 
 namespace Botan {
 

@@ -10,8 +10,10 @@
 
 #include <botan/xmss_tools.h>
 #include <botan/secmem.h>
+#ifndef SOUP_BUILD
 #include <map>
 #include <string>
+#endif
 
 namespace Botan {
 

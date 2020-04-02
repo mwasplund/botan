@@ -9,7 +9,9 @@
 #define BOTAN_DYNAMIC_LOADER_H_
 
 #include <botan/types.h>
+#ifndef SOUP_BUILD
 #include <string>
+#endif
 
 namespace Botan {
 

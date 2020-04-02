@@ -9,9 +9,11 @@
 #define BOTAN_MEMORY_OPS_H_
 
 #include <botan/types.h>
+#ifndef SOUP_BUILD
 #include <cstring>
 #include <type_traits>
 #include <vector>
+#endif
 
 namespace Botan {
 

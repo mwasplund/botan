@@ -9,8 +9,10 @@
 #define BOTAN_UTIL_FILESYSTEM_H_
 
 #include <botan/types.h>
+#ifndef SOUP_BUILD
 #include <vector>
 #include <string>
+#endif
 
 namespace Botan {
 

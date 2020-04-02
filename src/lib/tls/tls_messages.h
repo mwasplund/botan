@@ -17,9 +17,11 @@
 #include <botan/pk_keys.h>
 #include <botan/x509cert.h>
 #include <botan/ocsp.h>
+#ifndef SOUP_BUILD
 #include <vector>
 #include <string>
 #include <set>
+#endif
 
 #if defined(BOTAN_HAS_CECPQ1)
   #include <botan/cecpq1.h>

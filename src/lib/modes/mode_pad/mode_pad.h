@@ -10,7 +10,9 @@
 #define BOTAN_MODE_PADDING_H_
 
 #include <botan/secmem.h>
+#ifndef SOUP_BUILD
 #include <string>
+#endif
 
 BOTAN_FUTURE_INTERNAL_HEADER(mode_pad.h)
 

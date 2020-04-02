@@ -9,7 +9,9 @@
 #define BOTAN_TLS_ALERT_H_
 
 #include <botan/secmem.h>
+#ifndef SOUP_BUILD
 #include <string>
+#endif
 
 namespace Botan {
 

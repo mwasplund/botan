@@ -9,8 +9,10 @@
 #define BOTAN_ENTROPY_SRC_DEVICE_H_
 
 #include <botan/entropy_src.h>
+#ifndef SOUP_BUILD
 #include <vector>
 #include <string>
+#endif
 
 namespace Botan {
 

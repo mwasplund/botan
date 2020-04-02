@@ -8,7 +8,9 @@
 #define BOTAN_PRIMALITY_TEST_H_
 
 #include <botan/types.h>
+#ifndef SOUP_BUILD
 #include <memory>
+#endif
 
 namespace Botan {
 

@@ -11,9 +11,11 @@
 
 #include <botan/p11.h>
 
+#ifndef SOUP_BUILD
 #include <utility>
 #include <string>
 #include <memory>
+#endif
 
 namespace Botan {
 namespace PKCS11 {

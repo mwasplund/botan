@@ -9,8 +9,10 @@
 #define BOTAN_RFC6979_GENERATOR_H_
 
 #include <botan/bigint.h>
+#ifndef SOUP_BUILD
 #include <string>
 #include <memory>
+#endif
 
 BOTAN_FUTURE_INTERNAL_HEADER(rfc6979.h)
 

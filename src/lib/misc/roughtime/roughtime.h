@@ -8,9 +8,11 @@
 #ifndef BOTAN_ROUGHTIME_H_
 #define BOTAN_ROUGHTIME_H_
 
+#ifndef SOUP_BUILD
 #include <array>
 #include <chrono>
 #include <vector>
+#endif
 
 #include <botan/ed25519.h>
 

@@ -9,7 +9,9 @@
 #define BOTAN_UTILS_SAFE_INT_H_
 
 #include <botan/exceptn.h>
+#ifndef SOUP_BUILD
 #include <string>
+#endif
 
 namespace Botan {
 

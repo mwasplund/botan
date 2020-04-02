@@ -8,9 +8,11 @@
 #ifndef BOTAN_XMSS_PRIVATEKEY_H_
 #define BOTAN_XMSS_PRIVATEKEY_H_
 
+#ifndef SOUP_BUILD
 #include <cstddef>
 #include <iterator>
 #include <memory>
+#endif
 #include <botan/alg_id.h>
 #include <botan/exceptn.h>
 #include <botan/pk_keys.h>

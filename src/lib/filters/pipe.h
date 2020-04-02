@@ -11,8 +11,10 @@
 
 #include <botan/data_src.h>
 #include <botan/exceptn.h>
+#ifndef SOUP_BUILD
 #include <initializer_list>
 #include <iosfwd>
+#endif
 
 namespace Botan {
 

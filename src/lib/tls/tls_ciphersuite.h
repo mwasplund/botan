@@ -11,8 +11,10 @@
 #include <botan/types.h>
 #include <botan/tls_algos.h>
 #include <botan/tls_version.h>
+#ifndef SOUP_BUILD
 #include <string>
 #include <vector>
+#endif
 
 namespace Botan {
 

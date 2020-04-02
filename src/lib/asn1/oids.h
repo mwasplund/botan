@@ -9,7 +9,9 @@
 #define BOTAN_OIDS_H_
 
 #include <botan/asn1_oid.h>
+#ifndef SOUP_BUILD
 #include <unordered_map>
+#endif
 
 namespace Botan {
 

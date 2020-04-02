@@ -13,7 +13,9 @@
 #define BOTAN_GF2M_SMALL_M_H_
 
 #include <botan/types.h>
+#ifndef SOUP_BUILD
 #include <vector>
+#endif
 
 // fixme - still used in mceliece.h
 //BOTAN_FUTURE_INTERNAL_HEADER(gf2m_small_m.h)

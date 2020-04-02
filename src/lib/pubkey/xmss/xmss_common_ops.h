@@ -8,7 +8,9 @@
 #ifndef BOTAN_XMSS_COMMON_OPS_H_
 #define BOTAN_XMSS_COMMON_OPS_H_
 
+#ifndef SOUP_BUILD
 #include <vector>
+#endif
 #include <botan/secmem.h>
 #include <botan/xmss_parameters.h>
 #include <botan/xmss_address.h>

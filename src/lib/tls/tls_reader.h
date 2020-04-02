@@ -11,8 +11,10 @@
 #include <botan/exceptn.h>
 #include <botan/secmem.h>
 #include <botan/loadstor.h>
+#ifndef SOUP_BUILD
 #include <string>
 #include <vector>
+#endif
 
 namespace Botan {
 

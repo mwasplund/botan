@@ -15,7 +15,7 @@
 #include <botan/symkey.h>
 #include <botan/cipher_mode.h>
 
-#if defined(BOTAN_TARGET_OS_HAS_THREADS)
+#if defined(BOTAN_TARGET_OS_HAS_THREADS) && !defined(SOUP_BUILD)
   #include <thread>
 #endif
 

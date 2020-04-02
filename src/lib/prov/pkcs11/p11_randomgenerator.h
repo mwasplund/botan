@@ -13,8 +13,10 @@
 #include <botan/p11_session.h>
 #include <botan/entropy_src.h>
 
+#ifndef SOUP_BUILD
 #include <string>
 #include <functional>
+#endif
 
 namespace Botan {
 namespace PKCS11 {

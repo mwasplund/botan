@@ -15,10 +15,12 @@
 #include <botan/tls_version.h>
 #include <botan/secmem.h>
 #include <botan/x509_dn.h>
+#ifndef SOUP_BUILD
 #include <vector>
 #include <string>
 #include <map>
 #include <set>
+#endif
 
 namespace Botan {
 

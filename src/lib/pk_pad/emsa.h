@@ -10,7 +10,9 @@
 
 #include <botan/secmem.h>
 #include <botan/alg_id.h>
+#ifndef SOUP_BUILD
 #include <string>
+#endif
 
 BOTAN_FUTURE_INTERNAL_HEADER(emsa.h)
 

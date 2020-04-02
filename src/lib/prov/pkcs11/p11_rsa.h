@@ -16,7 +16,9 @@
 
 #if defined(BOTAN_HAS_RSA)
 #include <botan/rsa.h>
+#ifndef SOUP_BUILD
 #include <utility>
+#endif
 
 namespace Botan {
 namespace PKCS11 {

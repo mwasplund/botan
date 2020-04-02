@@ -12,9 +12,11 @@
 
 #include <botan/build.h> // IWYU pragma: export
 #include <botan/assert.h> // IWYU pragma: export
+#ifndef SOUP_BUILD
 #include <cstddef> // IWYU pragma: export
 #include <cstdint> // IWYU pragma: export
 #include <memory> // IWYU pragma: export
+#endif
 
 namespace Botan {
 

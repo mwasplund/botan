@@ -16,7 +16,9 @@
 #include <botan/ecc_key.h>
 #include <botan/ec_group.h>
 #include <botan/alg_id.h>
+#ifndef SOUP_BUILD
 #include <vector>
+#endif
 
 namespace Botan {
 namespace PKCS11 {

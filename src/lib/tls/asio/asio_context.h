@@ -14,7 +14,9 @@
 #include <boost/version.hpp>
 #if BOOST_VERSION >= 106600
 
+#ifndef SOUP_BUILD
 #include <functional>
+#endif
 
 #include <botan/credentials_manager.h>
 #include <botan/ocsp.h>

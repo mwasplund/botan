@@ -12,7 +12,9 @@
 #include <botan/types.h>
 #include <botan/bswap.h>
 #include <botan/mem_ops.h>
+#ifndef SOUP_BUILD
 #include <vector>
+#endif
 
 BOTAN_FUTURE_INTERNAL_HEADER(loadstor.h)
 

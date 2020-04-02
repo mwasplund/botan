@@ -18,7 +18,9 @@
 #include <botan/tls_callbacks.h>
 #include <botan/pk_keys.h>
 #include <botan/pubkey.h>
+#ifndef SOUP_BUILD
 #include <functional>
+#endif
 
 namespace Botan {
 

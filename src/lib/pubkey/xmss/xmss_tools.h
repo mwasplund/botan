@@ -10,8 +10,10 @@
 
 #include <botan/cpuid.h>
 #include <botan/secmem.h>
+#ifndef SOUP_BUILD
 #include <iterator>
 #include <type_traits>
+#endif
 
 //BOTAN_FUTURE_INTERNAL_HEADER(xmss_tools.h)
 

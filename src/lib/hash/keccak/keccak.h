@@ -10,7 +10,9 @@
 
 #include <botan/hash.h>
 #include <botan/secmem.h>
+#ifndef SOUP_BUILD
 #include <string>
+#endif
 
 namespace Botan {
 

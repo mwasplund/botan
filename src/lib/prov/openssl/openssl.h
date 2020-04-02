@@ -11,6 +11,7 @@
 #include <botan/pk_ops_fwd.h>
 #include <botan/secmem.h>
 #include <botan/exceptn.h>
+#ifndef SOUP_BUILD
 #include <memory>
 #include <string>
 
@@ -19,6 +20,7 @@
 
 #if defined(BOTAN_HAS_RC4)
 #include <openssl/rc4.h>
+#endif
 #endif
 
 namespace Botan {

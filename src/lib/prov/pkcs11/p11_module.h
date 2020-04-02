@@ -9,8 +9,10 @@
 #ifndef BOTAN_P11_MODULE_H_
 #define BOTAN_P11_MODULE_H_
 
+#ifndef SOUP_BUILD
 #include <string>
 #include <memory>
+#endifs
 
 #include <botan/p11.h>
 #include <botan/dyn_load.h>

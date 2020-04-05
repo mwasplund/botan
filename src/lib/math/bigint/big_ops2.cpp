@@ -8,6 +8,7 @@
 #ifdef SOUP_BUILD
 module;
 #include <algorithm>
+#include <mutex>
 
 #define SOUP_MACRO_ONLY
 #include <botan/assert.h>

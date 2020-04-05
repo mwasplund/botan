@@ -8,6 +8,7 @@
 
 #ifdef SOUP_BUILD
 module;
+#include <mutex>
 #include <string>
 #include <utility>
 module Botan;

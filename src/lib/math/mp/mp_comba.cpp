@@ -8,6 +8,7 @@
 
 #ifdef SOUP_BUILD
 module;
+#include <mutex>
 module Botan;
 #else
 #include <botan/internal/mp_core.h>

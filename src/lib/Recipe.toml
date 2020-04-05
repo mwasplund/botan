@@ -6,11 +6,11 @@ IncludePaths = [
 ]
 Source = [
     "math/bigint/big_ops2.cpp",
-    #"math/bigint/bigint.cpp",
+    "math/bigint/bigint.cpp",
     "math/mp/mp_comba.cpp",
     "math/mp/mp_karat.cpp",
-    "math/numbertheory/monty.cpp",
     "math/numbertheory/monty_exp.cpp",
+    "math/numbertheory/monty.cpp",
     "pubkey/dh/dh.cpp",
     "tls/tls_callbacks.cpp",
 ]

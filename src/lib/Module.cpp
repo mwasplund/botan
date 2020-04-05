@@ -34,5 +34,3 @@ export module Botan;
 #include <botan/internal/mp_core.h>
 #include <botan/internal/pk_ops_impl.h>
 #include <botan/internal/rounding.h>
-
-#include <botan/tls_client.h>

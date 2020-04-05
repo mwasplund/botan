@@ -15,10 +15,15 @@
 
 export module Botan;
 
+#include <botan/ber_dec.h>
 #include <botan/blinding.h>
 #include <botan/x509path.h>
+#include <botan/charset.h>
+#include <botan/der_enc.h>
 #include <botan/dh.h>
+#include <botan/divide.h>
 #include <botan/ecdh.h>
+#include <botan/hex.h>
 #include <botan/loadstor.h>
 #include <botan/monty.h>
 #include <botan/numthry.h>
@@ -32,5 +37,6 @@ export module Botan;
 #include <botan/internal/ct_utils.h>
 #include <botan/internal/monty_exp.h>
 #include <botan/internal/mp_core.h>
+#include <botan/internal/mp_monty.h>
 #include <botan/internal/pk_ops_impl.h>
 #include <botan/internal/rounding.h>

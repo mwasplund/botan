@@ -5,10 +5,16 @@
 * Botan is released under the Simplified BSD License (see license.txt)
 */
 
+#ifdef SOUP_BUILD
+module;
+#include <mutex>
+module Botan;
+#else
 #include <botan/bigint.h>
 #include <botan/divide.h>
 #include <botan/charset.h>
 #include <botan/hex.h>
+#endif
 
 namespace Botan {
 

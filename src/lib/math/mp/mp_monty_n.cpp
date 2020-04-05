@@ -5,10 +5,16 @@
 * Botan is released under the Simplified BSD License (see license.txt)
 */
 
+#ifdef SOUP_BUILD
+module;
+#include <mutex>
+module Botan;
+#else
 #include <botan/internal/mp_monty.h>
 #include <botan/internal/mp_core.h>
 #include <botan/internal/mp_asmi.h>
 #include <botan/internal/ct_utils.h>
+#endif
 
 namespace Botan {
 

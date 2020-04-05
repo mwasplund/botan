@@ -5,12 +5,21 @@ IncludePaths = [
     "../../build/include/"
 ]
 Source = [
+    "math/bigint/big_code.cpp",
     "math/bigint/big_ops2.cpp",
     "math/bigint/bigint.cpp",
     "math/mp/mp_comba.cpp",
     "math/mp/mp_karat.cpp",
+    "math/mp/mp_monty_n.cpp",
+    "math/mp/mp_monty.cpp",
+    "math/numbertheory/mod_inv.cpp",
     "math/numbertheory/monty_exp.cpp",
     "math/numbertheory/monty.cpp",
+    "math/numbertheory/reducer.cpp",
     "pubkey/dh/dh.cpp",
+    "pubkey/dl_algo/dl_algo.cpp",
+    "pubkey/pubkey.cpp",
     "tls/tls_callbacks.cpp",
+    "utils/assert.cpp",
+    "utils/charset.cpp",
 ]

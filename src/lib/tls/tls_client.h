@@ -56,8 +56,14 @@ class BOTAN_PUBLIC_API(2,0) Client final : public Channel
             Session_Manager& session_manager,
             Credentials_Manager& creds,
             const Policy& policy,
+            RandomNumberGenerator& rng
+         ) : Client(callbacks, session_manager, creds, policy, rng, Server_Information()) {}
+     Client(Callbacks& callbacks,
+            Session_Manager& session_manager,
+            Credentials_Manager& creds,
+            const Policy& policy,
             RandomNumberGenerator& rng,
-            const Server_Information& server_info = Server_Information(),
+            const Server_Information& server_info,
             const Protocol_Version& offer_version = Protocol_Version::latest_tls_version(),
             const std::vector<std::string>& next_protocols = {},
             size_t reserved_io_buffer_size = TLS::Client::IO_BUF_DEFAULT_SIZE
@@ -106,7 +112,7 @@ class BOTAN_PUBLIC_API(2,0) Client final : public Channel
              Credentials_Manager& creds,
              const Policy& policy,
              RandomNumberGenerator& rng,
-             const Server_Information& server_info = Server_Information(),
+             const Server_Information& server_info,
              const Protocol_Version& offer_version = Protocol_Version::latest_tls_version(),
              const std::vector<std::string>& next_protocols = {},
              size_t reserved_io_buffer_size = TLS::Client::IO_BUF_DEFAULT_SIZE
@@ -126,7 +132,7 @@ class BOTAN_PUBLIC_API(2,0) Client final : public Channel
              Credentials_Manager& creds,
              const Policy& policy,
              RandomNumberGenerator& rng,
-             const Server_Information& server_info = Server_Information(),
+             const Server_Information& server_info,
              const Protocol_Version& offer_version = Protocol_Version::latest_tls_version(),
              const std::vector<std::string>& next_protocols = {}
          );

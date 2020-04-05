@@ -18,7 +18,7 @@
 
 #define BOTAN_VERSION_RELEASE_TYPE "unreleased"
 
-#define BOTAN_VERSION_VC_REVISION "git:74c7a5fcd96b450d0b31a2a794605f1c1c05efc9"
+#define BOTAN_VERSION_VC_REVISION "git:5486b1423c0b32da365ff814505b0f5a7c95dd9f"
 
 #define BOTAN_DISTRIBUTION_INFO "unspecified"
 
@@ -32,6 +32,9 @@
 #define BOTAN_LIB_LINK "crypt32.lib user32.lib ws2_32.lib"
 #define BOTAN_LINK_FLAGS ""
 
+#ifdef SOUP_BUILD
+  #define BOTAN_DLL 
+#endif
 
 #ifndef BOTAN_DLL
   #define BOTAN_DLL __declspec(dllimport)

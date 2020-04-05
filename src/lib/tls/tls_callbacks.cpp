@@ -6,6 +6,12 @@
 * Botan is released under the Simplified BSD License (see license.txt)
 */
 
+#ifdef SOUP_BUILD
+module;
+#include <string>
+#include <utility>
+module Botan;
+#else
 #include <botan/tls_callbacks.h>
 #include <botan/tls_policy.h>
 #include <botan/tls_algos.h>
@@ -18,6 +24,7 @@
 
 #if defined(BOTAN_HAS_CURVE_25519)
   #include <botan/curve25519.h>
+#endif
 #endif
 
 namespace Botan {

@@ -18,7 +18,23 @@ class Modular_Reducer;
 
 class Montgomery_Params;
 
-class Montgomery_Exponentation_State;
+class Montgomery_Exponentation_State
+   {
+   public:
+      Montgomery_Exponentation_State(std::shared_ptr<const Montgomery_Params> params,
+                                     const BigInt& g,
+                                     size_t window_bits,
+                                     bool const_time);
+
+      BigInt exponentiation(const BigInt& k, size_t max_k_bits) const;
+
+      BigInt exponentiation_vartime(const BigInt& k) const;
+   private:
+      std::shared_ptr<const Montgomery_Params> m_params;
+      std::vector<Montgomery_Int> m_g;
+      size_t m_window_bits;
+      bool m_const_time;
+   };
 
 /*
 * Precompute for calculating values g^x mod p

@@ -9,11 +9,14 @@
 #ifndef BOTAN_ASSERTION_CHECKING_H_
 #define BOTAN_ASSERTION_CHECKING_H_
 
+#ifndef SOUP_MACRO_ONLY
 #include <botan/build.h>
 #include <botan/compiler.h>
+#endif
 
 namespace Botan {
 
+#ifndef SOUP_MACRO_ONLY
 /**
 * Called when an assertion fails
 * Throws an Exception object
@@ -33,10 +36,12 @@ BOTAN_NORETURN void BOTAN_UNSTABLE_API throw_invalid_argument(const char* messag
                                                               const char* func,
                                                               const char* file);
 
+#endif
 
 #define BOTAN_ARG_CHECK(expr, msg)                                      \
    do { if(!(expr)) Botan::throw_invalid_argument(msg, __func__, __FILE__); } while(0)
 
+#ifndef SOUP_MACRO_ONLY
 /**
 * Called when an invalid state is encountered
 * Throws Invalid_State
@@ -44,6 +49,7 @@ BOTAN_NORETURN void BOTAN_UNSTABLE_API throw_invalid_argument(const char* messag
 BOTAN_NORETURN void BOTAN_UNSTABLE_API throw_invalid_state(const char* message,
                                                            const char* func,
                                                            const char* file);
+#endif
 
 
 #define BOTAN_STATE_CHECK(expr)                                     \

@@ -85,8 +85,11 @@ class BOTAN_PUBLIC_API(2,0) ECDH_PrivateKey final : public ECDH_PublicKey,
       * @param x the private key; if zero, a new random key is generated
       */
       ECDH_PrivateKey(RandomNumberGenerator& rng,
+                      const EC_Group& domain) :
+         EC_PrivateKey(rng, domain, 0) {}
+      ECDH_PrivateKey(RandomNumberGenerator& rng,
                       const EC_Group& domain,
-                      const BigInt& x = 0) :
+                      const BigInt& x) :
          EC_PrivateKey(rng, domain, x) {}
 
       std::vector<uint8_t> public_value() const override

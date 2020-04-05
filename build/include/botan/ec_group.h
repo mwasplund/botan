@@ -61,7 +61,8 @@ class BOTAN_PUBLIC_API(2,0) EC_Group final
                   base_point.get_affine_x(),
                   base_point.get_affine_y(),
                   order,
-                  cofactor) {}
+                  cofactor,
+                  OID()) {}
 
       /**
       * Construct Domain paramers from specified parameters
@@ -81,7 +82,7 @@ class BOTAN_PUBLIC_API(2,0) EC_Group final
                const BigInt& base_y,
                const BigInt& order,
                const BigInt& cofactor,
-               const OID& oid = OID());
+               const OID& oid);
 
       /**
       * Decode a BER encoded ECC domain parameter set

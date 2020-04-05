@@ -39,7 +39,7 @@ class Certificate_Status_Request;
 * Encapsulates the callbacks that a TLS channel will make which are due to
 * channel specific operations.
 */
-class BOTAN_PUBLIC_API(2,0) Callbacks
+BOTAN_EXPORT class BOTAN_PUBLIC_API(2,0) Callbacks
    {
    public:
        virtual ~Callbacks() = default;

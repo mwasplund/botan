@@ -67,8 +67,9 @@ class BOTAN_PUBLIC_API(2,0) DH_PrivateKey final : public DH_PublicKey,
       * @param grp the group to be used in the key
       * @param x the key's secret value (or if zero, generate a new key)
       */
+      DH_PrivateKey(RandomNumberGenerator& rng, const DL_Group& grp) : DH_PrivateKey(rng, grp, 0) {}
       DH_PrivateKey(RandomNumberGenerator& rng, const DL_Group& grp,
-                    const BigInt& x = 0);
+                    const BigInt& x);
 
       std::unique_ptr<PK_Ops::Key_Agreement>
          create_key_agreement_op(RandomNumberGenerator& rng,

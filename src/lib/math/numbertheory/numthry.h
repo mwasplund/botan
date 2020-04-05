@@ -210,7 +210,7 @@ inline bool verify_prime(const BigInt& n, RandomNumberGenerator& rng)
 */
 BigInt BOTAN_PUBLIC_API(2,0) random_prime(RandomNumberGenerator& rng,
                                           size_t bits,
-                                          const BigInt& coprime = 0,
+                                          const BigInt& coprime,
                                           size_t equiv = 1,
                                           size_t equiv_mod = 2,
                                           size_t prob = 128);

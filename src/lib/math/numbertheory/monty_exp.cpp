@@ -6,32 +6,25 @@
 * Botan is released under the Simplified BSD License (see license.txt)
 */
 
+#ifdef SOUP_BUILD
+module;
+#include <algorithm>
+#include <memory>
+#include <string>
+
+#define SOUP_MACRO_ONLY
+#include <botan/assert.h>
+module Botan;
+#else
 #include <botan/internal/monty_exp.h>
 #include <botan/internal/ct_utils.h>
 #include <botan/internal/rounding.h>
 #include <botan/numthry.h>
 #include <botan/reducer.h>
 #include <botan/monty.h>
+#endif
 
 namespace Botan {
-
-class Montgomery_Exponentation_State
-   {
-   public:
-      Montgomery_Exponentation_State(std::shared_ptr<const Montgomery_Params> params,
-                                     const BigInt& g,
-                                     size_t window_bits,
-                                     bool const_time);
-
-      BigInt exponentiation(const BigInt& k, size_t max_k_bits) const;
-
-      BigInt exponentiation_vartime(const BigInt& k) const;
-   private:
-      std::shared_ptr<const Montgomery_Params> m_params;
-      std::vector<Montgomery_Int> m_g;
-      size_t m_window_bits;
-      bool m_const_time;
-   };
 
 Montgomery_Exponentation_State::Montgomery_Exponentation_State(std::shared_ptr<const Montgomery_Params> params,
                                                                const BigInt& g,

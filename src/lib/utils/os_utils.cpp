@@ -6,6 +6,37 @@
 * Botan is released under the Simplified BSD License (see license.txt)
 */
 
+#ifdef SOUP_BUILD
+module;
+
+#define SOUP_MACRO_ONLY
+#include <botan/assert.h>
+#include <botan/build.h>
+
+#include <algorithm>
+#include <chrono>
+#include <cstdlib>
+#include <mutex>
+#include <string>
+
+#if defined(BOTAN_TARGET_OS_HAS_THREADS)
+  #include <thread>
+#endif
+
+#if defined(BOTAN_TARGET_OS_HAS_EXPLICIT_BZERO)
+  #include <string.h>
+#endif
+
+#if defined(BOTAN_TARGET_OS_HAS_WIN32)
+  #define NOMINMAX 1
+  #define _WINSOCKAPI_ // stop windows.h including winsock.h
+  #include <windows.h>
+#endif
+
+module Botan;
+
+#else
+
 #include <botan/internal/os_utils.h>
 #include <botan/cpuid.h>
 #include <botan/exceptn.h>
@@ -58,6 +89,8 @@
 
 #if defined(BOTAN_TARGET_OS_IS_IOS) || defined(BOTAN_TARGET_OS_IS_MACOS)
   #include <mach/vm_statistics.h>
+#endif
+
 #endif
 
 namespace Botan {

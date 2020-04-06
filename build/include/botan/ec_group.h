@@ -12,6 +12,8 @@
 
 #include <botan/point_gfp.h>
 #include <botan/asn1_oid.h>
+#include <botan/mutex.h>
+#include <botan/internal/point_mul.h>
 #ifndef SOUP_BUILD
 #include <memory>
 #include <set>
@@ -377,6 +379,217 @@ inline bool operator!=(const EC_Group& lhs,
 
 // For compatibility with 1.8
 typedef EC_Group EC_Domain_Params;
+
+
+class EC_Group_Data final
+   {
+   public:
+
+      EC_Group_Data(const BigInt& p,
+                    const BigInt& a,
+                    const BigInt& b,
+                    const BigInt& g_x,
+                    const BigInt& g_y,
+                    const BigInt& order,
+                    const BigInt& cofactor,
+                    const OID& oid) :
+         m_curve(p, a, b),
+         m_base_point(m_curve, g_x, g_y),
+         m_g_x(g_x),
+         m_g_y(g_y),
+         m_order(order),
+         m_cofactor(cofactor),
+         m_mod_order(order),
+         m_base_mult(m_base_point, m_mod_order),
+         m_oid(oid),
+         m_p_bits(p.bits()),
+         m_order_bits(order.bits()),
+         m_a_is_minus_3(a == p - 3),
+         m_a_is_zero(a.is_zero())
+         {
+         }
+
+      bool match(const BigInt& p, const BigInt& a, const BigInt& b,
+                 const BigInt& g_x, const BigInt& g_y,
+                 const BigInt& order, const BigInt& cofactor) const
+         {
+         return (this->p() == p &&
+                 this->a() == a &&
+                 this->b() == b &&
+                 this->order() == order &&
+                 this->cofactor() == cofactor &&
+                 this->g_x() == g_x &&
+                 this->g_y() == g_y);
+         }
+
+      const OID& oid() const { return m_oid; }
+      const BigInt& p() const { return m_curve.get_p(); }
+      const BigInt& a() const { return m_curve.get_a(); }
+      const BigInt& b() const { return m_curve.get_b(); }
+      const BigInt& order() const { return m_order; }
+      const BigInt& cofactor() const { return m_cofactor; }
+      const BigInt& g_x() const { return m_g_x; }
+      const BigInt& g_y() const { return m_g_y; }
+
+      size_t p_bits() const { return m_p_bits; }
+      size_t p_bytes() const { return (m_p_bits + 7) / 8; }
+
+      size_t order_bits() const { return m_order_bits; }
+      size_t order_bytes() const { return (m_order_bits + 7) / 8; }
+
+      const CurveGFp& curve() const { return m_curve; }
+      const PointGFp& base_point() const { return m_base_point; }
+
+      bool a_is_minus_3() const { return m_a_is_minus_3; }
+      bool a_is_zero() const { return m_a_is_zero; }
+
+      BigInt mod_order(const BigInt& x) const { return m_mod_order.reduce(x); }
+
+      BigInt square_mod_order(const BigInt& x) const
+         {
+         return m_mod_order.square(x);
+         }
+
+      BigInt multiply_mod_order(const BigInt& x, const BigInt& y) const
+         {
+         return m_mod_order.multiply(x, y);
+         }
+
+      BigInt multiply_mod_order(const BigInt& x, const BigInt& y, const BigInt& z) const
+         {
+         return m_mod_order.multiply(m_mod_order.multiply(x, y), z);
+         }
+
+      BigInt inverse_mod_order(const BigInt& x) const
+         {
+         return inverse_mod(x, m_order);
+         }
+
+      PointGFp blinded_base_point_multiply(const BigInt& k,
+                                           RandomNumberGenerator& rng,
+                                           std::vector<BigInt>& ws) const
+         {
+         return m_base_mult.mul(k, rng, m_order, ws);
+         }
+
+   private:
+      CurveGFp m_curve;
+      PointGFp m_base_point;
+
+      BigInt m_g_x;
+      BigInt m_g_y;
+      BigInt m_order;
+      BigInt m_cofactor;
+      Modular_Reducer m_mod_order;
+      PointGFp_Base_Point_Precompute m_base_mult;
+      OID m_oid;
+      size_t m_p_bits;
+      size_t m_order_bits;
+      bool m_a_is_minus_3;
+      bool m_a_is_zero;
+   };
+
+class EC_Group_Data_Map final
+   {
+   public:
+      EC_Group_Data_Map() {}
+
+      size_t clear()
+         {
+         lock_guard_type<mutex_type> lock(m_mutex);
+         size_t count = m_registered_curves.size();
+         m_registered_curves.clear();
+         return count;
+         }
+
+      std::shared_ptr<EC_Group_Data> lookup(const OID& oid)
+         {
+         lock_guard_type<mutex_type> lock(m_mutex);
+
+         for(auto i : m_registered_curves)
+            {
+            if(i->oid() == oid)
+               return i;
+            }
+
+         // Not found, check hardcoded data
+         std::shared_ptr<EC_Group_Data> data = EC_Group::EC_group_info(oid);
+
+         if(data)
+            {
+            m_registered_curves.push_back(data);
+            return data;
+            }
+
+         // Nope, unknown curve
+         return std::shared_ptr<EC_Group_Data>();
+         }
+
+      std::shared_ptr<EC_Group_Data> lookup_or_create(const BigInt& p,
+                                                      const BigInt& a,
+                                                      const BigInt& b,
+                                                      const BigInt& g_x,
+                                                      const BigInt& g_y,
+                                                      const BigInt& order,
+                                                      const BigInt& cofactor,
+                                                      const OID& oid)
+         {
+         lock_guard_type<mutex_type> lock(m_mutex);
+
+         for(auto i : m_registered_curves)
+            {
+            if(oid.has_value())
+               {
+               if(i->oid() == oid)
+                  return i;
+               else if(i->oid().has_value())
+                  continue;
+               }
+
+            if(i->match(p, a, b, g_x, g_y, order, cofactor))
+               return i;
+            }
+
+         // Not found - if OID is set try looking up that way
+
+         if(oid.has_value())
+            {
+            // Not located in existing store - try hardcoded data set
+            std::shared_ptr<EC_Group_Data> data = EC_Group::EC_group_info(oid);
+
+            if(data)
+               {
+               m_registered_curves.push_back(data);
+               return data;
+               }
+            }
+
+         // Not found or no OID, add data and return
+         return add_curve(p, a, b, g_x, g_y, order, cofactor, oid);
+         }
+
+   private:
+
+      std::shared_ptr<EC_Group_Data> add_curve(const BigInt& p,
+                                               const BigInt& a,
+                                               const BigInt& b,
+                                               const BigInt& g_x,
+                                               const BigInt& g_y,
+                                               const BigInt& order,
+                                               const BigInt& cofactor,
+                                               const OID& oid)
+         {
+         std::shared_ptr<EC_Group_Data> d =
+            std::make_shared<EC_Group_Data>(p, a, b, g_x, g_y, order, cofactor, oid);
+
+         // This function is always called with the lock held
+         m_registered_curves.push_back(d);
+         return d;
+         }
+
+      mutex_type m_mutex;
+      std::vector<std::shared_ptr<EC_Group_Data>> m_registered_curves;
+   };
 
 }
 

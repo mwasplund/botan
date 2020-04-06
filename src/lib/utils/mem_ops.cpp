@@ -4,6 +4,15 @@
 * Botan is released under the Simplified BSD License (see license.txt)
 */
 
+#ifdef SOUP_BUILD
+module;
+#include <mutex>
+
+#define SOUP_MACRO_ONLY
+#include <botan/assert.h>
+#include <botan/build.h>
+module Botan;
+#else
 #include <botan/mem_ops.h>
 #include <botan/internal/ct_utils.h>
 #include <cstdlib>
@@ -11,6 +20,7 @@
 
 #if defined(BOTAN_HAS_LOCKING_ALLOCATOR)
   #include <botan/locking_allocator.h>
+#endif
 #endif
 
 namespace Botan {

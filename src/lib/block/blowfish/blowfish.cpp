@@ -5,12 +5,24 @@
 * Botan is released under the Simplified BSD License (see license.txt)
 */
 
+#ifdef SOUP_BUILD
+module;
+#include <mutex>
+
+#define SOUP_MACRO_ONLY
+#include <botan/assert.h>
+#include <botan/build.h>
+module Botan;
+#else
+
 #include <botan/blowfish.h>
 #include <botan/loadstor.h>
 
+#endif
+
 namespace Botan {
 
-namespace {
+// TODO: MSVC Bug namespace {
 
 const uint32_t P_INIT[18] = {
    0x243F6A88, 0x85A308D3, 0x13198A2E, 0x03707344, 0xA4093822, 0x299F31D0,
@@ -196,7 +208,7 @@ inline uint32_t BFF(uint32_t X, const secure_vector<uint32_t>& S)
             S[512+get_byte(2, X)]) + S[768+get_byte(3, X)];
    }
 
-}
+// }
 
 /*
 * Blowfish Encryption

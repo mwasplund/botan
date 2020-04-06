@@ -5,6 +5,17 @@
 * Botan is released under the Simplified BSD License (see license.txt)
 */
 
+#ifdef SOUP_BUILD
+module;
+#include <mutex>
+
+#define SOUP_MACRO_ONLY
+#include <botan/assert.h>
+#include <botan/build.h>
+#include <botan/internal/serpent_sbox.h>
+module Botan;
+#else
+
 #include <botan/serpent.h>
 #include <botan/loadstor.h>
 #include <botan/rotate.h>
@@ -12,6 +23,8 @@
 
 #if defined(BOTAN_HAS_SERPENT_SIMD) || defined(BOTAN_HAS_SERPENT_AVX2)
   #include <botan/cpuid.h>
+#endif
+
 #endif
 
 namespace Botan {

@@ -16,14 +16,26 @@
 * Internet & Security Agency homepage</A>
 */
 
+#ifdef SOUP_BUILD
+module;
+#include <mutex>
+
+#define SOUP_MACRO_ONLY
+#include <botan/assert.h>
+#include <botan/build.h>
+module Botan;
+#else
+
 #include <botan/aria.h>
 #include <botan/loadstor.h>
 #include <botan/rotate.h>
 #include <botan/cpuid.h>
 
+#endif
+
 namespace Botan {
 
-namespace {
+// TODO: MSVC bug namespace {
 
 namespace ARIA_F {
 
@@ -432,7 +444,7 @@ void key_schedule(secure_vector<uint32_t>& ERK,
 
 }
 
-}
+// }
 
 void ARIA_128::encrypt_n(const uint8_t in[], uint8_t out[], size_t blocks) const
    {

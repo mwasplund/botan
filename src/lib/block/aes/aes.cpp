@@ -7,11 +7,25 @@
 * Botan is released under the Simplified BSD License (see license.txt)
 */
 
+#ifdef SOUP_BUILD
+module;
+#include <mutex>
+#include <string>
+#include <type_traits>
+
+#define SOUP_MACRO_ONLY
+#include <botan/assert.h>
+#include <botan/build.h>
+module Botan;
+#else
+
 #include <botan/aes.h>
 #include <botan/loadstor.h>
 #include <botan/cpuid.h>
 #include <botan/rotate.h>
 #include <type_traits>
+
+#endif
 
 /*
 * This implementation is based on table lookups which are known to be
@@ -48,7 +62,7 @@
 
 namespace Botan {
 
-namespace {
+// TODO: MSVC bug namespace {
 
 alignas(64)
 const uint8_t SE[256] = {
@@ -480,7 +494,7 @@ const char* aes_provider()
    return "base";
    }
 
-}
+// }
 
 std::string AES_128::provider() const { return aes_provider(); }
 std::string AES_192::provider() const { return aes_provider(); }

@@ -6,10 +6,26 @@
 * Botan is released under the Simplified BSD License (see license.txt)
 */
 
+#ifdef SOUP_BUILD
+module;
+#define SOUP_MACRO_ONLY
+#include <botan/assert.h>
+#include <botan/build.h>
+
+#include <algorithm>
+#include <memory>
+#include <mutex>
+#include <string>
+#include <vector>
+module Botan;
+#else
+
 #include <botan/certstor.h>
 #include <botan/internal/filesystem.h>
 #include <botan/hash.h>
 #include <botan/data_src.h>
+
+#endif
 
 namespace Botan {
 

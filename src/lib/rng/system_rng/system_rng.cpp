@@ -5,6 +5,40 @@
 * Botan is released under the Simplified BSD License (see license.txt)
 */
 
+#ifdef SOUP_BUILD
+module;
+#include <mutex>
+
+#define SOUP_MACRO_ONLY
+#include <botan/assert.h>
+#include <botan/build.h>
+
+#if defined(BOTAN_TARGET_OS_HAS_RTLGENRANDOM)
+  #define NOMINMAX 1
+  #define _WINSOCKAPI_ // stop windows.h including winsock.h
+  #include <windows.h>
+
+#elif defined(BOTAN_TARGET_OS_HAS_CRYPTO_NG)
+  #include <bcrypt.h>
+
+#elif defined(BOTAN_TARGET_OS_HAS_ARC4RANDOM)
+  #include <stdlib.h>
+
+#elif defined(BOTAN_TARGET_OS_HAS_GETRANDOM)
+  #include <sys/random.h>
+  #include <errno.h>
+
+#elif defined(BOTAN_TARGET_OS_HAS_DEV_RANDOM)
+  #include <sys/types.h>
+  #include <sys/stat.h>
+  #include <fcntl.h>
+  #include <unistd.h>
+  #include <errno.h>
+#endif
+
+module Botan;
+#else
+
 #include <botan/system_rng.h>
 
 #if defined(BOTAN_TARGET_OS_HAS_RTLGENRANDOM)
@@ -29,6 +63,8 @@
   #include <fcntl.h>
   #include <unistd.h>
   #include <errno.h>
+#endif
+
 #endif
 
 namespace Botan {

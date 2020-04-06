@@ -5,13 +5,28 @@
 * Botan is released under the Simplified BSD License (see license.txt)
 */
 
+#ifdef SOUP_BUILD
+module;
+#include <mutex>
+
+#define SOUP_MACRO_ONLY
+#include <botan/assert.h>
+#include <botan/build.h>
+module Botan;
+#else
+
 #include <botan/camellia.h>
 #include <botan/loadstor.h>
 #include <botan/rotate.h>
 
+#endif
+
 namespace Botan {
 
+// TODO: MSVC bug trying to export this...
+#ifndef SOUP_BUILD
 namespace {
+#endif
 
 const uint64_t Camellia_SBOX1[256] = {
 0x7070700070000070, 0x8282820082000082, 0x2C2C2C002C00002C, 0xECECEC00EC0000EC,
@@ -853,7 +868,9 @@ void key_schedule(secure_vector<uint64_t>& SK, const uint8_t key[], size_t lengt
 
 }
 
+#ifndef SOUP_BUILD
 }
+#endif
 
 void Camellia_128::encrypt_n(const uint8_t in[], uint8_t out[], size_t blocks) const
    {

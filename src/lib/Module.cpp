@@ -18,6 +18,7 @@ export module Botan;
 #include <botan/base64.h>
 #include <botan/ber_dec.h>
 #include <botan/blinding.h>
+#include <botan/block_cipher.h>
 #include <botan/calendar.h>
 #include <botan/charset.h>
 #include <botan/cpuid.h>
@@ -38,6 +39,9 @@ export module Botan;
 #include <botan/pem.h>
 #include <botan/reducer.h>
 #include <botan/rdrand_rng.h>
+#include <botan/rotate.h>
+#include <botan/scan_name.h>
+#include <botan/stream_cipher.h>
 #include <botan/tls_algos.h>
 #include <botan/tls_callbacks.h>
 #include <botan/tls_exceptn.h>
@@ -47,8 +51,10 @@ export module Botan;
 #include <botan/x509path.h>
 #include <botan/x509_ext.h>
 #include <botan/internal/bit_ops.h>
+#include <botan/internal/cast_sboxes.h>
 #include <botan/internal/codec_base.h>
 #include <botan/internal/ct_utils.h>
+#include <botan/internal/filesystem.h>
 #include <botan/internal/monty_exp.h>
 #include <botan/internal/mp_core.h>
 #include <botan/internal/mp_monty.h>
@@ -58,6 +64,7 @@ export module Botan;
 #include <botan/internal/primality.h>
 #include <botan/internal/rounding.h>
 #include <botan/internal/safeint.h>
+#include <botan/internal/socket.h>
 #include <botan/internal/stl_util.h>
 
 #if defined(BOTAN_HAS_LOCKING_ALLOCATOR)
@@ -95,4 +102,106 @@ export module Botan;
 
 #if defined(BOTAN_HAS_ENTROPY_SRC_GETENTROPY)
   #include <botan/internal/getentropy.h>
+#endif
+
+#if defined(BOTAN_HAS_HTTP_UTIL)
+  #include <botan/http_util.h>
+#endif
+
+#if defined(BOTAN_TARGET_OS_HAS_RTLGENRANDOM)
+  #include <botan/dyn_load.h>
+#endif
+
+
+#if defined(BOTAN_HAS_AES)
+  #include <botan/aes.h>
+#endif
+
+#if defined(BOTAN_HAS_ARIA)
+  #include <botan/aria.h>
+#endif
+
+#if defined(BOTAN_HAS_BLOWFISH)
+  #include <botan/blowfish.h>
+#endif
+
+#if defined(BOTAN_HAS_CAMELLIA)
+  #include <botan/camellia.h>
+#endif
+
+#if defined(BOTAN_HAS_CAST_128)
+  #include <botan/cast128.h>
+#endif
+
+#if defined(BOTAN_HAS_CAST_256)
+  #include <botan/cast256.h>
+#endif
+
+#if defined(BOTAN_HAS_CASCADE)
+  #include <botan/cascade.h>
+#endif
+
+#if defined(BOTAN_HAS_DES)
+  #include <botan/des.h>
+  #include <botan/desx.h>
+#endif
+
+#if defined(BOTAN_HAS_GOST_28147_89)
+  #include <botan/gost_28147.h>
+#endif
+
+#if defined(BOTAN_HAS_IDEA)
+  #include <botan/idea.h>
+#endif
+
+#if defined(BOTAN_HAS_KASUMI)
+  #include <botan/kasumi.h>
+#endif
+
+#if defined(BOTAN_HAS_LION)
+  #include <botan/lion.h>
+#endif
+
+#if defined(BOTAN_HAS_MISTY1)
+  #include <botan/misty1.h>
+#endif
+
+#if defined(BOTAN_HAS_NOEKEON)
+  #include <botan/noekeon.h>
+#endif
+
+#if defined(BOTAN_HAS_SEED)
+  #include <botan/seed.h>
+#endif
+
+#if defined(BOTAN_HAS_SERPENT)
+  #include <botan/serpent.h>
+#endif
+
+#if defined(BOTAN_HAS_SHACAL2)
+  #include <botan/shacal2.h>
+#endif
+
+#if defined(BOTAN_HAS_SM4)
+  #include <botan/sm4.h>
+#endif
+
+#if defined(BOTAN_HAS_TWOFISH)
+  #include <botan/twofish.h>
+#endif
+
+#if defined(BOTAN_HAS_THREEFISH_512)
+  #include <botan/threefish_512.h>
+#endif
+
+#if defined(BOTAN_HAS_XTEA)
+  #include <botan/xtea.h>
+#endif
+
+#if defined(BOTAN_HAS_OPENSSL)
+  #include <botan/internal/openssl.h>
+#endif
+
+#if defined(BOTAN_HAS_COMMONCRYPTO)
+  #include <botan/internal/commoncrypto.h>
 #endif

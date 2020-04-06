@@ -5,6 +5,19 @@
 * Botan is released under the Simplified BSD License (see license.txt)
 */
 
+#ifdef SOUP_BUILD
+module;
+#include <algorithm>
+#include <mutex>
+#include <string>
+#include <vector>
+
+#define SOUP_MACRO_ONLY
+#include <botan/assert.h>
+#include <botan/build.h>
+module Botan;
+#else
+
 #include <botan/block_cipher.h>
 #include <botan/scan_name.h>
 #include <botan/exceptn.h>
@@ -100,6 +113,8 @@
 
 #if defined(BOTAN_HAS_COMMONCRYPTO)
   #include <botan/internal/commoncrypto.h>
+#endif
+
 #endif
 
 namespace Botan {

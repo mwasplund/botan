@@ -5,6 +5,18 @@
 * Botan is released under the Simplified BSD License (see license.txt)
 */
 
+#ifdef SOUP_BUILD
+module;
+#define SOUP_MACRO_ONLY
+#include <botan/assert.h>
+#include <botan/build.h>
+
+#include <iomanip>
+#include <mutex>
+#include <sstream>
+module Botan;
+#else
+
 #include <botan/asn1_time.h>
 #include <botan/der_enc.h>
 #include <botan/ber_dec.h>
@@ -13,6 +25,8 @@
 #include <botan/calendar.h>
 #include <sstream>
 #include <iomanip>
+
+#endif
 
 namespace Botan {
 

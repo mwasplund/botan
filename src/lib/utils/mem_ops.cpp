@@ -6,11 +6,11 @@
 
 #ifdef SOUP_BUILD
 module;
-#include <mutex>
-
 #define SOUP_MACRO_ONLY
 #include <botan/assert.h>
 #include <botan/build.h>
+
+#include <mutex>
 module Botan;
 #else
 #include <botan/mem_ops.h>

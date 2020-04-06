@@ -290,7 +290,7 @@ class BOTAN_PUBLIC_API(2,0) Extensions final : public ASN1_Object
 
 namespace Cert_Extension {
 
-static const size_t NO_CERT_PATH_LIMIT = 0xFFFFFFF0;
+constexpr size_t NO_CERT_PATH_LIMIT = 0xFFFFFFF0;
 
 /**
 * Basic Constraints Extension
@@ -426,7 +426,9 @@ class BOTAN_PUBLIC_API(2,4) Subject_Alternative_Name final : public Certificate_
       Subject_Alternative_Name* copy() const override
          { return new Subject_Alternative_Name(get_alt_name()); }
 
-      explicit Subject_Alternative_Name(const AlternativeName& name = AlternativeName()) :
+      explicit Subject_Alternative_Name() :
+         Subject_Alternative_Name(AlternativeName()) {}
+      explicit Subject_Alternative_Name(const AlternativeName& name) :
          m_alt_name(name) {}
 
    private:
@@ -454,7 +456,9 @@ class BOTAN_PUBLIC_API(2,0) Issuer_Alternative_Name final : public Certificate_E
       Issuer_Alternative_Name* copy() const override
          { return new Issuer_Alternative_Name(get_alt_name()); }
 
-      explicit Issuer_Alternative_Name(const AlternativeName& name = AlternativeName()) :
+      explicit Issuer_Alternative_Name() :
+         Issuer_Alternative_Name(AlternativeName()) {}
+      explicit Issuer_Alternative_Name(const AlternativeName& name) :
          m_alt_name(name) {}
 
    private:

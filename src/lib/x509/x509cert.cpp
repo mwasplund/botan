@@ -6,6 +6,21 @@
 * Botan is released under the Simplified BSD License (see license.txt)
 */
 
+#ifdef SOUP_BUILD
+module;
+#define SOUP_MACRO_ONLY
+#include <botan/assert.h>
+#include <botan/build.h>
+
+#include <algorithm>
+#include <memory>
+#include <mutex>
+#include <string>
+#include <sstream>
+#include <vector>
+module Botan;
+#else
+
 #include <botan/x509cert.h>
 #include <botan/datastor.h>
 #include <botan/pk_keys.h>
@@ -19,57 +34,9 @@
 #include <algorithm>
 #include <sstream>
 
+#endif
+
 namespace Botan {
-
-struct X509_Certificate_Data
-   {
-   std::vector<uint8_t> m_serial;
-   AlgorithmIdentifier m_sig_algo_inner;
-   X509_DN m_issuer_dn;
-   X509_DN m_subject_dn;
-   std::vector<uint8_t> m_issuer_dn_bits;
-   std::vector<uint8_t> m_subject_dn_bits;
-   X509_Time m_not_before;
-   X509_Time m_not_after;
-   std::vector<uint8_t> m_subject_public_key_bits;
-   std::vector<uint8_t> m_subject_public_key_bits_seq;
-   std::vector<uint8_t> m_subject_public_key_bitstring;
-   std::vector<uint8_t> m_subject_public_key_bitstring_sha1;
-   AlgorithmIdentifier m_subject_public_key_algid;
-
-   std::vector<uint8_t> m_v2_issuer_key_id;
-   std::vector<uint8_t> m_v2_subject_key_id;
-   Extensions m_v3_extensions;
-
-   std::vector<OID> m_extended_key_usage;
-   std::vector<uint8_t> m_authority_key_id;
-   std::vector<uint8_t> m_subject_key_id;
-   std::vector<OID> m_cert_policies;
-
-   std::vector<std::string> m_crl_distribution_points;
-   std::string m_ocsp_responder;
-   std::vector<std::string> m_ca_issuers;
-
-   std::vector<uint8_t> m_issuer_dn_bits_sha256;
-   std::vector<uint8_t> m_subject_dn_bits_sha256;
-
-   std::string m_fingerprint_sha1;
-   std::string m_fingerprint_sha256;
-
-   AlternativeName m_subject_alt_name;
-   AlternativeName m_issuer_alt_name;
-   NameConstraints m_name_constraints;
-
-   Data_Store m_subject_ds;
-   Data_Store m_issuer_ds;
-
-   size_t m_version = 0;
-   size_t m_path_len_constraint = 0;
-   Key_Constraints m_key_constraints = NO_CONSTRAINTS;
-   bool m_self_signed = false;
-   bool m_is_ca_certificate = false;
-   bool m_serial_negative = false;
-   };
 
 std::string X509_Certificate::PEM_label() const
    {

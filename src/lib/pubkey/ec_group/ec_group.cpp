@@ -19,7 +19,6 @@ module;
 #include <vector>
 #include <set>
 module Botan;
-
 #else
 
 #include <botan/ec_group.h>

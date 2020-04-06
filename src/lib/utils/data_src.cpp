@@ -6,6 +6,24 @@
 * Botan is released under the Simplified BSD License (see license.txt)
 */
 
+#ifdef SOUP_BUILD
+module;
+#define SOUP_MACRO_ONLY
+#include <botan/assert.h>
+#include <botan/build.h>
+
+#include <algorithm>
+#include <istream>
+#include <mutex>
+
+#if defined(BOTAN_TARGET_OS_HAS_FILESYSTEM)
+  #include <fstream>
+#endif
+
+module Botan;
+
+#else
+
 #include <botan/data_src.h>
 #include <botan/exceptn.h>
 #include <algorithm>
@@ -13,6 +31,8 @@
 
 #if defined(BOTAN_TARGET_OS_HAS_FILESYSTEM)
   #include <fstream>
+#endif
+
 #endif
 
 namespace Botan {

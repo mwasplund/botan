@@ -5,6 +5,17 @@
 * Botan is released under the Simplified BSD License (see license.txt)
 */
 
+#ifdef SOUP_BUILD
+module;
+#define SOUP_MACRO_ONLY
+#include <botan/assert.h>
+#include <botan/build.h>
+
+#include <mutex>
+#include <string>
+module Botan;
+#else
+
 #include <botan/dl_group.h>
 #include <botan/numthry.h>
 #include <botan/reducer.h>
@@ -15,90 +26,9 @@
 #include <botan/workfactor.h>
 #include <botan/internal/monty_exp.h>
 
+#endif
+
 namespace Botan {
-
-class DL_Group_Data final
-   {
-   public:
-      DL_Group_Data(const BigInt& p, const BigInt& q, const BigInt& g) :
-         m_p(p), m_q(q), m_g(g),
-         m_mod_p(p),
-         m_mod_q(q),
-         m_monty_params(std::make_shared<Montgomery_Params>(m_p, m_mod_p)),
-         m_monty(monty_precompute(m_monty_params, m_g, /*window bits=*/4)),
-         m_p_bits(p.bits()),
-         m_q_bits(q.bits()),
-         m_estimated_strength(dl_work_factor(m_p_bits)),
-         m_exponent_bits(dl_exponent_size(m_p_bits))
-         {
-         }
-
-      ~DL_Group_Data() = default;
-
-      DL_Group_Data(const DL_Group_Data& other) = delete;
-      DL_Group_Data& operator=(const DL_Group_Data& other) = delete;
-
-      const BigInt& p() const { return m_p; }
-      const BigInt& q() const { return m_q; }
-      const BigInt& g() const { return m_g; }
-
-      BigInt mod_p(const BigInt& x) const { return m_mod_p.reduce(x); }
-
-      BigInt multiply_mod_p(const BigInt& x, const BigInt& y) const
-         {
-         return m_mod_p.multiply(x, y);
-         }
-
-      BigInt mod_q(const BigInt& x) const { return m_mod_q.reduce(x); }
-
-      BigInt multiply_mod_q(const BigInt& x, const BigInt& y) const
-         {
-         return m_mod_q.multiply(x, y);
-         }
-
-      BigInt square_mod_q(const BigInt& x) const
-         {
-         return m_mod_q.square(x);
-         }
-
-      std::shared_ptr<const Montgomery_Params> monty_params_p() const
-         { return m_monty_params; }
-
-      size_t p_bits() const { return m_p_bits; }
-      size_t q_bits() const { return m_q_bits; }
-      size_t p_bytes() const { return (m_p_bits + 7) / 8; }
-      size_t q_bytes() const { return (m_q_bits + 7) / 8; }
-
-      size_t estimated_strength() const { return m_estimated_strength; }
-
-      size_t exponent_bits() const { return m_exponent_bits; }
-
-      BigInt power_g_p(const BigInt& k, size_t max_k_bits) const
-         {
-         return monty_execute(*m_monty, k, max_k_bits);
-         }
-
-      bool q_is_set() const { return m_q_bits > 0; }
-
-      void assert_q_is_set(const std::string& function) const
-         {
-         if(q_is_set() == false)
-            throw Invalid_State("DL_Group::" + function + " q is not set for this group");
-         }
-
-   private:
-      BigInt m_p;
-      BigInt m_q;
-      BigInt m_g;
-      Modular_Reducer m_mod_p;
-      Modular_Reducer m_mod_q;
-      std::shared_ptr<const Montgomery_Params> m_monty_params;
-      std::shared_ptr<const Montgomery_Exponentation_State> m_monty;
-      size_t m_p_bits;
-      size_t m_q_bits;
-      size_t m_estimated_strength;
-      size_t m_exponent_bits;
-   };
 
 //static
 std::shared_ptr<DL_Group_Data> DL_Group::BER_decode_DL_group(const uint8_t data[], size_t data_len, DL_Group::Format format)

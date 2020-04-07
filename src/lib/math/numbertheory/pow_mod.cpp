@@ -6,6 +6,16 @@
 * Botan is released under the Simplified BSD License (see license.txt)
 */
 
+#ifdef SOUP_BUILD
+module;
+#include <mutex>
+
+#define SOUP_MACRO_ONLY
+#include <botan/assert.h>
+#include <botan/build.h>
+module Botan;
+#else
+
 #include <botan/pow_mod.h>
 #include <botan/numthry.h>
 #include <botan/reducer.h>
@@ -13,6 +23,8 @@
 #include <botan/internal/monty_exp.h>
 #include <botan/internal/rounding.h>
 #include <vector>
+
+#endif
 
 namespace Botan {
 

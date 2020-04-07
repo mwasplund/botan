@@ -8,11 +8,24 @@
 * Botan is released under the Simplified BSD License (see license.txt)
 */
 
+#ifdef SOUP_BUILD
+module;
+#include <mutex>
+#include <vector>
+
+#define SOUP_MACRO_ONLY
+#include <botan/assert.h>
+#include <botan/build.h>
+module Botan;
+#else
+
 #include <botan/poly1305.h>
 #include <botan/loadstor.h>
 #include <botan/mul128.h>
 #include <botan/internal/donna128.h>
 #include <botan/internal/ct_utils.h>
+
+#endif
 
 namespace Botan {
 

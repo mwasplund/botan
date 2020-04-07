@@ -76,7 +76,7 @@ class BOTAN_PUBLIC_API(2,0) Power_Mod
       * @param disable_montgomery_arith Disables use of Montgomery
       * representation. Likely only useful for testing.
       */
-      Power_Mod(const BigInt& modulus = 0,
+      Power_Mod(const BigInt& modulus,
                 Usage_Hints hints = NO_HINTS,
                 bool disable_montgomery_arith = false);
       Power_Mod(const Power_Mod&);

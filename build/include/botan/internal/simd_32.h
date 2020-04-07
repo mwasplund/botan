@@ -8,6 +8,39 @@
 #ifndef BOTAN_SIMD_32_H_
 #define BOTAN_SIMD_32_H_
 
+#ifdef SOUP_MACRO_ONLY
+
+#if defined(BOTAN_TARGET_SUPPORTS_SSE2)
+  #define BOTAN_SIMD_USE_SSE2
+
+#elif defined(BOTAN_TARGET_SUPPORTS_ALTIVEC)
+  #define BOTAN_SIMD_USE_ALTIVEC
+#elif defined(BOTAN_TARGET_SUPPORTS_NEON)
+  #define BOTAN_SIMD_USE_NEON
+#else
+  #error "No SIMD instruction set enabled"
+#endif
+
+#if defined(BOTAN_SIMD_USE_SSE2)
+  #define BOTAN_SIMD_ISA "sse2"
+  #define BOTAN_VPERM_ISA "ssse3"
+  #define BOTAN_CLMUL_ISA "pclmul"
+#elif defined(BOTAN_SIMD_USE_NEON)
+  #if defined(BOTAN_TARGET_ARCH_IS_ARM64)
+    #define BOTAN_SIMD_ISA "+simd"
+    #define BOTAN_CLMUL_ISA "+crypto"
+  #else
+    #define BOTAN_SIMD_ISA "fpu=neon"
+  #endif
+  #define BOTAN_VPERM_ISA BOTAN_SIMD_ISA
+#elif defined(BOTAN_SIMD_USE_ALTIVEC)
+  #define BOTAN_SIMD_ISA "altivec"
+  #define BOTAN_VPERM_ISA "altivec"
+  #define BOTAN_CLMUL_ISA "crypto"
+#endif
+
+#else
+
 #include <botan/types.h>
 
 #if defined(BOTAN_TARGET_SUPPORTS_SSE2)
@@ -617,5 +650,7 @@ class SIMD_4x32 final
    };
 
 }
+
+#endif
 
 #endif

@@ -5,6 +5,16 @@
 * Botan is released under the Simplified BSD License (see license.txt)
 */
 
+#ifdef SOUP_BUILD
+module;
+#include <mutex>
+
+#define SOUP_MACRO_ONLY
+#include <botan/assert.h>
+#include <botan/build.h>
+module Botan;
+#else
+
 #include <botan/mac.h>
 #include <botan/exceptn.h>
 #include <botan/scan_name.h>
@@ -38,6 +48,8 @@
 
 #if defined(BOTAN_HAS_ANSI_X919_MAC)
   #include <botan/x919_mac.h>
+#endif
+
 #endif
 
 namespace Botan {

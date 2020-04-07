@@ -15,6 +15,11 @@
 
 export module Botan;
 
+#include <botan/aead.h>
+#include <botan/asn1_attribute.h>
+#include <botan/asn1_print.h>
+#include <botan/asn1_str.h>
+#include <botan/asn1_time.h>
 #include <botan/base64.h>
 #include <botan/bcrypt_pbkdf.h>
 #include <botan/ber_dec.h>
@@ -23,15 +28,19 @@ export module Botan;
 #include <botan/calendar.h>
 #include <botan/charset.h>
 #include <botan/cpuid.h>
+#include <botan/curve25519.h>
 #include <botan/datastor.h>
 #include <botan/der_enc.h>
 #include <botan/dh.h>
 #include <botan/divide.h>
+#include <botan/ed25519.h>
 #include <botan/ecdh.h>
 #include <botan/entropy_src.h>
+#include <botan/ghash.h>
 #include <botan/hash.h>
 #include <botan/hex.h>
 #include <botan/loadstor.h>
+#include <botan/mac.h>
 #include <botan/mgf1.h>
 #include <botan/monty.h>
 #include <botan/numthry.h>
@@ -39,11 +48,13 @@ export module Botan;
 #include <botan/oids.h>
 #include <botan/parsing.h>
 #include <botan/pem.h>
+#include <botan/pow_mod.h>
 #include <botan/reducer.h>
 #include <botan/rdrand_rng.h>
 #include <botan/rotate.h>
 #include <botan/scan_name.h>
 #include <botan/sha3.h>
+#include <botan/sodium.h>
 #include <botan/stream_cipher.h>
 #include <botan/tls_algos.h>
 #include <botan/tls_callbacks.h>
@@ -57,6 +68,7 @@ export module Botan;
 #include <botan/internal/cast_sboxes.h>
 #include <botan/internal/codec_base.h>
 #include <botan/internal/ct_utils.h>
+#include <botan/internal/donna128.h>
 #include <botan/internal/filesystem.h>
 #include <botan/internal/monty_exp.h>
 #include <botan/internal/mp_core.h>
@@ -64,6 +76,7 @@ export module Botan;
 #include <botan/internal/os_utils.h>
 #include <botan/internal/pk_ops_impl.h>
 #include <botan/internal/point_mul.h>
+#include <botan/internal/poly_dbl.h>
 #include <botan/internal/primality.h>
 #include <botan/internal/rounding.h>
 #include <botan/internal/safeint.h>
@@ -72,6 +85,156 @@ export module Botan;
 #include <botan/internal/socket.h>
 #include <botan/internal/stl_util.h>
 #include <botan/internal/timer.h>
+
+#if defined(BOTAN_HAS_CBC_MAC)
+  #include <botan/cbc_mac.h>
+#endif
+
+#if defined(BOTAN_HAS_CMAC)
+  #include <botan/cmac.h>
+#endif
+
+#if defined(BOTAN_HAS_GMAC)
+  #include <botan/gmac.h>
+  #include <botan/block_cipher.h>
+#endif
+
+#if defined(BOTAN_HAS_HMAC)
+  #include <botan/hmac.h>
+  #include <botan/hash.h>
+#endif
+
+#if defined(BOTAN_HAS_POLY1305)
+  #include <botan/poly1305.h>
+#endif
+
+#if defined(BOTAN_HAS_SIPHASH)
+  #include <botan/siphash.h>
+#endif
+
+#if defined(BOTAN_HAS_ANSI_X919_MAC)
+  #include <botan/x919_mac.h>
+#endif
+
+#if defined(BOTAN_HAS_HKDF)
+#include <botan/hkdf.h>
+#endif
+
+#if defined(BOTAN_HAS_KDF1)
+#include <botan/kdf1.h>
+#endif
+
+#if defined(BOTAN_HAS_KDF2)
+#include <botan/kdf2.h>
+#endif
+
+#if defined(BOTAN_HAS_KDF1_18033)
+#include <botan/kdf1_iso18033.h>
+#endif
+
+#if defined(BOTAN_HAS_TLS_V10_PRF) || defined(BOTAN_HAS_TLS_V12_PRF)
+#include <botan/prf_tls.h>
+#endif
+
+#if defined(BOTAN_HAS_X942_PRF)
+#include <botan/prf_x942.h>
+#endif
+
+#if defined(BOTAN_HAS_SP800_108)
+#include <botan/sp800_108.h>
+#endif
+
+#if defined(BOTAN_HAS_SP800_56A)
+#include <botan/sp800_56a.h>
+#endif
+
+#if defined(BOTAN_HAS_SP800_56C)
+#include <botan/sp800_56c.h>
+#endif
+
+#if defined(BOTAN_HAS_ADLER32)
+  #include <botan/adler32.h>
+#endif
+
+#if defined(BOTAN_HAS_CRC24)
+  #include <botan/crc24.h>
+#endif
+
+#if defined(BOTAN_HAS_CRC32)
+  #include <botan/crc32.h>
+#endif
+
+#if defined(BOTAN_HAS_GOST_34_11)
+  #include <botan/gost_3411.h>
+#endif
+
+#if defined(BOTAN_HAS_KECCAK)
+  #include <botan/keccak.h>
+#endif
+
+#if defined(BOTAN_HAS_MD4)
+  #include <botan/md4.h>
+#endif
+
+#if defined(BOTAN_HAS_MD5)
+  #include <botan/md5.h>
+#endif
+
+#if defined(BOTAN_HAS_RIPEMD_160)
+  #include <botan/rmd160.h>
+#endif
+
+#if defined(BOTAN_HAS_SHA1)
+  #include <botan/sha160.h>
+#endif
+
+#if defined(BOTAN_HAS_SHA2_32)
+  #include <botan/sha2_32.h>
+#endif
+
+#if defined(BOTAN_HAS_SHA2_64)
+  #include <botan/sha2_64.h>
+#endif
+
+#if defined(BOTAN_HAS_SHA3)
+  #include <botan/sha3.h>
+#endif
+
+#if defined(BOTAN_HAS_SKEIN_512)
+  #include <botan/skein_512.h>
+#endif
+
+#if defined(BOTAN_HAS_SHAKE)
+  #include <botan/shake.h>
+#endif
+
+#if defined(BOTAN_HAS_STREEBOG)
+  #include <botan/streebog.h>
+#endif
+
+#if defined(BOTAN_HAS_SM3)
+  #include <botan/sm3.h>
+#endif
+
+#if defined(BOTAN_HAS_TIGER)
+  #include <botan/tiger.h>
+#endif
+
+#if defined(BOTAN_HAS_WHIRLPOOL)
+  #include <botan/whrlpool.h>
+#endif
+
+#if defined(BOTAN_HAS_PARALLEL_HASH)
+  #include <botan/par_hash.h>
+#endif
+
+#if defined(BOTAN_HAS_COMB4P)
+  #include <botan/comb4p.h>
+#endif
+
+#if defined(BOTAN_HAS_BLAKE2B)
+  #include <botan/blake2b.h>
+#endif
 
 #if defined(BOTAN_HAS_EME_OAEP)
 #include <botan/oaep.h>

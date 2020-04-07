@@ -8,12 +8,18 @@
 #ifdef SOUP_BUILD
 module;
 #include <mutex>
+
+#define SOUP_MACRO_ONLY
+#include <botan/assert.h>
+#include <botan/build.h>
 module Botan;
 #else
+
 #include <botan/internal/mp_monty.h>
 #include <botan/internal/mp_core.h>
 #include <botan/internal/mp_asmi.h>
 #include <botan/internal/ct_utils.h>
+
 #endif
 
 namespace Botan {

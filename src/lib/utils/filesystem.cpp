@@ -5,6 +5,30 @@
 * Botan is released under the Simplified BSD License (see license.txt)
 */
 
+#ifdef SOUP_BUILD
+module;
+#include <algorithm>
+#include <deque>
+#include <memory>
+#include <mutex>
+
+#define SOUP_MACRO_ONLY
+#include <botan/assert.h>
+#include <botan/build.h>
+
+#if defined(BOTAN_TARGET_OS_HAS_POSIX1)
+  #include <sys/types.h>
+  #include <sys/stat.h>
+  #include <dirent.h>
+  #include <functional>
+#elif defined(BOTAN_TARGET_OS_HAS_WIN32)
+  #define NOMINMAX 1
+  #define _WINSOCKAPI_ // stop windows.h including winsock.h
+  #include <windows.h>
+#endif
+module Botan;
+#else
+
 #include <botan/exceptn.h>
 #include <botan/internal/filesystem.h>
 #include <algorithm>
@@ -20,6 +44,8 @@
   #define NOMINMAX 1
   #define _WINSOCKAPI_ // stop windows.h including winsock.h
   #include <windows.h>
+#endif
+
 #endif
 
 namespace Botan {

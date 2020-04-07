@@ -5,10 +5,24 @@
 * Botan is released under the Simplified BSD License (see license.txt)
 */
 
+#ifdef SOUP_BUILD
+module;
+#include <chrono>
+#include <mutex>
+#include <string>
+
+#define SOUP_MACRO_ONLY
+#include <botan/assert.h>
+#include <botan/build.h>
+module Botan;
+#else
+
 #include <botan/internal/socket.h>
 #include <botan/exceptn.h>
 #include <botan/mem_ops.h>
 #include <chrono>
+
+#endif
 
 #if defined(BOTAN_HAS_BOOST_ASIO)
   /*

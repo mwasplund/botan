@@ -16,6 +16,7 @@
 export module Botan;
 
 #include <botan/base64.h>
+#include <botan/bcrypt_pbkdf.h>
 #include <botan/ber_dec.h>
 #include <botan/blinding.h>
 #include <botan/block_cipher.h>
@@ -31,6 +32,7 @@ export module Botan;
 #include <botan/hash.h>
 #include <botan/hex.h>
 #include <botan/loadstor.h>
+#include <botan/mgf1.h>
 #include <botan/monty.h>
 #include <botan/numthry.h>
 #include <botan/ocsp.h>
@@ -41,6 +43,7 @@ export module Botan;
 #include <botan/rdrand_rng.h>
 #include <botan/rotate.h>
 #include <botan/scan_name.h>
+#include <botan/sha3.h>
 #include <botan/stream_cipher.h>
 #include <botan/tls_algos.h>
 #include <botan/tls_callbacks.h>
@@ -64,8 +67,47 @@ export module Botan;
 #include <botan/internal/primality.h>
 #include <botan/internal/rounding.h>
 #include <botan/internal/safeint.h>
+#include <botan/internal/simd_32.h>
+#include <botan/internal/simd_avx2.h>
 #include <botan/internal/socket.h>
 #include <botan/internal/stl_util.h>
+#include <botan/internal/timer.h>
+
+#if defined(BOTAN_HAS_EME_OAEP)
+#include <botan/oaep.h>
+#endif
+
+#if defined(BOTAN_HAS_EME_PKCS1)
+#include <botan/eme_pkcs.h>
+#endif
+
+#if defined(BOTAN_HAS_EME_RAW)
+#include <botan/eme_raw.h>
+#endif
+
+#if defined(BOTAN_HAS_CHACHA)
+  #include <botan/chacha.h>
+#endif
+
+#if defined(BOTAN_HAS_SALSA20)
+  #include <botan/salsa20.h>
+#endif
+
+#if defined(BOTAN_HAS_SHAKE_CIPHER)
+  #include <botan/shake_cipher.h>
+#endif
+
+#if defined(BOTAN_HAS_CTR_BE)
+  #include <botan/ctr.h>
+#endif
+
+#if defined(BOTAN_HAS_OFB)
+  #include <botan/ofb.h>
+#endif
+
+#if defined(BOTAN_HAS_RC4)
+  #include <botan/rc4.h>
+#endif
 
 #if defined(BOTAN_HAS_LOCKING_ALLOCATOR)
   #include <botan/locking_allocator.h>

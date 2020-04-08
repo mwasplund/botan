@@ -11,8 +11,12 @@ module;
 #include <mutex>
 #include <string>
 #include <utility>
+
+#define SOUP_MACRO_ONLY
+#include <botan/build.h>
 module Botan;
 #else
+
 #include <botan/tls_callbacks.h>
 #include <botan/tls_policy.h>
 #include <botan/tls_algos.h>
@@ -26,6 +30,7 @@ module Botan;
 #if defined(BOTAN_HAS_CURVE_25519)
   #include <botan/curve25519.h>
 #endif
+
 #endif
 
 namespace Botan {

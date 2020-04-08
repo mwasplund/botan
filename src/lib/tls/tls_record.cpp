@@ -7,6 +7,17 @@
 * Botan is released under the Simplified BSD License (see license.txt)
 */
 
+#ifdef SOUP_BUILD
+module;
+#include <algorithm>
+#include <mutex>
+
+#define SOUP_MACRO_ONLY
+#include <botan/assert.h>
+#include <botan/build.h>
+module Botan;
+#else
+
 #include <botan/internal/tls_record.h>
 #include <botan/tls_ciphersuite.h>
 #include <botan/tls_exceptn.h>
@@ -19,6 +30,8 @@
 
 #if defined(BOTAN_HAS_TLS_CBC)
   #include <botan/internal/tls_cbc.h>
+#endif
+
 #endif
 
 namespace Botan {

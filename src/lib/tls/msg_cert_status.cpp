@@ -5,6 +5,15 @@
 * Botan is released under the Simplified BSD License (see license.txt)
 */
 
+#ifdef SOUP_BUILD
+module;
+#include <mutex>
+
+#define SOUP_MACRO_ONLY
+#include <botan/build.h>
+module Botan;
+#else
+
 #include <botan/tls_messages.h>
 #include <botan/tls_extensions.h>
 #include <botan/internal/tls_reader.h>
@@ -12,6 +21,8 @@
 #include <botan/internal/tls_handshake_hash.h>
 #include <botan/der_enc.h>
 #include <botan/ber_dec.h>
+
+#endif
 
 namespace Botan {
 

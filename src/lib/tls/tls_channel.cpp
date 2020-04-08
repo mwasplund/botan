@@ -6,6 +6,21 @@
 * Botan is released under the Simplified BSD License (see license.txt)
 */
 
+#ifdef SOUP_BUILD
+module;
+#include <algorithm>
+#include <functional>
+#include <memory>
+#include <mutex>
+#include <vector>
+#include <string>
+
+#define SOUP_MACRO_ONLY
+#include <botan/assert.h>
+#include <botan/build.h>
+module Botan;
+#else
+
 #include <botan/tls_channel.h>
 #include <botan/tls_policy.h>
 #include <botan/tls_messages.h>
@@ -16,6 +31,8 @@
 #include <botan/internal/rounding.h>
 #include <botan/internal/stl_util.h>
 #include <botan/loadstor.h>
+
+#endif
 
 namespace Botan {
 
@@ -60,7 +77,7 @@ Channel::Channel(output_fn out,
                           relies on a deprecated API
                           */
                           Compat_Callbacks::SILENCE_DEPRECATION_WARNING::PLEASE,
-                          out, app_data_cb, recv_alert_cb, hs_cb, hs_msg_cb)),
+                          out, app_data_cb, recv_alert_cb, hs_cb, hs_msg_cb, nullptr)),
     m_callbacks(*m_compat_callbacks.get()),
     m_session_manager(session_manager),
     m_policy(policy),

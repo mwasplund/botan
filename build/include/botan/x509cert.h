@@ -8,6 +8,7 @@
 #ifndef BOTAN_X509_CERTS_H_
 #define BOTAN_X509_CERTS_H_
 
+#include <botan/datastor.h>
 #include <botan/x509_obj.h>
 #include <botan/x509_key.h>
 #include <botan/x509_ext.h>
@@ -21,7 +22,6 @@
 namespace Botan {
 
 class Public_Key;
-class X509_DN;
 class AlternativeName;
 class Extensions;
 

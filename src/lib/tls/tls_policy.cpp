@@ -7,6 +7,17 @@
 * Botan is released under the Simplified BSD License (see license.txt)
 */
 
+#ifdef SOUP_BUILD
+module;
+#include <algorithm>
+#include <mutex>
+#include <sstream>
+
+#define SOUP_MACRO_ONLY
+#include <botan/build.h>
+module Botan;
+#else
+
 #include <botan/tls_policy.h>
 #include <botan/tls_ciphersuite.h>
 #include <botan/tls_algos.h>
@@ -14,6 +25,8 @@
 #include <botan/internal/stl_util.h>
 #include <botan/pk_keys.h>
 #include <sstream>
+
+#endif
 
 namespace Botan {
 

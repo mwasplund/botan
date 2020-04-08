@@ -32,6 +32,7 @@ export module Botan;
 #include <botan/cfb.h>
 #include <botan/charset.h>
 #include <botan/cpuid.h>
+#include <botan/credentials_manager.h>
 #include <botan/curve25519.h>
 #include <botan/datastor.h>
 #include <botan/der_enc.h>
@@ -64,6 +65,7 @@ export module Botan;
 #include <botan/rdrand_rng.h>
 #include <botan/rotate.h>
 #include <botan/roughtime.h>
+#include <botan/rsa.h>
 #include <botan/scan_name.h>
 #include <botan/sha3.h>
 #include <botan/sodium.h>
@@ -71,8 +73,10 @@ export module Botan;
 #include <botan/stream_cipher.h>
 #include <botan/stream_mode.h>
 #include <botan/tls_algos.h>
+#include <botan/tls_blocking.h>
 #include <botan/tls_callbacks.h>
 #include <botan/tls_exceptn.h>
+#include <botan/tls_messages.h>
 #include <botan/tls_policy.h>
 #include <botan/totp.h>
 #include <botan/tss.h>
@@ -103,6 +107,11 @@ export module Botan;
 #include <botan/internal/socket.h>
 #include <botan/internal/stl_util.h>
 #include <botan/internal/timer.h>
+#include <botan/internal/tls_cbc.h>
+#include <botan/internal/tls_handshake_state.h>
+#include <botan/internal/tls_reader.h>
+#include <botan/internal/tls_record.h>
+#include <botan/internal/tls_seq_numbers.h>
 
 #if defined(BOTAN_HAS_EMSA1)
    #include <botan/emsa1.h>

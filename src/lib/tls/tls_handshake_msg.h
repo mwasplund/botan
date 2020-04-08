@@ -10,6 +10,8 @@
 #define BOTAN_TLS_HANDSHAKE_MSG_H_
 
 #include <botan/tls_magic.h>
+#include <botan/internal/tls_handshake_io.h>
+#include <botan/internal/tls_handshake_hash.h>
 #ifndef SOUP_BUILD
 #include <vector>
 #include <string>
@@ -18,9 +20,6 @@
 namespace Botan {
 
 namespace TLS {
-
-class Handshake_IO;
-class Handshake_Hash;
 
 /**
 * TLS Handshake Message Base Class

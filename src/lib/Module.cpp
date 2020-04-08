@@ -17,6 +17,7 @@
 export module Botan;
 
 #include <botan/aead.h>
+#include <botan/argon2.h>
 #include <botan/asn1_attribute.h>
 #include <botan/asn1_print.h>
 #include <botan/asn1_str.h>
@@ -42,6 +43,7 @@ export module Botan;
 #include <botan/filters.h>
 #include <botan/fpe_fe1.h>
 #include <botan/ghash.h>
+#include <botan/hash_id.h>
 #include <botan/hash.h>
 #include <botan/hex.h>
 #include <botan/hotp.h>
@@ -55,6 +57,7 @@ export module Botan;
 #include <botan/oids.h>
 #include <botan/parsing.h>
 #include <botan/pbkdf.h>
+#include <botan/pbkdf2.h>
 #include <botan/pem.h>
 #include <botan/pow_mod.h>
 #include <botan/reducer.h>
@@ -87,6 +90,7 @@ export module Botan;
 #include <botan/internal/mp_core.h>
 #include <botan/internal/mp_monty.h>
 #include <botan/internal/os_utils.h>
+#include <botan/internal/padding.h>
 #include <botan/internal/pk_ops_impl.h>
 #include <botan/internal/point_mul.h>
 #include <botan/internal/poly_dbl.h>
@@ -99,6 +103,46 @@ export module Botan;
 #include <botan/internal/socket.h>
 #include <botan/internal/stl_util.h>
 #include <botan/internal/timer.h>
+
+#if defined(BOTAN_HAS_EMSA1)
+   #include <botan/emsa1.h>
+#endif
+
+#if defined(BOTAN_HAS_EMSA_X931)
+   #include <botan/emsa_x931.h>
+#endif
+
+#if defined(BOTAN_HAS_EMSA_PKCS1)
+   #include <botan/emsa_pkcs1.h>
+#endif
+
+#if defined(BOTAN_HAS_EMSA_PSSR)
+   #include <botan/pssr.h>
+#endif
+
+#if defined(BOTAN_HAS_EMSA_RAW)
+   #include <botan/emsa_raw.h>
+#endif
+
+#if defined(BOTAN_HAS_ISO_9796)
+   #include <botan/iso9796.h>
+#endif
+
+#if defined(BOTAN_HAS_SCRYPT)
+   #include <botan/scrypt.h>
+#endif
+
+#if defined(BOTAN_HAS_PBKDF1)
+  #include <botan/pbkdf1.h>
+#endif
+
+#if defined(BOTAN_HAS_PBKDF2)
+  #include <botan/pbkdf2.h>
+#endif
+
+#if defined(BOTAN_HAS_PGP_S2K)
+  #include <botan/pgp_s2k.h>
+#endif
 
 #if defined(BOTAN_HAS_MODE_XTS)
   #include <botan/xts.h>

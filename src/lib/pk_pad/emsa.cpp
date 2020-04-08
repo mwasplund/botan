@@ -4,6 +4,15 @@
 * Botan is released under the Simplified BSD License (see license.txt)
 */
 
+#ifdef SOUP_BUILD
+module;
+#include <mutex>
+
+#define SOUP_MACRO_ONLY
+#include <botan/build.h>
+module Botan;
+#else
+
 #include <botan/emsa.h>
 #include <botan/hash.h>
 #include <botan/scan_name.h>
@@ -31,6 +40,8 @@
 
 #if defined(BOTAN_HAS_ISO_9796)
    #include <botan/iso9796.h>
+#endif
+
 #endif
 
 namespace Botan {

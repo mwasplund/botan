@@ -6,10 +6,23 @@
 * Distributed under the terms of the Botan license
 */
 
+#ifdef SOUP_BUILD
+module;
+#include <algorithm>
+#include <mutex>
+#include <string>
+
+#define SOUP_MACRO_ONLY
+#include <botan/build.h>
+module Botan;
+#else
+
 #include <botan/pgp_s2k.h>
 #include <botan/exceptn.h>
 #include <botan/internal/timer.h>
 #include <algorithm>
+
+#endif
 
 namespace Botan {
 

@@ -6,114 +6,28 @@
 * Botan is released under the Simplified BSD License (see license.txt)
 */
 
+#ifdef SOUP_BUILD
+module;
+#include <algorithm>
+#include <memory>
+#include <mutex>
+#include <string>
+#include <vector>
+
+#define SOUP_MACRO_ONLY
+#include <botan/assert.h>
+#include <botan/build.h>
+module Botan;
+#else
+
 #include <botan/ocb.h>
 #include <botan/block_cipher.h>
 #include <botan/internal/poly_dbl.h>
 #include <botan/internal/bit_ops.h>
 
+#endif
+
 namespace Botan {
-
-// Has to be in Botan namespace so unique_ptr can reference it
-class L_computer final
-   {
-   public:
-      explicit L_computer(const BlockCipher& cipher) :
-         m_BS(cipher.block_size()),
-         m_max_blocks(cipher.parallel_bytes() / m_BS)
-         {
-         m_L_star.resize(m_BS);
-         cipher.encrypt(m_L_star);
-         m_L_dollar = poly_double(star());
-         m_L.push_back(poly_double(dollar()));
-
-         while(m_L.size() < 8)
-            m_L.push_back(poly_double(m_L.back()));
-
-         m_offset_buf.resize(m_BS * m_max_blocks);
-         }
-
-      void init(const secure_vector<uint8_t>& offset)
-         {
-         m_offset = offset;
-         }
-
-      bool initialized() const { return m_offset.empty() == false; }
-
-      const secure_vector<uint8_t>& star() const { return m_L_star; }
-      const secure_vector<uint8_t>& dollar() const { return m_L_dollar; }
-      const secure_vector<uint8_t>& offset() const { return m_offset; }
-
-      const secure_vector<uint8_t>& get(size_t i) const
-         {
-         while(m_L.size() <= i)
-            m_L.push_back(poly_double(m_L.back()));
-
-         return m_L[i];
-         }
-
-      const uint8_t*
-      compute_offsets(size_t block_index, size_t blocks)
-         {
-         BOTAN_ASSERT(blocks <= m_max_blocks, "OCB offsets");
-
-         uint8_t* offsets = m_offset_buf.data();
-
-         if(block_index % 4 == 0)
-            {
-            const secure_vector<uint8_t>& L0 = get(0);
-            const secure_vector<uint8_t>& L1 = get(1);
-
-            while(blocks >= 4)
-               {
-               // ntz(4*i+1) == 0
-               // ntz(4*i+2) == 1
-               // ntz(4*i+3) == 0
-               block_index += 4;
-               const size_t ntz4 = var_ctz32(static_cast<uint32_t>(block_index));
-
-               xor_buf(offsets, m_offset.data(), L0.data(), m_BS);
-               offsets += m_BS;
-
-               xor_buf(offsets, offsets - m_BS, L1.data(), m_BS);
-               offsets += m_BS;
-
-               xor_buf(m_offset.data(), L1.data(), m_BS);
-               copy_mem(offsets, m_offset.data(), m_BS);
-               offsets += m_BS;
-
-               xor_buf(m_offset.data(), get(ntz4).data(), m_BS);
-               copy_mem(offsets, m_offset.data(), m_BS);
-               offsets += m_BS;
-
-               blocks -= 4;
-               }
-            }
-
-         for(size_t i = 0; i != blocks; ++i)
-            { // could be done in parallel
-            const size_t ntz = var_ctz32(static_cast<uint32_t>(block_index + i + 1));
-            xor_buf(m_offset.data(), get(ntz).data(), m_BS);
-            copy_mem(offsets, m_offset.data(), m_BS);
-            offsets += m_BS;
-            }
-
-         return m_offset_buf.data();
-         }
-
-   private:
-      secure_vector<uint8_t> poly_double(const secure_vector<uint8_t>& in) const
-         {
-         secure_vector<uint8_t> out(in.size());
-         poly_double_n(out.data(), in.data(), out.size());
-         return out;
-         }
-
-      const size_t m_BS, m_max_blocks;
-      secure_vector<uint8_t> m_L_dollar, m_L_star;
-      secure_vector<uint8_t> m_offset;
-      mutable std::vector<secure_vector<uint8_t>> m_L;
-      secure_vector<uint8_t> m_offset_buf;
-   };
 
 namespace {
 

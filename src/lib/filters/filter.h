@@ -93,6 +93,9 @@ class BOTAN_PUBLIC_API(2,0) Filter
       Filter& operator=(const Filter&) = delete;
 
    private:
+
+   // TODO: MSVC friend bug
+   public:
       /**
       * Start a new message in *this and all following filters. Only for
       * internal use, not intended for use in client applications.

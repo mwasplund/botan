@@ -1,6 +1,7 @@
 ﻿module;
 
 #include <algorithm>
+#include <array>
 #include <chrono>
 #include <cstddef>
 #include <cstdint>
@@ -26,6 +27,8 @@ export module Botan;
 #include <botan/blinding.h>
 #include <botan/block_cipher.h>
 #include <botan/calendar.h>
+#include <botan/cbc.h>
+#include <botan/cfb.h>
 #include <botan/charset.h>
 #include <botan/cpuid.h>
 #include <botan/curve25519.h>
@@ -36,30 +39,40 @@ export module Botan;
 #include <botan/ed25519.h>
 #include <botan/ecdh.h>
 #include <botan/entropy_src.h>
+#include <botan/filters.h>
+#include <botan/fpe_fe1.h>
 #include <botan/ghash.h>
 #include <botan/hash.h>
 #include <botan/hex.h>
+#include <botan/hotp.h>
 #include <botan/loadstor.h>
 #include <botan/mac.h>
 #include <botan/mgf1.h>
 #include <botan/monty.h>
+#include <botan/nist_keywrap.h>
 #include <botan/numthry.h>
 #include <botan/ocsp.h>
 #include <botan/oids.h>
 #include <botan/parsing.h>
+#include <botan/pbkdf.h>
 #include <botan/pem.h>
 #include <botan/pow_mod.h>
 #include <botan/reducer.h>
 #include <botan/rdrand_rng.h>
 #include <botan/rotate.h>
+#include <botan/roughtime.h>
 #include <botan/scan_name.h>
 #include <botan/sha3.h>
 #include <botan/sodium.h>
+#include <botan/srp6.h>
 #include <botan/stream_cipher.h>
+#include <botan/stream_mode.h>
 #include <botan/tls_algos.h>
 #include <botan/tls_callbacks.h>
 #include <botan/tls_exceptn.h>
 #include <botan/tls_policy.h>
+#include <botan/totp.h>
+#include <botan/tss.h>
 #include <botan/workfactor.h>
 #include <botan/x509cert.h>
 #include <botan/x509path.h>
@@ -82,9 +95,50 @@ export module Botan;
 #include <botan/internal/safeint.h>
 #include <botan/internal/simd_32.h>
 #include <botan/internal/simd_avx2.h>
+#include <botan/internal/socket_udp.h>
 #include <botan/internal/socket.h>
 #include <botan/internal/stl_util.h>
 #include <botan/internal/timer.h>
+
+#if defined(BOTAN_HAS_MODE_XTS)
+  #include <botan/xts.h>
+#endif
+
+#if defined(BOTAN_HAS_GCM_CLMUL_CPU)
+  #include <botan/internal/clmul_cpu.h>
+#endif
+
+#if defined(BOTAN_HAS_GCM_CLMUL_SSSE3)
+  #include <botan/internal/clmul_ssse3.h>
+#endif
+
+#if defined(BOTAN_HAS_BLOCK_CIPHER)
+  #include <botan/block_cipher.h>
+#endif
+
+#if defined(BOTAN_HAS_AEAD_CCM)
+  #include <botan/ccm.h>
+#endif
+
+#if defined(BOTAN_HAS_AEAD_CHACHA20_POLY1305)
+  #include <botan/chacha20poly1305.h>
+#endif
+
+#if defined(BOTAN_HAS_AEAD_EAX)
+  #include <botan/eax.h>
+#endif
+
+#if defined(BOTAN_HAS_AEAD_GCM)
+  #include <botan/gcm.h>
+#endif
+
+#if defined(BOTAN_HAS_AEAD_OCB)
+  #include <botan/ocb.h>
+#endif
+
+#if defined(BOTAN_HAS_AEAD_SIV)
+  #include <botan/siv.h>
+#endif
 
 #if defined(BOTAN_HAS_CBC_MAC)
   #include <botan/cbc_mac.h>

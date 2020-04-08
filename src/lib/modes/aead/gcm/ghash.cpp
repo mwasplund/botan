@@ -6,6 +6,16 @@
 * Botan is released under the Simplified BSD License (see license.txt)
 */
 
+#ifdef SOUP_BUILD
+module;
+#include <mutex>
+
+#define SOUP_MACRO_ONLY
+#include <botan/assert.h>
+#include <botan/build.h>
+module Botan;
+#else
+
 #include <botan/ghash.h>
 #include <botan/internal/ct_utils.h>
 #include <botan/loadstor.h>
@@ -18,6 +28,8 @@
 
 #if defined(BOTAN_HAS_GCM_CLMUL_SSSE3)
   #include <botan/internal/clmul_ssse3.h>
+#endif
+
 #endif
 
 namespace Botan {

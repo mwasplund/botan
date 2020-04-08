@@ -4,8 +4,21 @@
 * Botan is released under the Simplified BSD License (see license.txt)
 */
 
+#ifdef SOUP_BUILD
+module;
+#include <mutex>
+
+#define SOUP_MACRO_ONLY
+#include <botan/build.h>
+
+#include <immintrin.h>
+module Botan;
+#else
+
 #include <botan/internal/clmul_ssse3.h>
 #include <immintrin.h>
+
+#endif
 
 namespace Botan {
 

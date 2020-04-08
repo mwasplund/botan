@@ -22,8 +22,6 @@ module Botan;
 #include <botan/mem_ops.h>
 #include <chrono>
 
-#endif
-
 #if defined(BOTAN_HAS_BOOST_ASIO)
   /*
   * We don't need serial port support anyway, and asking for it causes
@@ -46,6 +44,8 @@ module Botan;
 
 #elif defined(BOTAN_TARGET_OS_HAS_WINSOCK2)
   #include <ws2tcpip.h>
+#endif
+
 #endif
 
 namespace Botan {

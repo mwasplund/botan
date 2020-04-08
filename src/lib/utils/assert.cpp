@@ -9,10 +9,15 @@
 module;
 #include <mutex>
 #include <sstream>
+
+#define SOUP_MACRO_ONLY
+#include <botan/build.h>
 module Botan;
 #else
+
 #include <botan/exceptn.h>
 #include <sstream>
+
 #endif
 
 namespace Botan {

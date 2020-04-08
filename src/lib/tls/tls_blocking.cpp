@@ -8,7 +8,9 @@
 
 #ifdef SOUP_BUILD
 module;
+#include <algorithm>
 #include <mutex>
+#include <functional>
 #include <string>
 #include <vector>
 
@@ -45,7 +47,9 @@ Blocking_Client::Blocking_Client(read_fn reader,
                writer,
                std::bind(&Blocking_Client::data_cb, this, std::placeholders::_1, std::placeholders::_2),
                std::function<void (Alert)>(std::bind(&Blocking_Client::alert_cb, this, std::placeholders::_1)),
-               std::bind(&Blocking_Client::handshake_cb, this, std::placeholders::_1)
+               std::bind(&Blocking_Client::handshake_cb, this, std::placeholders::_1),
+               nullptr,
+               nullptr
              )),
    m_channel(*m_callbacks.get(),
              session_manager,

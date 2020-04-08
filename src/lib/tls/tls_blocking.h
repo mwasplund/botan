@@ -36,7 +36,7 @@ class BOTAN_PUBLIC_API(2,0) Blocking_Client
                       Credentials_Manager& creds,
                       const Policy& policy,
                       RandomNumberGenerator& rng,
-                      const Server_Information& server_info = Server_Information(),
+                      const Server_Information& server_info,
                       const Protocol_Version& offer_version = Protocol_Version::latest_tls_version(),
                       const std::vector<std::string>& next_protos = {});
 

@@ -6,6 +6,15 @@
 * Botan is released under the Simplified BSD License (see license.txt)
 */
 
+#ifdef SOUP_BUILD
+module;
+#include <mutex>
+
+#define SOUP_MACRO_ONLY
+#include <botan/build.h>
+module Botan;
+#else
+
 #include <botan/internal/socket_udp.h>
 #include <botan/internal/uri.h>
 #include <botan/exceptn.h>
@@ -33,6 +42,8 @@
 
 #elif defined(BOTAN_TARGET_OS_HAS_WINSOCK2)
    #include <ws2tcpip.h>
+#endif
+
 #endif
 
 namespace Botan {

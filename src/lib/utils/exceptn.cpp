@@ -14,7 +14,9 @@ module;
 #include <string>
 module Botan;
 #else
+
 #include <botan/exceptn.h>
+
 #endif
 
 namespace Botan {

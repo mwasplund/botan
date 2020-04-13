@@ -17,6 +17,7 @@ module;
 #include <botan/build.h>
 module Botan;
 #else
+
 #include <botan/x509_dn.h>
 #include <botan/der_enc.h>
 #include <botan/ber_dec.h>
@@ -26,6 +27,7 @@ module Botan;
 #include <ostream>
 #include <sstream>
 #include <cctype>
+
 #endif
 
 namespace Botan {
@@ -251,7 +253,7 @@ bool operator<(const X509_DN& dn1, const X509_DN& dn2)
 /*
 * DER encode a DistinguishedName
 */
-void X509_DN::encode_into(DER_Encoder& der) const
+void X509_DN::encode_into(::Botan::DER_Encoder& der) const
    {
    der.start_cons(SEQUENCE);
 

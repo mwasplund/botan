@@ -39,7 +39,7 @@ class BOTAN_PUBLIC_API(2,0) PK_Encryptor
       * @param rng the random number source to use
       * @return encrypted message
       */
-      std::vector<uint8_t> encrypt(const uint8_t in[], size_t length,
+      std::vector<uint8_t> encrypt(const uint8_t* in, size_t length,
                                  RandomNumberGenerator& rng) const
          {
          return enc(in, length, rng);
@@ -95,7 +95,7 @@ class BOTAN_PUBLIC_API(2,0) PK_Decryptor
       * @param length the length of the above byte array
       * @return decrypted message
       */
-      secure_vector<uint8_t> decrypt(const uint8_t in[], size_t length) const;
+      secure_vector<uint8_t> decrypt(const uint8_t* in, size_t length) const;
 
       /**
       * Same as above, but taking a vector
@@ -115,7 +115,7 @@ class BOTAN_PUBLIC_API(2,0) PK_Decryptor
       * oracle attacks, especially against PKCS #1 v1.5 decryption.
       */
       secure_vector<uint8_t>
-      decrypt_or_random(const uint8_t in[],
+      decrypt_or_random(const uint8_t* in,
                         size_t length,
                         size_t expected_pt_len,
                         RandomNumberGenerator& rng) const;
@@ -135,7 +135,7 @@ class BOTAN_PUBLIC_API(2,0) PK_Decryptor
       * check can be used as an oracle to recover the key.
       */
       secure_vector<uint8_t>
-      decrypt_or_random(const uint8_t in[],
+      decrypt_or_random(const uint8_t* in,
                         size_t length,
                         size_t expected_pt_len,
                         RandomNumberGenerator& rng,
@@ -157,7 +157,7 @@ class BOTAN_PUBLIC_API(2,0) PK_Decryptor
 
    private:
       virtual secure_vector<uint8_t> do_decrypt(uint8_t& valid_mask,
-                                             const uint8_t in[], size_t in_len) const = 0;
+                                             const uint8_t* in, size_t in_len) const = 0;
    };
 
 /**
@@ -213,7 +213,7 @@ class BOTAN_PUBLIC_API(2,0) PK_Signer final
       * @param rng the rng to use
       * @return signature
       */
-      std::vector<uint8_t> sign_message(const uint8_t in[], size_t length,
+      std::vector<uint8_t> sign_message(const uint8_t* in, size_t length,
                                      RandomNumberGenerator& rng)
          {
          this->update(in, length);
@@ -244,7 +244,7 @@ class BOTAN_PUBLIC_API(2,0) PK_Signer final
       * @param in the message part to add as a byte array
       * @param length the length of the above byte array
       */
-      void update(const uint8_t in[], size_t length);
+      void update(const uint8_t* in, size_t length);
 
       /**
       * Add a message part.
@@ -325,8 +325,8 @@ class BOTAN_PUBLIC_API(2,0) PK_Verifier final
       * @param sig_length the length of the above byte array sig
       * @return true if the signature is valid
       */
-      bool verify_message(const uint8_t msg[], size_t msg_length,
-                          const uint8_t sig[], size_t sig_length);
+      bool verify_message(const uint8_t* msg, size_t msg_length,
+                          const uint8_t* sig, size_t sig_length);
       /**
       * Verify a signature.
       * @param msg the message that the signature belongs to
@@ -354,7 +354,7 @@ class BOTAN_PUBLIC_API(2,0) PK_Verifier final
       * @param msg_part the new message part as a byte array
       * @param length the length of the above byte array
       */
-      void update(const uint8_t msg_part[], size_t length);
+      void update(const uint8_t* msg_part, size_t length);
 
       /**
       * Add a message part of the message corresponding to the
@@ -383,7 +383,7 @@ class BOTAN_PUBLIC_API(2,0) PK_Verifier final
       * @param length the length of the above byte array
       * @return true if the signature is valid, false otherwise
       */
-      bool check_signature(const uint8_t sig[], size_t length);
+      bool check_signature(const uint8_t* sig, size_t length);
 
       /**
       * Check the signature of the buffered message, i.e. the one build
@@ -461,9 +461,9 @@ class BOTAN_PUBLIC_API(2,0) PK_Key_Agreement final
       * @param params_len the length of params in bytes
       */
       SymmetricKey derive_key(size_t key_len,
-                              const uint8_t in[],
+                              const uint8_t* in,
                               size_t in_len,
-                              const uint8_t params[],
+                              const uint8_t* params,
                               size_t params_len) const;
 
       /**
@@ -475,7 +475,7 @@ class BOTAN_PUBLIC_API(2,0) PK_Key_Agreement final
       */
       SymmetricKey derive_key(size_t key_len,
                               const std::vector<uint8_t>& in,
-                              const uint8_t params[],
+                              const uint8_t* params,
                               size_t params_len) const
          {
          return derive_key(key_len, in.data(), in.size(),
@@ -490,7 +490,7 @@ class BOTAN_PUBLIC_API(2,0) PK_Key_Agreement final
       * @param params extra derivation params
       */
       SymmetricKey derive_key(size_t key_len,
-                              const uint8_t in[], size_t in_len,
+                              const uint8_t* in, size_t in_len,
                               const std::string& params = "") const
          {
          return derive_key(key_len, in, in_len,
@@ -614,7 +614,7 @@ class BOTAN_PUBLIC_API(2,0) PK_Decryptor_EME final : public PK_Decryptor
       PK_Decryptor_EME(const PK_Decryptor_EME&) = delete;
    private:
       secure_vector<uint8_t> do_decrypt(uint8_t& valid_mask,
-                                     const uint8_t in[],
+                                     const uint8_t* in,
                                      size_t in_len) const override;
 
       std::unique_ptr<PK_Ops::Decryption> m_op;
@@ -664,7 +664,7 @@ class BOTAN_PUBLIC_API(2,0) PK_KEM_Encryptor final
                    secure_vector<uint8_t>& out_shared_key,
                    size_t desired_shared_key_len,
                    Botan::RandomNumberGenerator& rng,
-                   const uint8_t salt[],
+                   const uint8_t* salt,
                    size_t salt_len);
 
       /**
@@ -754,10 +754,10 @@ class BOTAN_PUBLIC_API(2,0) PK_KEM_Decryptor final
       * @param salt_len size of the salt value in bytes
       * @return the shared data encryption key
       */
-      secure_vector<uint8_t> decrypt(const uint8_t encap_key[],
+      secure_vector<uint8_t> decrypt(const uint8_t* encap_key,
                                   size_t encap_key_len,
                                   size_t desired_shared_key_len,
-                                  const uint8_t salt[],
+                                  const uint8_t* salt,
                                   size_t salt_len);
 
       /**
@@ -767,7 +767,7 @@ class BOTAN_PUBLIC_API(2,0) PK_KEM_Decryptor final
       * @param desired_shared_key_len desired size of the shared key in bytes
       * @return the shared data encryption key
       */
-      secure_vector<uint8_t> decrypt(const uint8_t encap_key[],
+      secure_vector<uint8_t> decrypt(const uint8_t* encap_key,
                                   size_t encap_key_len,
                                   size_t desired_shared_key_len)
          {

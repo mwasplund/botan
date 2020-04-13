@@ -21,7 +21,7 @@ module Botan;
 
 namespace Botan {
 
-const uint16_t PRIMES[PRIME_TABLE_SIZE+1] = {
+const uint16_t PRIMES_ARRAY[PRIME_TABLE_SIZE+1] = {
     3,     5,     7,    11,    13,    17,    19,    23,    29,    31,    37,
    41,    43,    47,    53,    59,    61,    67,    71,    73,    79,    83,
    89,    97,   101,   103,   107,   109,   113,   127,   131,   137,   139,
@@ -618,4 +618,5 @@ const uint16_t PRIMES[PRIME_TABLE_SIZE+1] = {
 65323, 65327, 65353, 65357, 65371, 65381, 65393, 65407, 65413, 65419, 65423,
 65437, 65447, 65449, 65479, 65497, 65519, 65521, 0 };
 
+const uint16_t* PRIMES = PRIMES_ARRAY;
 }

@@ -7,12 +7,11 @@
 
 #ifdef SOUP_BUILD
 module;
-#define SOUP_MACRO_ONLY
-#include <botan/assert.h>
-#include <botan/build.h>
-
 #include <mutex>
 #include <sstream>
+
+#define SOUP_MACRO_ONLY
+#include <botan/assert.h>
 module Botan;
 #else
 

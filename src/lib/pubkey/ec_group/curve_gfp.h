@@ -68,7 +68,7 @@ class BOTAN_UNSTABLE_API CurveGFp_Repr
          }
 
       virtual void curve_mul_words(BigInt& z,
-                                   const word x_words[],
+                                   const word* x_words,
                                    const size_t x_size,
                                    const BigInt& y,
                                    secure_vector<word>& ws) const = 0;
@@ -81,7 +81,7 @@ class BOTAN_UNSTABLE_API CurveGFp_Repr
          }
 
       virtual void curve_sqr_words(BigInt& z,
-                                   const word x_words[],
+                                   const word* x_words,
                                    size_t x_size,
                                    secure_vector<word>& ws) const = 0;
    };
@@ -179,7 +179,7 @@ class BOTAN_UNSTABLE_API CurveGFp final
          m_repr->curve_mul(z, x, y, ws);
          }
 
-      void mul(BigInt& z, const word x_w[], size_t x_size,
+      void mul(BigInt& z, const word* x_w, size_t x_size,
                const BigInt& y, secure_vector<word>& ws) const
          {
          m_repr->curve_mul_words(z, x_w, x_size, y, ws);
@@ -190,7 +190,7 @@ class BOTAN_UNSTABLE_API CurveGFp final
          m_repr->curve_sqr(z, x, ws);
          }
 
-      void sqr(BigInt& z, const word x_w[], size_t x_size, secure_vector<word>& ws) const
+      void sqr(BigInt& z, const word* x_w, size_t x_size, secure_vector<word>& ws) const
          {
          m_repr->curve_sqr_words(z, x_w, x_size, ws);
          }

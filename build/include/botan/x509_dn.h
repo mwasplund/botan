@@ -40,7 +40,7 @@ class BOTAN_PUBLIC_API(2,0) X509_DN final : public ASN1_Object
             add_attribute(i.first, i.second);
          }
 
-      void encode_into(class DER_Encoder&) const override;
+      void encode_into(::Botan::DER_Encoder&) const override;
       void decode_from(class BER_Decoder&) override;
 
       bool has_field(const OID& oid) const;

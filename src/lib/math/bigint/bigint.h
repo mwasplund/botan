@@ -515,7 +515,7 @@ class BOTAN_PUBLIC_API(2,0) BigInt final
         m_data.set_word_at(i, w);
         }
 
-     void set_words(const word w[], size_t len)
+     void set_words(const word* w, size_t len)
         {
         m_data.set_words(w, len);
         }

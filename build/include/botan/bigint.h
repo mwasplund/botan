@@ -79,7 +79,7 @@ class BOTAN_PUBLIC_API(2,0) BigInt final
      * @param buf the byte array holding the value
      * @param length size of buf
      */
-     BigInt(const uint8_t buf[], size_t length);
+     BigInt(const uint8_t* buf, size_t length);
 
      /**
      * Create a BigInt from an integer in a byte array
@@ -94,7 +94,7 @@ class BOTAN_PUBLIC_API(2,0) BigInt final
      * @param length size of buf
      * @param base is the number base of the integer in buf
      */
-     BigInt(const uint8_t buf[], size_t length, Base base);
+     BigInt(const uint8_t* buf, size_t length, Base base);
 
      /**
      * Create a BigInt from an integer in a byte array
@@ -103,7 +103,7 @@ class BOTAN_PUBLIC_API(2,0) BigInt final
      * @param max_bits if the resulting integer is more than max_bits,
      *        it will be shifted so it is at most max_bits in length.
      */
-     BigInt(const uint8_t buf[], size_t length, size_t max_bits);
+     BigInt(const uint8_t* buf, size_t length, size_t max_bits);
 
      /**
      * Create a BigInt from an array of words
@@ -280,11 +280,11 @@ class BOTAN_PUBLIC_API(2,0) BigInt final
      */
      bool operator !() const { return (!is_nonzero()); }
 
-     static BigInt add2(const BigInt& x, const word y[], size_t y_words, Sign y_sign);
+     static BigInt add2(const BigInt& x, const word* y, size_t y_words, Sign y_sign);
 
-     BigInt& add(const word y[], size_t y_words, Sign sign);
+     BigInt& add(const word* y, size_t y_words, Sign sign);
 
-     BigInt& sub(const word y[], size_t y_words, Sign sign)
+     BigInt& sub(const word* y, size_t y_words, Sign sign)
         {
         return add(y, y_words, sign == Positive ? Negative : Positive);
         }
@@ -308,7 +308,7 @@ class BOTAN_PUBLIC_API(2,0) BigInt final
      * @param y_words length of y in words
      * @param ws a temp workspace
      */
-     BigInt& rev_sub(const word y[], size_t y_words, secure_vector<word>& ws);
+     BigInt& rev_sub(const word* y, size_t y_words, secure_vector<word>& ws);
 
      /**
      * Set *this to (*this + y) % mod
@@ -515,7 +515,7 @@ class BOTAN_PUBLIC_API(2,0) BigInt final
         m_data.set_word_at(i, w);
         }
 
-     void set_words(const word w[], size_t len)
+     void set_words(const word* w, size_t len)
         {
         m_data.set_words(w, len);
         }
@@ -663,7 +663,7 @@ class BOTAN_PUBLIC_API(2,0) BigInt final
      * Store BigInt-value in a given byte array
      * @param buf destination byte array for the integer value
      */
-     void binary_encode(uint8_t buf[]) const;
+     void binary_encode(uint8_t* buf) const;
 
      /**
      * Store BigInt-value in a given byte array. If len is less than
@@ -675,14 +675,14 @@ class BOTAN_PUBLIC_API(2,0) BigInt final
      * @param buf destination byte array for the integer value
      * @param len how many bytes to write
      */
-     void binary_encode(uint8_t buf[], size_t len) const;
+     void binary_encode(uint8_t* buf, size_t len) const;
 
      /**
      * Read integer value from a byte array with given size
      * @param buf byte array buffer containing the integer
      * @param length size of buf
      */
-     void binary_decode(const uint8_t buf[], size_t length);
+     void binary_decode(const uint8_t* buf, size_t length);
 
      /**
      * Read integer value from a byte vector
@@ -791,7 +791,7 @@ class BOTAN_PUBLIC_API(2,0) BigInt final
      * @param buf destination byte array for the encoded integer
      * @param n the BigInt to use as integer source
      */
-     static BOTAN_DEPRECATED("Use n.binary_encode") void encode(uint8_t buf[], const BigInt& n)
+     static BOTAN_DEPRECATED("Use n.binary_encode") void encode(uint8_t* buf, const BigInt& n)
         {
         n.binary_encode(buf);
         }
@@ -802,7 +802,7 @@ class BOTAN_PUBLIC_API(2,0) BigInt final
      * @param length size of buf
      * @result BigInt representing the integer in the byte array
      */
-     static BigInt decode(const uint8_t buf[], size_t length)
+     static BigInt decode(const uint8_t* buf, size_t length)
         {
         return BigInt(buf, length);
         }
@@ -856,7 +856,7 @@ class BOTAN_PUBLIC_API(2,0) BigInt final
      * Hex or Decimal output, use to_hex_string or to_dec_string resp.
      */
      BOTAN_DEPRECATED("See comments on declaration")
-     static void encode(uint8_t buf[], const BigInt& n, Base base);
+     static void encode(uint8_t* buf, const BigInt& n, Base base);
 
      /**
      * Create a BigInt from an integer in a byte array
@@ -865,7 +865,7 @@ class BOTAN_PUBLIC_API(2,0) BigInt final
      * @param base number-base of the integer in buf
      * @result BigInt representing the integer in the byte array
      */
-     static BigInt decode(const uint8_t buf[], size_t length,
+     static BigInt decode(const uint8_t* buf, size_t length,
                           Base base);
 
      /**
@@ -958,7 +958,7 @@ class BOTAN_PUBLIC_API(2,0) BigInt final
               m_reg[i] = w;
               }
 
-           void set_words(const word w[], size_t len)
+           void set_words(const word* w, size_t len)
               {
               invalidate_sig_words();
               m_reg.assign(w, w + len);

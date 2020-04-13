@@ -5,6 +5,17 @@
 * Botan is released under the Simplified BSD License (see license.txt)
 */
 
+#ifdef SOUP_BUILD
+module;
+#define SOUP_MACRO_ONLY
+#include <botan/assert.h>
+
+#include <functional>
+#include <mutex>
+#include <sstream>
+module Botan;
+#else
+
 #include <botan/name_constraint.h>
 #include <botan/asn1_alt_name.h>
 #include <botan/ber_dec.h>
@@ -14,9 +25,13 @@
 #include <botan/parsing.h>
 #include <sstream>
 
+#endif
+
 namespace Botan {
 
+#ifndef SOUP_BUILD
 class DER_Encoder;
+#endif
 
 GeneralName::GeneralName(const std::string& str) : GeneralName()
    {

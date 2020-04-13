@@ -22,7 +22,7 @@ class Encryption_with_EME : public Encryption
    public:
       size_t max_input_bits() const override;
 
-      secure_vector<uint8_t> encrypt(const uint8_t msg[], size_t msg_len,
+      secure_vector<uint8_t> encrypt(const uint8_t* msg, size_t msg_len,
                                   RandomNumberGenerator& rng) override;
 
       ~Encryption_with_EME() = default;
@@ -31,7 +31,7 @@ class Encryption_with_EME : public Encryption
    private:
       virtual size_t max_raw_input_bits() const = 0;
 
-      virtual secure_vector<uint8_t> raw_encrypt(const uint8_t msg[], size_t len,
+      virtual secure_vector<uint8_t> raw_encrypt(const uint8_t* msg, size_t len,
                                               RandomNumberGenerator& rng) = 0;
       std::unique_ptr<EME> m_eme;
    };
@@ -40,13 +40,13 @@ class Decryption_with_EME : public Decryption
    {
    public:
       secure_vector<uint8_t> decrypt(uint8_t& valid_mask,
-                                  const uint8_t msg[], size_t msg_len) override;
+                                  const uint8_t* msg, size_t msg_len) override;
 
       ~Decryption_with_EME() = default;
    protected:
       explicit Decryption_with_EME(const std::string& eme);
    private:
-      virtual secure_vector<uint8_t> raw_decrypt(const uint8_t msg[], size_t len) = 0;
+      virtual secure_vector<uint8_t> raw_decrypt(const uint8_t* msg, size_t len) = 0;
       std::unique_ptr<EME> m_eme;
    };
 
@@ -55,11 +55,11 @@ class Verification_with_EMSA : public Verification
    public:
       ~Verification_with_EMSA() = default;
 
-      void update(const uint8_t msg[], size_t msg_len) override;
-      bool is_valid_signature(const uint8_t sig[], size_t sig_len) override;
+      void update(const uint8_t* msg, size_t msg_len) override;
+      bool is_valid_signature(const uint8_t* sig, size_t sig_len) override;
 
       bool do_check(const secure_vector<uint8_t>& msg,
-                    const uint8_t sig[], size_t sig_len);
+                    const uint8_t* sig, size_t sig_len);
 
       std::string hash_for_signature() { return m_hash; }
 
@@ -98,8 +98,8 @@ class Verification_with_EMSA : public Verification
       * @param sig_len the length of sig in bytes
       * @returns if signature is a valid one for message
       */
-      virtual bool verify(const uint8_t[], size_t,
-                          const uint8_t[], size_t)
+      virtual bool verify(const uint8_t*, size_t,
+                          const uint8_t*, size_t)
          {
          throw Invalid_State("Message recovery required");
          }
@@ -111,7 +111,7 @@ class Verification_with_EMSA : public Verification
       * @param msg_len the length of msg in bytes
       * @returns recovered message
       */
-      virtual secure_vector<uint8_t> verify_mr(const uint8_t[], size_t)
+      virtual secure_vector<uint8_t> verify_mr(const uint8_t*, size_t)
          {
          throw Invalid_State("Message recovery not supported");
          }
@@ -127,7 +127,7 @@ class Verification_with_EMSA : public Verification
 class Signature_with_EMSA : public Signature
    {
    public:
-      void update(const uint8_t msg[], size_t msg_len) override;
+      void update(const uint8_t* msg, size_t msg_len) override;
 
       secure_vector<uint8_t> sign(RandomNumberGenerator& rng) override;
    protected:
@@ -161,7 +161,7 @@ class Signature_with_EMSA : public Signature
       bool self_test_signature(const std::vector<uint8_t>& msg,
                                const std::vector<uint8_t>& sig) const;
 
-      virtual secure_vector<uint8_t> raw_sign(const uint8_t msg[], size_t msg_len,
+      virtual secure_vector<uint8_t> raw_sign(const uint8_t* msg, size_t msg_len,
                                            RandomNumberGenerator& rng) = 0;
 
       std::unique_ptr<EMSA> m_emsa;
@@ -173,14 +173,14 @@ class Key_Agreement_with_KDF : public Key_Agreement
    {
    public:
       secure_vector<uint8_t> agree(size_t key_len,
-                                const uint8_t other_key[], size_t other_key_len,
-                                const uint8_t salt[], size_t salt_len) override;
+                                const uint8_t* other_key, size_t other_key_len,
+                                const uint8_t* salt, size_t salt_len) override;
 
    protected:
       explicit Key_Agreement_with_KDF(const std::string& kdf);
       ~Key_Agreement_with_KDF() = default;
    private:
-      virtual secure_vector<uint8_t> raw_agree(const uint8_t w[], size_t w_len) = 0;
+      virtual secure_vector<uint8_t> raw_agree(const uint8_t* w, size_t w_len) = 0;
       std::unique_ptr<KDF> m_kdf;
    };
 
@@ -191,7 +191,7 @@ class KEM_Encryption_with_KDF : public KEM_Encryption
                        secure_vector<uint8_t>& out_shared_key,
                        size_t desired_shared_key_len,
                        Botan::RandomNumberGenerator& rng,
-                       const uint8_t salt[],
+                       const uint8_t* salt,
                        size_t salt_len) override;
 
    protected:
@@ -208,15 +208,15 @@ class KEM_Encryption_with_KDF : public KEM_Encryption
 class KEM_Decryption_with_KDF : public KEM_Decryption
    {
    public:
-      secure_vector<uint8_t> kem_decrypt(const uint8_t encap_key[],
+      secure_vector<uint8_t> kem_decrypt(const uint8_t* encap_key,
                                       size_t len,
                                       size_t desired_shared_key_len,
-                                      const uint8_t salt[],
+                                      const uint8_t* salt,
                                       size_t salt_len) override;
 
    protected:
       virtual secure_vector<uint8_t>
-      raw_kem_decrypt(const uint8_t encap_key[], size_t len) = 0;
+      raw_kem_decrypt(const uint8_t* encap_key, size_t len) = 0;
 
       explicit KEM_Decryption_with_KDF(const std::string& kdf);
       ~KEM_Decryption_with_KDF() = default;

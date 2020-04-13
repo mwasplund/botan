@@ -280,7 +280,7 @@ const size_t PRIME_TABLE_SIZE = 6541;
 /**
 * A const array of all primes less than 65535
 */
-extern const uint16_t BOTAN_PUBLIC_API(2,0) PRIMES[];
+extern const uint16_t* BOTAN_PUBLIC_API(2,0) PRIMES;
 
 }
 

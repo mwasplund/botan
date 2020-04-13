@@ -172,8 +172,8 @@ class BOTAN_PUBLIC_API(2,0) BlockCipher : public SymmetricAlgorithm
       virtual void decrypt_n(const uint8_t in[], uint8_t out[],
                              size_t blocks) const = 0;
 
-      virtual void encrypt_n_xex(uint8_t data[],
-                                 const uint8_t mask[],
+      virtual void encrypt_n_xex(uint8_t* data,
+                                 const uint8_t* mask,
                                  size_t blocks) const
          {
          const size_t BS = block_size();
@@ -182,8 +182,8 @@ class BOTAN_PUBLIC_API(2,0) BlockCipher : public SymmetricAlgorithm
          xor_buf(data, mask, blocks * BS);
          }
 
-      virtual void decrypt_n_xex(uint8_t data[],
-                                 const uint8_t mask[],
+      virtual void decrypt_n_xex(uint8_t* data,
+                                 const uint8_t* mask,
                                  size_t blocks) const
          {
          const size_t BS = block_size();
@@ -236,8 +236,8 @@ class Block_Cipher_Fixed_Params : public BaseClass
          xor_buf(data, mask, blocks * BS);
          }
 
-      void decrypt_n_xex(uint8_t data[],
-                         const uint8_t mask[],
+      void decrypt_n_xex(uint8_t* data,
+                         const uint8_t* mask,
                          size_t blocks) const final override
          {
          xor_buf(data, mask, blocks * BS);

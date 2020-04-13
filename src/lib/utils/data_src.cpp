@@ -15,6 +15,7 @@ module;
 #include <algorithm>
 #include <istream>
 #include <mutex>
+#include <string>
 
 #if defined(BOTAN_TARGET_OS_HAS_FILESYSTEM)
   #include <fstream>

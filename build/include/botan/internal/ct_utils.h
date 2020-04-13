@@ -382,7 +382,7 @@ secure_vector<uint8_t> copy_output(CT::Mask<uint8_t> bad_input,
                                    size_t input_length,
                                    size_t delim_idx);
 
-secure_vector<uint8_t> strip_leading_zeros(const uint8_t in[], size_t length);
+secure_vector<uint8_t> strip_leading_zeros(const uint8_t* in, size_t length);
 
 inline secure_vector<uint8_t> strip_leading_zeros(const secure_vector<uint8_t>& in)
    {

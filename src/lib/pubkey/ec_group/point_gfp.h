@@ -243,9 +243,9 @@ class BOTAN_PUBLIC_API(2,0) PointGFp final
       * @param z_size size of z_words
       * @param workspace temp space, at least WORKSPACE_SIZE elements
       */
-      void add(const word x_words[], size_t x_size,
-               const word y_words[], size_t y_size,
-               const word z_words[], size_t z_size,
+      void add(const word* x_words, size_t x_size,
+               const word* y_words, size_t y_size,
+               const word* z_words, size_t z_size,
                std::vector<BigInt>& workspace);
 
       /**
@@ -273,8 +273,8 @@ class BOTAN_PUBLIC_API(2,0) PointGFp final
       * @param y_size size of y_words
       * @param workspace temp space, at least WORKSPACE_SIZE elements
       */
-      void add_affine(const word x_words[], size_t x_size,
-                      const word y_words[], size_t y_size,
+      void add_affine(const word* x_words, size_t x_size,
+                      const word* y_words, size_t y_size,
                       std::vector<BigInt>& workspace);
 
       /**

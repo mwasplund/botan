@@ -73,7 +73,7 @@ class BOTAN_PUBLIC_API(2,0) DER_Encoder final
       /**
       * Insert raw bytes directly into the output stream
       */
-      DER_Encoder& raw_bytes(const uint8_t val[], size_t len);
+      DER_Encoder& raw_bytes(const uint8_t* val, size_t len);
 
       template<typename Alloc>
       DER_Encoder& raw_bytes(const std::vector<uint8_t, Alloc>& val)
@@ -85,7 +85,7 @@ class BOTAN_PUBLIC_API(2,0) DER_Encoder final
       DER_Encoder& encode(bool b);
       DER_Encoder& encode(size_t s);
       DER_Encoder& encode(const BigInt& n);
-      DER_Encoder& encode(const uint8_t val[], size_t len, ASN1_Tag real_type);
+      DER_Encoder& encode(const uint8_t* val, size_t len, ASN1_Tag real_type);
 
       template<typename Alloc>
       DER_Encoder& encode(const std::vector<uint8_t, Alloc>& vec, ASN1_Tag real_type)
@@ -105,7 +105,7 @@ class BOTAN_PUBLIC_API(2,0) DER_Encoder final
                           ASN1_Tag type_tag,
                           ASN1_Tag class_tag = CONTEXT_SPECIFIC);
 
-      DER_Encoder& encode(const uint8_t v[], size_t len,
+      DER_Encoder& encode(const uint8_t* v, size_t len,
                           ASN1_Tag real_type,
                           ASN1_Tag type_tag,
                           ASN1_Tag class_tag = CONTEXT_SPECIFIC);
@@ -158,7 +158,7 @@ class BOTAN_PUBLIC_API(2,0) DER_Encoder final
          }
 
       DER_Encoder& add_object(ASN1_Tag type_tag, ASN1_Tag class_tag,
-                              const uint8_t rep[], size_t length);
+                              const uint8_t* rep, size_t length);
 
       DER_Encoder& add_object(ASN1_Tag type_tag, ASN1_Tag class_tag,
                               const std::vector<uint8_t>& rep)
@@ -186,10 +186,10 @@ class BOTAN_PUBLIC_API(2,0) DER_Encoder final
 
             void push_contents(DER_Encoder& der);
 
-            void add_bytes(const uint8_t val[], size_t len);
+            void add_bytes(const uint8_t* val, size_t len);
 
-            void add_bytes(const uint8_t hdr[], size_t hdr_len,
-                           const uint8_t val[], size_t val_len);
+            void add_bytes(const uint8_t* hdr, size_t hdr_len,
+                           const uint8_t* val, size_t val_len);
 
             DER_Sequence(ASN1_Tag, ASN1_Tag);
 

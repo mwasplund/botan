@@ -12,7 +12,7 @@ module;
 #include <string>
 
 #define SOUP_MACRO_ONLY
-#include <botan/build.h>
+#include <botan/assert.h>
 module Botan;
 #else
 
@@ -98,7 +98,7 @@ std::string ucs4_to_utf8(const uint8_t ucs4[], size_t len)
    std::string s;
    for(size_t i = 0; i != chars; ++i)
       {
-      const uint32_t c = load_be<uint32_t>(ucs4, i);
+      const uint32_t c = load_be<unsigned int>(ucs4, i);
       append_utf8_for(s, c);
       }
 

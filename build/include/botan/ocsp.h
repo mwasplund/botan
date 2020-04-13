@@ -111,7 +111,7 @@ class BOTAN_PUBLIC_API(2,0) Response final
       * @param response_bits response bits received
       * @param response_bits_len length of response in bytes
       */
-      Response(const uint8_t response_bits[],
+      Response(const uint8_t* response_bits,
                size_t response_bits_len);
 
       /**

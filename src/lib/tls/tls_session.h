@@ -92,7 +92,7 @@ class BOTAN_PUBLIC_API(2,0) Session final
       * @param ctext_size the size of ctext in bytes
       * @param key the same key used by the encrypting side
       */
-      static Session decrypt(const uint8_t ctext[],
+      static Session decrypt(const uint8_t* ctext,
                              size_t ctext_size,
                              const SymmetricKey& key);
 

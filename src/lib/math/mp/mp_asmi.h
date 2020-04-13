@@ -412,7 +412,7 @@ inline word word8_linmul3(word z[8], const word x[8], word y, word carry)
 /*
 * Eight Word Block Multiply/Add
 */
-inline word word8_madd3(word z[8], const word x[8], word y, word carry)
+inline word word8_madd3(word* z, const word* x, word y, word carry)
    {
 #if defined(BOTAN_MP_USE_X86_32_ASM)
    asm(

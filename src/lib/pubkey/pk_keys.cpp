@@ -9,7 +9,6 @@
 module;
 #define SOUP_MACRO_ONLY
 #include <botan/assert.h>
-#include <botan/build.h>
 
 #include <algorithm>
 #include <mutex>

@@ -7,16 +7,15 @@
 
 #ifdef SOUP_BUILD
 module;
-#define SOUP_MACRO_ONLY
-#include <botan/assert.h>
-#include <botan/build.h>
-#define BOTAN_CHECKED_ADD(x,y) checked_add(x,y,__FILE__,__LINE__)
-
 #include <algorithm>
 #include <mutex>
 #include <string>
 #include <utility>
 #include <vector>
+
+#define SOUP_MACRO_ONLY
+#include <botan/assert.h>
+#define BOTAN_CHECKED_ADD(x,y) checked_add(x,y,__FILE__,__LINE__)
 module Botan;
 #else
 

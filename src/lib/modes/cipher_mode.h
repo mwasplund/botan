@@ -78,7 +78,7 @@ class BOTAN_PUBLIC_API(2,0) Cipher_Mode : public SymmetricAlgorithm
       * @param nonce the per message nonce
       * @param nonce_len length of nonce
       */
-      void start(const uint8_t nonce[], size_t nonce_len)
+      void start(const uint8_t* nonce, size_t nonce_len)
          {
          start_msg(nonce, nonce_len);
          }

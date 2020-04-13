@@ -78,7 +78,7 @@ class BOTAN_PUBLIC_API(2,0) SymmetricAlgorithm
       * @param key the to be set as a byte array.
       * @param length in bytes of key param
       */
-      void set_key(const uint8_t key[], size_t length);
+      void set_key(const uint8_t* key, size_t length);
 
       /**
       * @return the algorithm name

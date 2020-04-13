@@ -32,7 +32,7 @@ class BOTAN_PUBLIC_API(2,0) Buffered_Computation
       * @param in the input to process as a byte array
       * @param length of param in in bytes
       */
-      void update(const uint8_t in[], size_t length) { add_data(in, length); }
+      void update(const uint8_t* in, size_t length) { add_data(in, length); }
 
       /**
       * Add new input to process.
@@ -82,7 +82,7 @@ class BOTAN_PUBLIC_API(2,0) Buffered_Computation
       * @param out The byte array to be filled with the result.
       * Must be of length output_length()
       */
-      void final(uint8_t out[]) { final_result(out); }
+      void final(uint8_t* out) { final_result(out); }
 
       /**
       * Complete the computation and retrieve the
@@ -117,7 +117,7 @@ class BOTAN_PUBLIC_API(2,0) Buffered_Computation
       * @param length the length of the byte array
       * @result the result of the call to final()
       */
-      secure_vector<uint8_t> process(const uint8_t in[], size_t length)
+      secure_vector<uint8_t> process(const uint8_t* in, size_t length)
          {
          add_data(in, length);
          return final();
@@ -166,13 +166,13 @@ class BOTAN_PUBLIC_API(2,0) Buffered_Computation
       * @param input is an input buffer
       * @param length is the length of input in bytes
       */
-      virtual void add_data(const uint8_t input[], size_t length) = 0;
+      virtual void add_data(const uint8_t* input, size_t length) = 0;
 
       /**
       * Write the final output to out
       * @param out is an output buffer of output_length()
       */
-      virtual void final_result(uint8_t out[]) = 0;
+      virtual void final_result(uint8_t* out) = 0;
    };
 
 }

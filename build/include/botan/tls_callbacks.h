@@ -354,7 +354,7 @@ BOTAN_EXPORT class BOTAN_PUBLIC_API(2,0) Callbacks
        * @param val the bytes
        * @param val_len length of val
        */
-       virtual void tls_log_debug_bin(const char* descr, const uint8_t val[], size_t val_len)
+       virtual void tls_log_debug_bin(const char* descr, const uint8_t* val, size_t val_len)
           {
           BOTAN_UNUSED(descr, val, val_len);
           }

@@ -20,14 +20,14 @@ namespace Botan {
 class BOTAN_PUBLIC_API(2,0) Blowfish final : public Block_Cipher_Fixed_Params<8, 1, 56>
    {
    public:
-      void encrypt_n(const uint8_t in[], uint8_t out[], size_t blocks) const override;
-      void decrypt_n(const uint8_t in[], uint8_t out[], size_t blocks) const override;
+      void encrypt_n(const uint8_t* in, uint8_t* out, size_t blocks) const override;
+      void decrypt_n(const uint8_t* in, uint8_t* out, size_t blocks) const override;
 
       /**
       * Modified EKSBlowfish key schedule, used for bcrypt password hashing
       */
-      void salted_set_key(const uint8_t key[], size_t key_length,
-                          const uint8_t salt[], size_t salt_length,
+      void salted_set_key(const uint8_t* key, size_t key_length,
+                          const uint8_t* salt, size_t salt_length,
                           const size_t workfactor, bool salt_first = false);
 
       BOTAN_DEPRECATED("Use Blowfish::salted_set_key taking salt length")
@@ -41,7 +41,7 @@ class BOTAN_PUBLIC_API(2,0) Blowfish final : public Block_Cipher_Fixed_Params<8,
       std::string name() const override { return "Blowfish"; }
       BlockCipher* clone() const override { return new Blowfish; }
    private:
-      void key_schedule(const uint8_t key[], size_t length) override;
+      void key_schedule(const uint8_t* key, size_t length) override;
 
       void key_expansion(const uint8_t key[],
                          size_t key_length,

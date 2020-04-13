@@ -12,13 +12,14 @@ module;
 
 #define SOUP_MACRO_ONLY
 #include <botan/assert.h>
-#include <botan/build.h>
 module Botan;
 #else
+
 #include <botan/bigint.h>
 #include <botan/internal/mp_core.h>
 #include <botan/internal/bit_ops.h>
 #include <algorithm>
+
 #endif
 
 namespace Botan {

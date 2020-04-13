@@ -27,9 +27,9 @@ class BOTAN_PUBLIC_API(2,11) Bcrypt_PBKDF final : public PasswordHash
       /**
       * Derive a new key under the current Bcrypt-PBKDF parameter set
       */
-      void derive_key(uint8_t out[], size_t out_len,
+      void derive_key(uint8_t* out, size_t out_len,
                       const char* password, size_t password_len,
-                      const uint8_t salt[], size_t salt_len) const override;
+                      const uint8_t* salt, size_t salt_len) const override;
 
       std::string to_string() const override;
 

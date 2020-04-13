@@ -41,7 +41,7 @@ class BOTAN_PUBLIC_API(2,0) RandomNumberGenerator
       * @param output the byte array to hold the random output.
       * @param length the length of the byte array output in bytes.
       */
-      virtual void randomize(uint8_t output[], size_t length) = 0;
+      virtual void randomize(uint8_t* output, size_t length) = 0;
 
       /**
       * Returns false if it is known that this RNG object is not able to accept
@@ -62,7 +62,7 @@ class BOTAN_PUBLIC_API(2,0) RandomNumberGenerator
       * @param input a byte array containg the entropy to be added
       * @param length the length of the byte array in
       */
-      virtual void add_entropy(const uint8_t input[], size_t length) = 0;
+      virtual void add_entropy(const uint8_t* input, size_t length) = 0;
 
       /**
       * Incorporate some additional data into the RNG state.
@@ -87,8 +87,8 @@ class BOTAN_PUBLIC_API(2,0) RandomNumberGenerator
       * @param input entropy buffer to incorporate
       * @param input_len size of the input buffer in bytes
       */
-      virtual void randomize_with_input(uint8_t output[], size_t output_len,
-                                        const uint8_t input[], size_t input_len);
+      virtual void randomize_with_input(uint8_t* output, size_t output_len,
+                                        const uint8_t* input, size_t input_len);
 
       /**
       * This calls `randomize_with_input` using some timestamps as extra input.
@@ -99,7 +99,7 @@ class BOTAN_PUBLIC_API(2,0) RandomNumberGenerator
       * both of the duplicated RNG states later incorporate a timestamp (and the
       * timestamps don't themselves repeat), their outputs will diverge.
       */
-      virtual void randomize_with_ts_input(uint8_t output[], size_t output_len);
+      virtual void randomize_with_ts_input(uint8_t* output, size_t output_len);
 
       /**
       * @return the name of this RNG type
@@ -212,12 +212,12 @@ class BOTAN_PUBLIC_API(2,0) Null_RNG final : public RandomNumberGenerator
 
       void clear() override {}
 
-      void randomize(uint8_t[], size_t) override
+      void randomize(uint8_t*, size_t) override
          {
          throw PRNG_Unseeded("Null_RNG called");
          }
 
-      void add_entropy(const uint8_t[], size_t) override {}
+      void add_entropy(const uint8_t*, size_t) override {}
 
       std::string name() const override { return "Null_RNG"; }
    };
@@ -231,7 +231,7 @@ class BOTAN_PUBLIC_API(2,0) Null_RNG final : public RandomNumberGenerator
 class BOTAN_PUBLIC_API(2,0) Serialized_RNG final : public RandomNumberGenerator
    {
    public:
-      void randomize(uint8_t out[], size_t len) override
+      void randomize(uint8_t* out, size_t len) override
          {
          lock_guard_type<mutex_type> lock(m_mutex);
          m_rng->randomize(out, len);
@@ -269,7 +269,7 @@ class BOTAN_PUBLIC_API(2,0) Serialized_RNG final : public RandomNumberGenerator
          return m_rng->reseed(src, poll_bits, poll_timeout);
          }
 
-      void add_entropy(const uint8_t in[], size_t len) override
+      void add_entropy(const uint8_t* in, size_t len) override
          {
          lock_guard_type<mutex_type> lock(m_mutex);
          m_rng->add_entropy(in, len);

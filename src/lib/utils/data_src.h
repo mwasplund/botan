@@ -32,7 +32,7 @@ class BOTAN_PUBLIC_API(2,0) DataSource
       * @return length in bytes that was actually read and put
       * into out
       */
-      virtual size_t read(uint8_t out[], size_t length) BOTAN_WARN_UNUSED_RESULT = 0;
+      virtual size_t read(uint8_t* out, size_t length) BOTAN_WARN_UNUSED_RESULT = 0;
 
       virtual bool check_available(size_t n) = 0;
 
@@ -47,7 +47,7 @@ class BOTAN_PUBLIC_API(2,0) DataSource
       * @return length in bytes that was actually read and put
       * into out
       */
-      virtual size_t peek(uint8_t out[], size_t length, size_t peek_offset) const BOTAN_WARN_UNUSED_RESULT = 0;
+      virtual size_t peek(uint8_t* out, size_t length, size_t peek_offset) const BOTAN_WARN_UNUSED_RESULT = 0;
 
       /**
       * Test whether the source still has data that can be read.
@@ -100,8 +100,8 @@ class BOTAN_PUBLIC_API(2,0) DataSource
 class BOTAN_PUBLIC_API(2,0) DataSource_Memory final : public DataSource
    {
    public:
-      size_t read(uint8_t[], size_t) override;
-      size_t peek(uint8_t[], size_t, size_t) const override;
+      size_t read(uint8_t*, size_t) override;
+      size_t peek(uint8_t*, size_t, size_t) const override;
       bool check_available(size_t n) override;
       bool end_of_data() const override;
 
@@ -116,7 +116,7 @@ class BOTAN_PUBLIC_API(2,0) DataSource_Memory final : public DataSource
       * @param in the byte array to read from
       * @param length the length of the byte array
       */
-      DataSource_Memory(const uint8_t in[], size_t length) :
+      DataSource_Memory(const uint8_t* in, size_t length) :
          m_source(in, in + length), m_offset(0) {}
 
       /**
@@ -145,8 +145,8 @@ class BOTAN_PUBLIC_API(2,0) DataSource_Memory final : public DataSource
 class BOTAN_PUBLIC_API(2,0) DataSource_Stream final : public DataSource
    {
    public:
-      size_t read(uint8_t[], size_t) override;
-      size_t peek(uint8_t[], size_t, size_t) const override;
+      size_t read(uint8_t*, size_t) override;
+      size_t peek(uint8_t*, size_t, size_t) const override;
       bool check_available(size_t n) override;
       bool end_of_data() const override;
       std::string id() const override;

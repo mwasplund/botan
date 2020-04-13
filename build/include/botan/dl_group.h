@@ -10,6 +10,7 @@
 
 #include <botan/bigint.h>
 #include <botan/monty.h>
+#include <botan/reducer.h>
 #include <botan/workfactor.h>
 #include <botan/internal/monty_exp.h>
 
@@ -188,7 +189,7 @@ class BOTAN_PUBLIC_API(2,0) DL_Group final
       /**
       * Decode a BER-encoded DL group param
       */
-      DL_Group(const uint8_t ber[], size_t ber_len, Format format);
+      DL_Group(const uint8_t* ber, size_t ber_len, Format format);
 
       /**
       * Decode a BER-encoded DL group param
@@ -413,7 +414,7 @@ class BOTAN_PUBLIC_API(2,0) DL_Group final
                                                                const char* g_str);
 
       static std::shared_ptr<DL_Group_Data>
-         BER_decode_DL_group(const uint8_t data[], size_t data_len, DL_Group::Format format);
+         BER_decode_DL_group(const uint8_t* data, size_t data_len, DL_Group::Format format);
 
       const DL_Group_Data& data() const;
       std::shared_ptr<DL_Group_Data> m_data;

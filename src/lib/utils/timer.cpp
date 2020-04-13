@@ -6,7 +6,10 @@
 
 #ifdef SOUP_BUILD
 module;
+#include <algorithm>
 #include <mutex>
+#include <sstream>
+#include <iomanip>
 
 #define SOUP_MACRO_ONLY
 #include <botan/build.h>

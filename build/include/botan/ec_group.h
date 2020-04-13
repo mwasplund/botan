@@ -315,7 +315,7 @@ class BOTAN_PUBLIC_API(2,0) EC_Group final
 
       size_t point_size(PointGFp::Compression_Type format) const;
 
-      PointGFp OS2ECP(const uint8_t bits[], size_t len) const;
+      PointGFp OS2ECP(const uint8_t* bits, size_t len) const;
 
       template<typename Alloc>
       PointGFp OS2ECP(const std::vector<uint8_t, Alloc>& vec) const
@@ -355,7 +355,7 @@ class BOTAN_PUBLIC_API(2,0) EC_Group final
    private:
       static EC_Group_Data_Map& ec_group_data();
 
-      static std::shared_ptr<EC_Group_Data> BER_decode_EC_group(const uint8_t bits[], size_t len);
+      static std::shared_ptr<EC_Group_Data> BER_decode_EC_group(const uint8_t* bits, size_t len);
 
       static std::shared_ptr<EC_Group_Data>
          load_EC_group_info(const char* p,

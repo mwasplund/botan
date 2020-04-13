@@ -70,8 +70,8 @@ BOTAN_PUBLIC_API(2,0) void secure_scrub_memory(void* ptr, size_t n);
 * @param len the number of Ts in x and y
 * @return 0xFF iff x[i] == y[i] forall i in [0...n) or 0x00 otherwise
 */
-BOTAN_PUBLIC_API(2,9) uint8_t ct_compare_u8(const uint8_t x[],
-                                            const uint8_t y[],
+BOTAN_PUBLIC_API(2,9) uint8_t ct_compare_u8(const uint8_t* x,
+                                            const uint8_t* y,
                                             size_t len);
 
 /**
@@ -81,8 +81,8 @@ BOTAN_PUBLIC_API(2,9) uint8_t ct_compare_u8(const uint8_t x[],
 * @param len the number of Ts in x and y
 * @return true iff x[i] == y[i] forall i in [0...n)
 */
-inline bool constant_time_compare(const uint8_t x[],
-                                  const uint8_t y[],
+inline bool constant_time_compare(const uint8_t* x,
+                                  const uint8_t* y,
                                   size_t len)
    {
    return ct_compare_u8(x, y, len) == 0xFF;
@@ -144,24 +144,24 @@ template<typename T> inline void copy_mem(T* out, const T* in, size_t n)
       }
    }
 
-template<typename T> inline void typecast_copy(uint8_t out[], T in[], size_t N)
+template<typename T> inline void typecast_copy(uint8_t* out, T* in, size_t N)
    {
    static_assert(BOTAN_IS_TRIVIALLY_COPYABLE(T), "");
    std::memcpy(out, in, sizeof(T)*N);
    }
 
-template<typename T> inline void typecast_copy(T out[], const uint8_t in[], size_t N)
+template<typename T> inline void typecast_copy(T* out, const uint8_t* in, size_t N)
    {
    static_assert(std::is_trivial<T>::value, "");
    std::memcpy(out, in, sizeof(T)*N);
    }
 
-template<typename T> inline void typecast_copy(uint8_t out[], T in)
+template<typename T> inline void typecast_copy(uint8_t* out, T in)
    {
    typecast_copy(out, &in, 1);
    }
 
-template<typename T> inline void typecast_copy(T& out, const uint8_t in[])
+template<typename T> inline void typecast_copy(T& out, const uint8_t* in)
    {
    static_assert(std::is_trivial<typename std::decay<T>::type>::value, "");
    typecast_copy(&out, in, 1);
@@ -232,8 +232,8 @@ template<typename T> inline bool same_mem(const T* p1, const T* p2, size_t n)
 * @param in the read-only input buffer
 * @param length the length of the buffers
 */
-inline void xor_buf(uint8_t out[],
-                    const uint8_t in[],
+inline void xor_buf(uint8_t* out,
+                    const uint8_t* in,
                     size_t length)
    {
    const size_t blocks = length - (length % 32);
@@ -267,9 +267,9 @@ inline void xor_buf(uint8_t out[],
 * @param in2 the second output buffer
 * @param length the length of the three buffers
 */
-inline void xor_buf(uint8_t out[],
-                    const uint8_t in[],
-                    const uint8_t in2[],
+inline void xor_buf(uint8_t* out,
+                    const uint8_t* in,
+                    const uint8_t* in2,
                     size_t length)
    {
    const size_t blocks = length - (length % 32);

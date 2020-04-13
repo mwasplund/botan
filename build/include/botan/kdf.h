@@ -66,10 +66,10 @@ class BOTAN_PUBLIC_API(2,0) KDF
       * @param label_len size of label in bytes
       * @return the derived key
       */
-      virtual size_t kdf(uint8_t key[], size_t key_len,
-                         const uint8_t secret[], size_t secret_len,
-                         const uint8_t salt[], size_t salt_len,
-                         const uint8_t label[], size_t label_len) const = 0;
+      virtual size_t kdf(uint8_t* key, size_t key_len,
+                         const uint8_t* secret, size_t secret_len,
+                         const uint8_t* salt, size_t salt_len,
+                         const uint8_t* label, size_t label_len) const = 0;
 
       /**
       * Derive a key
@@ -83,11 +83,11 @@ class BOTAN_PUBLIC_API(2,0) KDF
       * @return the derived key
       */
       secure_vector<uint8_t> derive_key(size_t key_len,
-                                    const uint8_t secret[],
+                                    const uint8_t* secret,
                                     size_t secret_len,
-                                    const uint8_t salt[],
+                                    const uint8_t* salt,
                                     size_t salt_len,
-                                    const uint8_t label[] = nullptr,
+                                    const uint8_t* label = nullptr,
                                     size_t label_len = 0) const
          {
          secure_vector<uint8_t> key(key_len);
@@ -147,7 +147,7 @@ class BOTAN_PUBLIC_API(2,0) KDF
       */
       secure_vector<uint8_t> derive_key(size_t key_len,
                                     const secure_vector<uint8_t>& secret,
-                                    const uint8_t salt[],
+                                    const uint8_t* salt,
                                     size_t salt_len,
                                     const std::string& label = "") const
          {
@@ -168,7 +168,7 @@ class BOTAN_PUBLIC_API(2,0) KDF
       * @return the derived key
       */
       secure_vector<uint8_t> derive_key(size_t key_len,
-                                    const uint8_t secret[],
+                                    const uint8_t* secret,
                                     size_t secret_len,
                                     const std::string& salt = "",
                                     const std::string& label = "") const

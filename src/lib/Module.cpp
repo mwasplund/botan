@@ -29,6 +29,7 @@ export module Botan;
 #include <botan/block_cipher.h>
 #include <botan/calendar.h>
 #include <botan/charset.h>
+#include <botan/credentials_manager.h>
 #include <botan/curve_nistp.h>
 #include <botan/der_enc.h>
 #include <botan/dh.h>
@@ -49,11 +50,16 @@ export module Botan;
 #include <botan/pk_ops.h>
 #include <botan/pubkey.h>
 #include <botan/rng.h>
+#include <botan/rsa.h>
 #include <botan/scan_name.h>
 #include <botan/stream_cipher.h>
+#include <botan/system_rng.h>
 #include <botan/tls_callbacks.h>
+#include <botan/tls_client.h>
 #include <botan/tls_exceptn.h>
+#include <botan/tls_messages.h>
 #include <botan/tls_policy.h>
+#include <botan/tls_session_manager.h>
 #include <botan/x509path.h>
 
 #include <botan/internal/bit_ops.h>
@@ -69,6 +75,13 @@ export module Botan;
 #include <botan/internal/safeint.h>
 #include <botan/internal/stl_util.h>
 #include <botan/internal/timer.h>
+#include <botan/internal/tls_handshake_io.h>
+#include <botan/internal/tls_handshake_hash.h>
+#include <botan/internal/tls_handshake_state.h>
+#include <botan/internal/tls_reader.h>
+#include <botan/internal/tls_record.h>
+#include <botan/internal/tls_seq_numbers.h>
+#include <botan/internal/tls_session_key.h>
 
 #if defined(BOTAN_HAS_EMSA1)
    #include <botan/emsa1.h>

@@ -85,7 +85,7 @@ class Stream_Handshake_IO final : public Handshake_IO
          const std::vector<uint8_t>& handshake_msg,
          Handshake_Type handshake_type) const override;
 
-      void add_record(const uint8_t record[],
+      void add_record(const uint8_t* record,
                       size_t record_len,
                       Record_Type type,
                       uint64_t sequence_number) override;
@@ -128,7 +128,7 @@ class Datagram_Handshake_IO final : public Handshake_IO
          const std::vector<uint8_t>& handshake_msg,
          Handshake_Type handshake_type) const override;
 
-      void add_record(const uint8_t record[],
+      void add_record(const uint8_t* record,
                       size_t record_len,
                       Record_Type type,
                       uint64_t sequence_number) override;

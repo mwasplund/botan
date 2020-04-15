@@ -22,7 +22,7 @@ namespace Botan {
 class BOTAN_PUBLIC_API(2,0) GHASH final : public SymmetricAlgorithm
    {
    public:
-      void set_associated_data(const uint8_t ad[], size_t ad_len);
+      void set_associated_data(const uint8_t* ad, size_t ad_len);
 
       secure_vector<uint8_t> BOTAN_DEPRECATED("Use other impl")
          nonce_hash(const uint8_t nonce[], size_t nonce_len)
@@ -32,14 +32,14 @@ class BOTAN_PUBLIC_API(2,0) GHASH final : public SymmetricAlgorithm
          return y0;
          }
 
-      void nonce_hash(secure_vector<uint8_t>& y0, const uint8_t nonce[], size_t len);
+      void nonce_hash(secure_vector<uint8_t>& y0, const uint8_t* nonce, size_t len);
 
-      void start(const uint8_t nonce[], size_t len);
+      void start(const uint8_t* nonce, size_t len);
 
       /*
       * Assumes input len is multiple of 16
       */
-      void update(const uint8_t in[], size_t len);
+      void update(const uint8_t* in, size_t len);
 
       /*
       * Incremental update of associated data
@@ -53,7 +53,7 @@ class BOTAN_PUBLIC_API(2,0) GHASH final : public SymmetricAlgorithm
          return mac;
          }
 
-      void final(uint8_t out[], size_t out_len);
+      void final(uint8_t* out, size_t out_len);
 
       Key_Length_Specification key_spec() const override
          { return Key_Length_Specification(16); }
@@ -72,7 +72,7 @@ class BOTAN_PUBLIC_API(2,0) GHASH final : public SymmetricAlgorithm
       void add_final_block(secure_vector<uint8_t>& x,
                            size_t ad_len, size_t pt_len);
    private:
-      void key_schedule(const uint8_t key[], size_t key_len) override;
+      void key_schedule(const uint8_t* key, size_t key_len) override;
 
       void gcm_multiply(secure_vector<uint8_t>& x,
                         const uint8_t input[],

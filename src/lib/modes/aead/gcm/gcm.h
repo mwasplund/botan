@@ -26,7 +26,7 @@ class GHASH;
 class BOTAN_PUBLIC_API(2,0) GCM_Mode : public AEAD_Mode
    {
    public:
-      void set_associated_data(const uint8_t ad[], size_t ad_len) override;
+      void set_associated_data(const uint8_t* ad, size_t ad_len) override;
 
       std::string name() const override;
 
@@ -56,9 +56,9 @@ class BOTAN_PUBLIC_API(2,0) GCM_Mode : public AEAD_Mode
       std::unique_ptr<StreamCipher> m_ctr;
       std::unique_ptr<GHASH> m_ghash;
    private:
-      void start_msg(const uint8_t nonce[], size_t nonce_len) override;
+      void start_msg(const uint8_t* nonce, size_t nonce_len) override;
 
-      void key_schedule(const uint8_t key[], size_t length) override;
+      void key_schedule(const uint8_t* key, size_t length) override;
 
       secure_vector<uint8_t> m_y0;
    };
@@ -81,7 +81,7 @@ class BOTAN_PUBLIC_API(2,0) GCM_Encryption final : public GCM_Mode
 
       size_t minimum_final_size() const override { return 0; }
 
-      size_t process(uint8_t buf[], size_t size) override;
+      size_t process(uint8_t* buf, size_t size) override;
 
       void finish(secure_vector<uint8_t>& final_block, size_t offset = 0) override;
    };
@@ -107,7 +107,7 @@ class BOTAN_PUBLIC_API(2,0) GCM_Decryption final : public GCM_Mode
 
       size_t minimum_final_size() const override { return tag_size(); }
 
-      size_t process(uint8_t buf[], size_t size) override;
+      size_t process(uint8_t* buf, size_t size) override;
 
       void finish(secure_vector<uint8_t>& final_block, size_t offset = 0) override;
    };

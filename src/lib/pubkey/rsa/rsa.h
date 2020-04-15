@@ -18,8 +18,78 @@
 
 namespace Botan {
 
-class RSA_Public_Data;
-class RSA_Private_Data;
+class RSA_Public_Data final
+   {
+   public:
+      RSA_Public_Data(BigInt&& n, BigInt&& e) :
+         m_n(n),
+         m_e(e),
+         m_monty_n(std::make_shared<Montgomery_Params>(m_n)),
+         m_public_modulus_bits(m_n.bits()),
+         m_public_modulus_bytes(m_n.bytes())
+         {}
+
+      BigInt public_op(const BigInt& m) const
+         {
+         const size_t powm_window = 1;
+         auto powm_m_n = monty_precompute(m_monty_n, m, powm_window, false);
+         return monty_execute_vartime(*powm_m_n, m_e);
+         }
+
+      const BigInt& get_n() const { return m_n; }
+      const BigInt& get_e() const { return m_e; }
+      size_t public_modulus_bits() const { return m_public_modulus_bits; }
+      size_t public_modulus_bytes() const { return m_public_modulus_bytes; }
+
+   private:
+      BigInt m_n;
+      BigInt m_e;
+      std::shared_ptr<const Montgomery_Params> m_monty_n;
+      size_t m_public_modulus_bits;
+      size_t m_public_modulus_bytes;
+   };
+
+class RSA_Private_Data final
+   {
+   public:
+      RSA_Private_Data(BigInt&& d, BigInt&& p, BigInt&& q,
+                       BigInt&& d1, BigInt&& d2, BigInt&& c) :
+         m_d(d),
+         m_p(p),
+         m_q(q),
+         m_d1(d1),
+         m_d2(d2),
+         m_c(c),
+         m_mod_p(m_p),
+         m_mod_q(m_q),
+         m_monty_p(std::make_shared<Montgomery_Params>(m_p, m_mod_p)),
+         m_monty_q(std::make_shared<Montgomery_Params>(m_q, m_mod_q)),
+         m_p_bits(m_p.bits()),
+         m_q_bits(m_q.bits())
+         {}
+
+      const BigInt& get_d() const { return m_d; }
+      const BigInt& get_p() const { return m_p; }
+      const BigInt& get_q() const { return m_q; }
+      const BigInt& get_d1() const { return m_d1; }
+      const BigInt& get_d2() const { return m_d2; }
+      const BigInt& get_c() const { return m_c; }
+
+   //private:
+      BigInt m_d;
+      BigInt m_p;
+      BigInt m_q;
+      BigInt m_d1;
+      BigInt m_d2;
+      BigInt m_c;
+
+      Modular_Reducer m_mod_p;
+      Modular_Reducer m_mod_q;
+      std::shared_ptr<const Montgomery_Params> m_monty_p;
+      std::shared_ptr<const Montgomery_Params> m_monty_q;
+      size_t m_p_bits;
+      size_t m_q_bits;
+   };
 
 /**
 * RSA Public Key

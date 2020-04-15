@@ -16,8 +16,6 @@ module;
 
 #define SOUP_MACRO_ONLY
 #include <botan/assert.h>
-#include <botan/build.h>
-#include <botan/internal/simd_32.h>
 
 #if defined(BOTAN_SIMD_USE_SSE2)
   #include <tmmintrin.h>

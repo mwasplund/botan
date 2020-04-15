@@ -32,6 +32,7 @@ export module Botan;
 #include <botan/charset.h>
 #include <botan/cpuid.h>
 #include <botan/credentials_manager.h>
+#include <botan/ctr.h>
 #include <botan/curve_nistp.h>
 #include <botan/der_enc.h>
 #include <botan/dh.h>
@@ -39,10 +40,13 @@ export module Botan;
 #include <botan/blinding.h>
 #include <botan/blowfish.h>
 #include <botan/ecdh.h>
+#include <botan/elgamal.h>
 #include <botan/emsa.h>
 #include <botan/entropy_src.h>
+#include <botan/ghash.h>
 #include <botan/hash.h>
 #include <botan/hex.h>
+#include <botan/keypair.h>
 #include <botan/loadstor.h>
 #include <botan/mac.h>
 #include <botan/oids.h>

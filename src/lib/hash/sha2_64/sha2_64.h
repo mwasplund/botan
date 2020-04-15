@@ -31,8 +31,8 @@ class BOTAN_PUBLIC_API(2,0) SHA_384 final : public MDx_HashFunction
       SHA_384() : MDx_HashFunction(128, true, true, 16), m_digest(8)
          { clear(); }
    private:
-      void compress_n(const uint8_t[], size_t blocks) override;
-      void copy_out(uint8_t[]) override;
+      void compress_n(const uint8_t*, size_t blocks) override;
+      void copy_out(uint8_t*) override;
 
       secure_vector<uint64_t> m_digest;
    };
@@ -61,8 +61,8 @@ class BOTAN_PUBLIC_API(2,0) SHA_512 final : public MDx_HashFunction
       SHA_512() : MDx_HashFunction(128, true, true, 16), m_digest(8)
          { clear(); }
    private:
-      void compress_n(const uint8_t[], size_t blocks) override;
-      void copy_out(uint8_t[]) override;
+      void compress_n(const uint8_t*, size_t blocks) override;
+      void copy_out(uint8_t*) override;
 
       static const uint64_t K[80];
 
@@ -91,8 +91,8 @@ class BOTAN_PUBLIC_API(2,0) SHA_512_256 final : public MDx_HashFunction
 
       SHA_512_256() : MDx_HashFunction(128, true, true, 16), m_digest(8) { clear(); }
    private:
-      void compress_n(const uint8_t[], size_t blocks) override;
-      void copy_out(uint8_t[]) override;
+      void compress_n(const uint8_t*, size_t blocks) override;
+      void copy_out(uint8_t*) override;
 
       secure_vector<uint64_t> m_digest;
    };

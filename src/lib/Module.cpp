@@ -29,6 +29,7 @@ export module Botan;
 #include <botan/block_cipher.h>
 #include <botan/calendar.h>
 #include <botan/charset.h>
+#include <botan/cpuid.h>
 #include <botan/credentials_manager.h>
 #include <botan/curve_nistp.h>
 #include <botan/der_enc.h>
@@ -50,6 +51,7 @@ export module Botan;
 #include <botan/pk_ops.h>
 #include <botan/pubkey.h>
 #include <botan/rng.h>
+#include <botan/rotate.h>
 #include <botan/rsa.h>
 #include <botan/scan_name.h>
 #include <botan/stream_cipher.h>

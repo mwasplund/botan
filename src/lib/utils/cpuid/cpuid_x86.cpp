@@ -5,6 +5,28 @@
 * Botan is released under the Simplified BSD License (see license.txt)
 */
 
+#ifdef SOUP_BUILD
+module;
+#include <mutex>
+
+#define SOUP_MACRO_ONLY
+#include <botan/assert.h>
+module Botan;
+
+#if defined(BOTAN_TARGET_CPU_IS_X86_FAMILY)
+
+#if defined(BOTAN_BUILD_COMPILER_IS_MSVC)
+  #include <intrin.h>
+#elif defined(BOTAN_BUILD_COMPILER_IS_INTEL)
+  #include <ia32intrin.h>
+#elif defined(BOTAN_BUILD_COMPILER_IS_GCC) || defined(BOTAN_BUILD_COMPILER_IS_CLANG)
+  #include <cpuid.h>
+#endif
+
+#endif
+
+#else
+
 #include <botan/cpuid.h>
 #include <botan/mem_ops.h>
 #include <botan/loadstor.h>
@@ -17,6 +39,8 @@
   #include <ia32intrin.h>
 #elif defined(BOTAN_BUILD_COMPILER_IS_GCC) || defined(BOTAN_BUILD_COMPILER_IS_CLANG)
   #include <cpuid.h>
+#endif
+
 #endif
 
 #endif

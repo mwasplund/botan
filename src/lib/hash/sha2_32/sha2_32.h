@@ -33,8 +33,8 @@ class BOTAN_PUBLIC_API(2,0) SHA_224 final : public MDx_HashFunction
       SHA_224() : MDx_HashFunction(64, true, true), m_digest(8)
          { clear(); }
    private:
-      void compress_n(const uint8_t[], size_t blocks) override;
-      void copy_out(uint8_t[]) override;
+      void compress_n(const uint8_t*, size_t blocks) override;
+      void copy_out(uint8_t*) override;
 
       secure_vector<uint32_t> m_digest;
    };
@@ -84,8 +84,8 @@ class BOTAN_PUBLIC_API(2,0) SHA_256 final : public MDx_HashFunction
                                       size_t blocks);
 #endif
 
-      void compress_n(const uint8_t[], size_t blocks) override;
-      void copy_out(uint8_t[]) override;
+      void compress_n(const uint8_t*, size_t blocks) override;
+      void copy_out(uint8_t*) override;
 
       secure_vector<uint32_t> m_digest;
    };

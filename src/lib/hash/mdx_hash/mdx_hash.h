@@ -34,8 +34,8 @@ class BOTAN_PUBLIC_API(2,0) MDx_HashFunction : public HashFunction
 
       size_t hash_block_size() const override final { return m_buffer.size(); }
    protected:
-      void add_data(const uint8_t input[], size_t length) override final;
-      void final_result(uint8_t output[]) override final;
+      void add_data(const uint8_t* input, size_t length) override final;
+      void final_result(uint8_t* output) override final;
 
       /**
       * Run the hash's compression function over a set of blocks
@@ -56,7 +56,7 @@ class BOTAN_PUBLIC_API(2,0) MDx_HashFunction : public HashFunction
       * Write the count, if used, to this spot
       * @param out where to write the counter to
       */
-      virtual void write_count(uint8_t out[]);
+      virtual void write_count(uint8_t* out);
    private:
       const uint8_t m_pad_char;
       const uint8_t m_counter_size;

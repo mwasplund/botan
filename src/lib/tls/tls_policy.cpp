@@ -511,7 +511,7 @@ std::vector<uint16_t> Policy::ciphersuite_list(Protocol_Version version,
       ciphersuites.push_back(suite);
       }
 
-   if(ciphersuites.empty())
+    if(ciphersuites.empty())
       {
       throw Invalid_State("Policy does not allow any available cipher suite");
       }

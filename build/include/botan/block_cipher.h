@@ -81,7 +81,7 @@ class BOTAN_PUBLIC_API(2,0) BlockCipher : public SymmetricAlgorithm
       * @param out The byte array designated to hold the encrypted block.
       * Must be of length block_size().
       */
-      void encrypt(const uint8_t in[], uint8_t out[]) const
+      void encrypt(const uint8_t* in, uint8_t* out) const
          { encrypt_n(in, out, 1); }
 
       /**
@@ -91,7 +91,7 @@ class BOTAN_PUBLIC_API(2,0) BlockCipher : public SymmetricAlgorithm
       * @param out The byte array designated to hold the decrypted block.
       * Must be of length block_size().
       */
-      void decrypt(const uint8_t in[], uint8_t out[]) const
+      void decrypt(const uint8_t* in, uint8_t* out) const
          { decrypt_n(in, out, 1); }
 
       /**
@@ -100,7 +100,7 @@ class BOTAN_PUBLIC_API(2,0) BlockCipher : public SymmetricAlgorithm
       * Must be of length block_size(). Will hold the result when the function
       * has finished.
       */
-      void encrypt(uint8_t block[]) const { encrypt_n(block, block, 1); }
+      void encrypt(uint8_t* block) const { encrypt_n(block, block, 1); }
 
       /**
       * Decrypt a block.
@@ -108,7 +108,7 @@ class BOTAN_PUBLIC_API(2,0) BlockCipher : public SymmetricAlgorithm
       * Must be of length block_size(). Will hold the result when the function
       * has finished.
       */
-      void decrypt(uint8_t block[]) const { decrypt_n(block, block, 1); }
+      void decrypt(uint8_t* block) const { decrypt_n(block, block, 1); }
 
       /**
       * Encrypt one or more blocks

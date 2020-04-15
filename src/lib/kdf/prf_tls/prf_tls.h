@@ -25,10 +25,10 @@ class BOTAN_PUBLIC_API(2,0) TLS_PRF final : public KDF
 
       KDF* clone() const override { return new TLS_PRF; }
 
-      size_t kdf(uint8_t key[], size_t key_len,
-                 const uint8_t secret[], size_t secret_len,
-                 const uint8_t salt[], size_t salt_len,
-                 const uint8_t label[], size_t label_len) const override;
+      size_t kdf(uint8_t* key, size_t key_len,
+                 const uint8_t* secret, size_t secret_len,
+                 const uint8_t* salt, size_t salt_len,
+                 const uint8_t* label, size_t label_len) const override;
 
       TLS_PRF(std::unique_ptr<MessageAuthenticationCode> hmac_md5,
               std::unique_ptr<MessageAuthenticationCode> hmac_sha1) :
@@ -52,10 +52,10 @@ class BOTAN_PUBLIC_API(2,0) TLS_12_PRF final : public KDF
 
       KDF* clone() const override { return new TLS_12_PRF(m_mac->clone()); }
 
-      size_t kdf(uint8_t key[], size_t key_len,
-                 const uint8_t secret[], size_t secret_len,
-                 const uint8_t salt[], size_t salt_len,
-                 const uint8_t label[], size_t label_len) const override;
+      size_t kdf(uint8_t* key, size_t key_len,
+                 const uint8_t* secret, size_t secret_len,
+                 const uint8_t* salt, size_t salt_len,
+                 const uint8_t* label, size_t label_len) const override;
 
       /**
       * @param mac MAC algorithm to use

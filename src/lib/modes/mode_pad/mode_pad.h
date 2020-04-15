@@ -144,7 +144,7 @@ class BOTAN_PUBLIC_API(2,0) Null_Padding final : public BlockCipherModePaddingMe
          /* no padding */
          }
 
-      size_t unpad(const uint8_t[], size_t size) const override { return size; }
+      size_t unpad(const uint8_t*, size_t size) const override { return size; }
 
       bool valid_blocksize(size_t) const override { return true; }
 

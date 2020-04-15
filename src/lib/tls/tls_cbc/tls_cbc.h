@@ -25,11 +25,11 @@ namespace TLS {
 class BOTAN_TEST_API TLS_CBC_HMAC_AEAD_Mode : public AEAD_Mode
    {
    public:
-      size_t process(uint8_t buf[], size_t sz) override final;
+      size_t process(uint8_t* buf, size_t sz) override final;
 
       std::string name() const override final;
 
-      void set_associated_data(const uint8_t ad[], size_t ad_len) override;
+      void set_associated_data(const uint8_t* ad, size_t ad_len) override;
 
       size_t update_granularity() const override final;
 
@@ -78,9 +78,9 @@ class BOTAN_TEST_API TLS_CBC_HMAC_AEAD_Mode : public AEAD_Mode
       std::vector<uint8_t> assoc_data_with_len(uint16_t len);
 
    private:
-      void start_msg(const uint8_t nonce[], size_t nonce_len) override final;
+      void start_msg(const uint8_t* nonce, size_t nonce_len) override final;
 
-      void key_schedule(const uint8_t key[], size_t length) override final;
+      void key_schedule(const uint8_t* key, size_t length) override final;
 
       const std::string m_cipher_name;
       const std::string m_mac_name;
@@ -124,7 +124,7 @@ class BOTAN_TEST_API TLS_CBC_HMAC_AEAD_Encryption final : public TLS_CBC_HMAC_AE
                                 use_encrypt_then_mac)
          {}
 
-      void set_associated_data(const uint8_t ad[], size_t ad_len) override;
+      void set_associated_data(const uint8_t* ad, size_t ad_len) override;
 
       size_t output_length(size_t input_length) const override;
 

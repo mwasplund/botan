@@ -55,9 +55,9 @@ class BOTAN_PUBLIC_API(2,0) CBC_Mode : public Cipher_Mode
       uint8_t* state_ptr() { return m_state.data(); }
 
    private:
-      void start_msg(const uint8_t nonce[], size_t nonce_len) override;
+      void start_msg(const uint8_t* nonce, size_t nonce_len) override;
 
-      void key_schedule(const uint8_t key[], size_t length) override;
+      void key_schedule(const uint8_t* key, size_t length) override;
 
       std::unique_ptr<BlockCipher> m_cipher;
       std::unique_ptr<BlockCipherModePaddingMethod> m_padding;
@@ -78,7 +78,7 @@ class BOTAN_PUBLIC_API(2,0) CBC_Encryption : public CBC_Mode
       CBC_Encryption(BlockCipher* cipher, BlockCipherModePaddingMethod* padding) :
          CBC_Mode(cipher, padding) {}
 
-      size_t process(uint8_t buf[], size_t size) override;
+      size_t process(uint8_t* buf, size_t size) override;
 
       void finish(secure_vector<uint8_t>& final_block, size_t offset = 0) override;
 
@@ -120,7 +120,7 @@ class BOTAN_PUBLIC_API(2,0) CBC_Decryption : public CBC_Mode
       CBC_Decryption(BlockCipher* cipher, BlockCipherModePaddingMethod* padding) :
          CBC_Mode(cipher, padding), m_tempbuf(update_granularity()) {}
 
-      size_t process(uint8_t buf[], size_t size) override;
+      size_t process(uint8_t* buf, size_t size) override;
 
       void finish(secure_vector<uint8_t>& final_block, size_t offset = 0) override;
 

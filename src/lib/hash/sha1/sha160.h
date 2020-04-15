@@ -33,7 +33,7 @@ class BOTAN_PUBLIC_API(2,0) SHA_160 final : public MDx_HashFunction
          }
 
    private:
-      void compress_n(const uint8_t[], size_t blocks) override;
+      void compress_n(const uint8_t*, size_t blocks) override;
 
 #if defined(BOTAN_HAS_SHA1_ARMV8)
       static void sha1_armv8_compress_n(secure_vector<uint32_t>& digest,
@@ -55,7 +55,7 @@ class BOTAN_PUBLIC_API(2,0) SHA_160 final : public MDx_HashFunction
 #endif
 
 
-      void copy_out(uint8_t[]) override;
+      void copy_out(uint8_t*) override;
 
       /**
       * The digest value

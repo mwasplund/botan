@@ -28,6 +28,7 @@ export module Botan;
 #include <botan/bigint.h>
 #include <botan/block_cipher.h>
 #include <botan/calendar.h>
+#include <botan/cbc.h>
 #include <botan/charset.h>
 #include <botan/cpuid.h>
 #include <botan/credentials_manager.h>
@@ -77,6 +78,7 @@ export module Botan;
 #include <botan/internal/safeint.h>
 #include <botan/internal/stl_util.h>
 #include <botan/internal/timer.h>
+#include <botan/internal/tls_cbc.h>
 #include <botan/internal/tls_handshake_io.h>
 #include <botan/internal/tls_handshake_hash.h>
 #include <botan/internal/tls_handshake_state.h>
@@ -84,6 +86,10 @@ export module Botan;
 #include <botan/internal/tls_record.h>
 #include <botan/internal/tls_seq_numbers.h>
 #include <botan/internal/tls_session_key.h>
+
+#if defined(BOTAN_HAS_TLS_CBC)
+  #include <botan/internal/tls_cbc.h>
+#endif
 
 #if defined(BOTAN_HAS_EMSA1)
    #include <botan/emsa1.h>

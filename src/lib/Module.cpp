@@ -29,6 +29,8 @@ export module Botan;
 #include <botan/block_cipher.h>
 #include <botan/calendar.h>
 #include <botan/cbc.h>
+#include <botan/certstor_system.h>
+#include <botan/certstor_windows.h>
 #include <botan/charset.h>
 #include <botan/cpuid.h>
 #include <botan/credentials_manager.h>
@@ -90,6 +92,15 @@ export module Botan;
 #include <botan/internal/tls_record.h>
 #include <botan/internal/tls_seq_numbers.h>
 #include <botan/internal/tls_session_key.h>
+
+
+#if defined(BOTAN_HAS_CERTSTOR_MACOS)
+   #include <botan/certstor_macos.h>
+#elif defined(BOTAN_HAS_CERTSTOR_WINDOWS)
+   #include <botan/certstor_windows.h>
+#elif defined(BOTAN_HAS_CERTSTOR_FLATFILE) && defined(BOTAN_SYSTEM_CERT_BUNDLE)
+   #include <botan/certstor_flatfile.h>
+#endif
 
 #if defined(BOTAN_HAS_TLS_CBC)
   #include <botan/internal/tls_cbc.h>

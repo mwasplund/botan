@@ -6,6 +6,26 @@
 * Botan is released under the Simplified BSD License (see license.txt)
 */
 
+#ifdef SOUP_BUILD
+module;
+#define SOUP_MACRO_ONLY
+#include <botan/assert.h>
+
+#include <array>
+#include <mutex>
+#include <string>
+#include <vector>
+
+#define NOMINMAX 1
+#define _WINSOCKAPI_ // stop windows.h including winsock.h
+#include <windows.h>
+#include <wincrypt.h>
+
+#define WINCRYPT_UNUSED_PARAM 0 // for avoiding warnings when passing NULL to unused params in win32 api that accept integer types
+
+module Botan;
+#else
+
 #include <botan/certstor_windows.h>
 #include <botan/der_enc.h>
 
@@ -18,6 +38,8 @@
 #include <wincrypt.h>
 
 #define WINCRYPT_UNUSED_PARAM 0 // for avoiding warnings when passing NULL to unused params in win32 api that accept integer types
+
+#endif
 
 namespace Botan {
 namespace {

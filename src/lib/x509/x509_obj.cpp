@@ -265,7 +265,7 @@ Certificate_Status_Code X509_Object::verify_signature(const Public_Key& pub_key)
       else
          return Certificate_Status_Code::SIGNATURE_ERROR;
       }
-   catch(Algorithm_Not_Found&)
+   catch(Algorithm_Not_Found& ex)
       {
       return Certificate_Status_Code::SIGNATURE_ALGO_UNKNOWN;
       }

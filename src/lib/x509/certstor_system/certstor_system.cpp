@@ -4,6 +4,14 @@
 * Botan is released under the Simplified BSD License (see license.txt)
 */
 
+#ifdef SOUP_BUILD
+module;
+#define SOUP_MACRO_ONLY
+#include <botan/assert.h>
+
+#include <mutex>
+module Botan;
+#else
 #include <botan/certstor_system.h>
 #include <botan/x509cert.h>
 
@@ -13,6 +21,8 @@
    #include <botan/certstor_windows.h>
 #elif defined(BOTAN_HAS_CERTSTOR_FLATFILE) && defined(BOTAN_SYSTEM_CERT_BUNDLE)
    #include <botan/certstor_flatfile.h>
+#endif
+
 #endif
 
 namespace Botan {

@@ -10,11 +10,19 @@
 module;
 #define SOUP_MACRO_ONLY
 #include <botan/assert.h>
-#include <botan/build.h>
+
+#if defined(BOTAN_TARGET_OS_HAS_THREADS) && defined(BOTAN_HAS_HTTP_UTIL)
+  #define BOTAN_HAS_ONLINE_REVOCATION_CHECKS
+#endif
 
 #include <algorithm>
+#include <chrono>
+#include <future>
+#include <memory>
 #include <mutex>
+#include <set>
 #include <string>
+#include <vector>
 module Botan;
 #else
 

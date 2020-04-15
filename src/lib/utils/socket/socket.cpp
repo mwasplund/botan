@@ -13,7 +13,31 @@ module;
 
 #define SOUP_MACRO_ONLY
 #include <botan/assert.h>
-#include <botan/build.h>
+
+#if defined(BOTAN_HAS_BOOST_ASIO)
+  /*
+  * We don't need serial port support anyway, and asking for it causes
+  * macro conflicts with termios.h when this file is included in the
+  * amalgamation.
+  */
+  #define BOOST_ASIO_DISABLE_SERIAL_PORT
+  #include <boost/asio.hpp>
+  #include <boost/asio/system_timer.hpp>
+
+#elif defined(BOTAN_TARGET_OS_HAS_SOCKETS)
+  #include <sys/socket.h>
+  #include <sys/time.h>
+  #include <netinet/in.h>
+  #include <netdb.h>
+  #include <string.h>
+  #include <unistd.h>
+  #include <errno.h>
+  #include <fcntl.h>
+
+#elif defined(BOTAN_TARGET_OS_HAS_WINSOCK2)
+  #include <ws2tcpip.h>
+#endif
+
 module Botan;
 #else
 

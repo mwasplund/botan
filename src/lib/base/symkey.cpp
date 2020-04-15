@@ -13,6 +13,7 @@ module;
 
 #include <algorithm>
 #include <mutex>
+#include <vector>
 module Botan;
 #else
 

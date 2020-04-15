@@ -43,9 +43,11 @@ export module Botan;
 #include <botan/blowfish.h>
 #include <botan/ecdh.h>
 #include <botan/elgamal.h>
+#include <botan/emsa_pkcs1.h>
 #include <botan/emsa.h>
 #include <botan/entropy_src.h>
 #include <botan/ghash.h>
+#include <botan/hash_id.h>
 #include <botan/hash.h>
 #include <botan/hex.h>
 #include <botan/keypair.h>
@@ -78,10 +80,12 @@ export module Botan;
 #include <botan/internal/mp_core.h>
 #include <botan/internal/mp_monty.h>
 #include <botan/internal/os_utils.h>
+#include <botan/internal/padding.h>
 #include <botan/internal/pk_ops_impl.h>
 #include <botan/internal/primality.h>
 #include <botan/internal/rounding.h>
 #include <botan/internal/safeint.h>
+#include <botan/internal/socket.h>
 #include <botan/internal/stl_util.h>
 #include <botan/internal/timer.h>
 #include <botan/internal/tls_cbc.h>

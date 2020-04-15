@@ -28,7 +28,7 @@ namespace Botan {
 * This type represents the validation status of an entire certificate path.
 * There is one set of status codes for each certificate in the path.
 */
-typedef std::vector<std::set<Certificate_Status_Code>> CertificatePathStatusCodes;
+using CertificatePathStatusCodes = std::vector<std::set<Certificate_Status_Code>>;
 
 /**
 * Specifies restrictions on the PKIX path validation
